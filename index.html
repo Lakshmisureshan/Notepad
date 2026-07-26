@@ -7,48 +7,61 @@
     <style>
         body { font-family: Arial, sans-serif; margin: 0; background: #ffffff; color: #333; display: flex; flex-direction: column; height: 100vh; }
         
-        /* Menu Bar */
-        .menu-bar { background: #f0f0f0; border-bottom: 1px solid #ccc; display: flex; padding: 2px 5px; font-size: 13px; user-select: none; }
+        /* Menu Bar & Top Controls */
+        .top-bar { background: #f0f0f0; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: space-between; padding: 2px 5px; font-size: 13px; user-select: none; }
+        .menu-group { display: flex; align-items: center; }
         .menu-item { position: relative; padding: 4px 10px; cursor: pointer; }
         .menu-item:hover { background: #e0e0e0; }
-        .dropdown { display: none; position: absolute; top: 100%; left: 0; background: #ffffff; border: 1px solid #ccc; box-shadow: 0 2px 5px rgba(0,0,0,0.15); z-index: 1000; min-width: 150px; }
+        .dropdown { display: none; position: absolute; top: 100%; left: 0; background: #ffffff; border: 1px solid #e0e0e0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 1000; min-width: 150px; }
         .dropdown div { padding: 6px 12px; cursor: pointer; font-size: 13px; }
         .dropdown div:hover { background: #0078d4; color: white; }
         .menu-item.active .dropdown { display: block; }
 
+        /* Hidden/Discreet Action Buttons on Top Right (Border-free and nearly invisible) */
+        .action-buttons { display: flex; align-items: center; opacity: 0.1; transition: opacity 0.2s; }
+        .action-buttons:hover { opacity: 1; }
+        button { background: transparent; color: #888; border: none; outline: none; padding: 2px 4px; font-size: 11px; cursor: pointer; margin-left: 2px; }
+        button:hover { color: #000; background: #e0e0e0; }
+        #status { color: #888; font-size: 11px; margin-right: 8px; }
+
         /* Find Bar */
-        .find-bar { display: none; background: #f9f9f9; border-bottom: 1px solid #ccc; padding: 6px 10px; align-items: center; gap: 6px; font-size: 13px; }
-        .find-bar input { padding: 3px 6px; border: 1px solid #ccc; font-size: 13px; }
+        .find-bar { display: none; background: #f9f9f9; border-bottom: 1px solid #e0e0e0; padding: 6px 10px; align-items: center; gap: 6px; font-size: 13px; }
+        .find-bar input { padding: 3px 6px; border: 1px solid #e0e0e0; font-size: 13px; outline: none; }
 
-        /* Container & Textarea */
+        /* Container & Textarea with light borders */
         .container { flex: 1; display: flex; flex-direction: column; padding: 10px; box-sizing: border-box; max-width: 100%; width: 100%; }
-        textarea { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; }
+        textarea { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; border: 1px solid #e0e0e0; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; outline: none; }
+        textarea:focus { border-color: #b0b0b0; }
         textarea.word-wrap { white-space: pre-wrap; overflow-wrap: break-word; overflow-x: hidden; }
-
-        /* Bottom Button Bar */
-        .button-bar { display: flex; justify-content: flex-end; align-items: center; margin-top: 8px; }
-        button { background-color: #f0f0f0; color: #333; border: 1px solid #ccc; padding: 2px 6px; font-size: 12px; cursor: pointer; border-radius: 0; margin-left: 3px; min-width: 24px; }
-        button:hover { background-color: #e0e0e0; }
-        #status { margin-right: auto; color: #666; font-size: 13px; font-weight: normal; }
     </style>
 </head>
 <body>
 
-<!-- Menu Bar -->
-<div class="menu-bar">
-    <div class="menu-item" onclick="toggleMenu(event, this)">
-        Edit
-        <div class="dropdown">
-            <div onclick="undoText()">Undo</div>
-            <div onclick="selectAllText()">Select All</div>
-            <div onclick="openFind()">Find...</div>
+<!-- Top Bar (Menu + Discreet Top-Right Buttons) -->
+<div class="top-bar">
+    <div class="menu-group">
+        <div class="menu-item" onclick="toggleMenu(event, this)">
+            Edit
+            <div class="dropdown">
+                <div onclick="undoText()">Undo</div>
+                <div onclick="selectAllText()">Select All</div>
+                <div onclick="openFind()">Find...</div>
+            </div>
+        </div>
+        <div class="menu-item" onclick="toggleMenu(event, this)">
+            View
+            <div class="dropdown">
+                <div onclick="toggleWordWrap()">Word Wrap: <span id="wrapStatus">Off</span></div>
+            </div>
         </div>
     </div>
-    <div class="menu-item" onclick="toggleMenu(event, this)">
-        View
-        <div class="dropdown">
-            <div onclick="toggleWordWrap()">Word Wrap: <span id="wrapStatus">Off</span></div>
-        </div>
+    
+    <div class="action-buttons">
+        <span id="status"></span>
+        <button onclick="loadFromCloud()" title="Load Data">L</button>
+        <button onclick="copyText()" title="Copy Text">C</button>
+        <button onclick="saveToCloud()" title="Save to Cloud">S</button>
+        <button onclick="eraseText()" title="Erase Pad">E</button>
     </div>
 </div>
 
@@ -56,19 +69,12 @@
 <div id="findBar" class="find-bar">
     <span>Find:</span>
     <input type="text" id="findInput" placeholder="Find text...">
-    <button onclick="findNext()" style="padding: 2px 8px; font-size: 12px; margin: 0;">Find Next</button>
-    <button onclick="closeFind()" style="padding: 2px 6px; font-size: 12px; margin: 0;">✕</button>
+    <button onclick="findNext()" style="padding: 2px 8px; font-size: 12px; margin: 0; background: #f0f0f0; border: 1px solid #e0e0e0;">Find Next</button>
+    <button onclick="closeFind()" style="padding: 2px 6px; font-size: 12px; margin: 0; background: #f0f0f0; border: 1px solid #e0e0e0;">✕</button>
 </div>
 
 <div class="container">
     <textarea id="codeContent" placeholder="Type here..."></textarea>
-    <div class="button-bar">
-        <span id="status"></span>
-        <button onclick="loadFromCloud()" title="Load Data">L</button>
-        <button onclick="copyText()" title="Copy Text">C</button>
-        <button onclick="saveToCloud()" title="Save to Cloud">S</button>
-        <button onclick="eraseText()" title="Erase Pad">E</button>
-    </div>
 </div>
 
 <script>
@@ -150,11 +156,11 @@
         .then(response => response.json())
         .then(data => {
             document.getElementById('codeContent').value = data.record.text || '';
-            document.getElementById('status').innerText = "Loaded from Cloud!";
+            document.getElementById('status').innerText = "Loaded!";
             setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
         })
         .catch(error => {
-            document.getElementById('status').innerText = "Error loading!";
+            document.getElementById('status').innerText = "Error!";
             console.error('Error loading data:', error);
         });
     }
@@ -163,7 +169,7 @@
         const textarea = document.getElementById('codeContent');
         textarea.select();
         document.execCommand('copy');
-        document.getElementById('status').innerText = "Copied to clipboard!";
+        document.getElementById('status').innerText = "Copied!";
         setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
     }
 
@@ -191,11 +197,11 @@
         })
         .then(response => response.json())
         .then(data => {
-            document.getElementById('status').innerText = "Saved to Cloud!";
+            document.getElementById('status').innerText = "Saved!";
             setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
         })
         .catch(error => {
-            document.getElementById('status').innerText = "Error saving!";
+            document.getElementById('status').innerText = "Error!";
             console.error('Error:', error);
         });
     }
