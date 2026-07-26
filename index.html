@@ -17,12 +17,11 @@
         .dropdown div:hover { background: #0078d4; color: white; }
         .menu-item.active .dropdown { display: block; }
 
-        /* Hidden/Discreet Action Buttons on Top Right (Border-free and nearly invisible) */
-        .action-buttons { display: flex; align-items: center; opacity: 0.1; transition: opacity 0.2s; }
-        .action-buttons:hover { opacity: 1; }
-        button { background: transparent; color: #888; border: none; outline: none; padding: 2px 4px; font-size: 11px; cursor: pointer; margin-left: 2px; }
-        button:hover { color: #000; background: #e0e0e0; }
-        #status { color: #888; font-size: 11px; margin-right: 8px; }
+        /* Action Buttons: Visible, very small footprint, sharp readable text, borderless look */
+        .action-buttons { display: flex; align-items: center; }
+        button { background: #e8e8e8; color: #333; border: 1px solid #d0d0d0; outline: none; padding: 1px 3px; font-size: 10px; font-family: sans-serif; font-weight: bold; cursor: pointer; margin-left: 2px; line-height: 1; }
+        button:hover { background: #dcdcdc; border-color: #adadad; }
+        #status { color: #666; font-size: 10px; margin-right: 6px; }
 
         /* Find Bar */
         .find-bar { display: none; background: #f9f9f9; border-bottom: 1px solid #e0e0e0; padding: 6px 10px; align-items: center; gap: 6px; font-size: 13px; }
@@ -37,7 +36,7 @@
 </head>
 <body>
 
-<!-- Top Bar (Menu + Discreet Top-Right Buttons) -->
+<!-- Top Bar (Menu + Visible Micro Buttons) -->
 <div class="top-bar">
     <div class="menu-group">
         <div class="menu-item" onclick="toggleMenu(event, this)">
