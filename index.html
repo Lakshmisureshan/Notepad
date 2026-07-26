@@ -27,7 +27,7 @@
 
         /* Bottom Button Bar */
         .button-bar { display: flex; justify-content: flex-end; align-items: center; margin-top: 8px; }
-        button { background-color: #f0f0f0; color: #333; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px; cursor: pointer; border-radius: 0; margin-left: 4px; }
+        button { background-color: #f0f0f0; color: #333; border: 1px solid #ccc; padding: 2px 6px; font-size: 12px; cursor: pointer; border-radius: 0; margin-left: 3px; min-width: 24px; }
         button:hover { background-color: #e0e0e0; }
         #status { margin-right: auto; color: #666; font-size: 13px; font-weight: normal; }
     </style>
@@ -64,9 +64,10 @@
     <textarea id="codeContent" placeholder="Type here..."></textarea>
     <div class="button-bar">
         <span id="status"></span>
-        <button onclick="loadFromCloud()">Load Data</button>
-        <button onclick="copyText()">Copy Text</button>
-        <button onclick="saveToCloud()">Save to Cloud</button>
+        <button onclick="loadFromCloud()" title="Load Data">L</button>
+        <button onclick="copyText()" title="Copy Text">C</button>
+        <button onclick="saveToCloud()" title="Save to Cloud">S</button>
+        <button onclick="eraseText()" title="Erase Pad">E</button>
     </div>
 </div>
 
@@ -190,15 +191,19 @@
         })
         .then(response => response.json())
         .then(data => {
-            // Clear notepad after successful save
-            document.getElementById('codeContent').value = '';
-            document.getElementById('status').innerText = "Saved to Cloud & Cleared!";
+            document.getElementById('status').innerText = "Saved to Cloud!";
             setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
         })
         .catch(error => {
             document.getElementById('status').innerText = "Error saving!";
             console.error('Error:', error);
         });
+    }
+
+    function eraseText() {
+        document.getElementById('codeContent').value = '';
+        document.getElementById('status').innerText = "Erased!";
+        setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
     }
 </script>
 
