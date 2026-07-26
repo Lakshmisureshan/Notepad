@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notepad</title>
+    <title>My Stored Procedure Vault</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; background: #f9f9f9; }
         .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
@@ -16,19 +16,27 @@
 <body>
 
 <div class="container">
-    <textarea id="codeContent" placeholder="HIII."></textarea>
+    <textarea id="codeContent" placeholder="Paste your stored procedure or notes here..."></textarea>
     <br>
     <button onclick="copyText()">Copy Text</button>
-    <button onclick="saveToBrowser()" style="background-color: #107c41;">Save Locally</button>
+    <button onclick="saveToCloud()" style="background-color: #107c41;">Save to Cloud</button>
     <span id="status"></span>
 </div>
 
 <script>
+    const BIN_ID = '6a6658d5da38895dfe930056';
+    const API_KEY = '$2a$10$FPgzNfQhAfoRmUOmmhDxMurkQkOcOd2suMzx/XagiT3welevDT2NS';
+
+    // Load text from cloud automatically when page opens
     window.onload = function() {
-        const savedText = localStorage.getItem('myStoredProcedure');
-        if (savedText) {
-            document.getElementById('codeContent').value = savedText;
-        }
+        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+            headers: { 'X-Master-Key': API_KEY }
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('codeContent').value = data.record.text || '';
+        })
+        .catch(error => console.error('Error loading data:', error));
     };
 
     function copyText() {
@@ -39,11 +47,27 @@
         setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
     }
 
-    function saveToBrowser() {
-        const textareaValue = document.getElementById('codeContent').value;
-        localStorage.setItem('myStoredProcedure', textareaValue);
-        document.getElementById('status').innerText = "Saved to browser!";
-        setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
+    function saveToCloud() {
+        const textValue = document.getElementById('codeContent').value;
+        document.getElementById('status').innerText = "Saving...";
+
+        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Master-Key': API_KEY
+            },
+            body: JSON.stringify({ text: textValue })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('status').innerText = "Saved to Cloud!";
+            setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
+        })
+        .catch(error => {
+            document.getElementById('status').innerText = "Error saving!";
+            console.error('Error:', error);
+        });
     }
 </script>
 
