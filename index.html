@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Stored Procedure Vault</title>
+    <title>Notepad</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background: #f9f9f9; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        textarea { width: 100%; height: 350px; font-family: monospace; padding: 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        button { background-color: #0078d4; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 4px; margin-top: 10px; }
-        button:hover { background-color: #005a9e; }
-        #status { margin-left: 10px; color: green; font-weight: bold; }
+        body { font-family: Arial, sans-serif; margin: 20px; background: #ffffff; color: #333; }
+        .container { max-width: 800px; margin: auto; background: #ffffff; padding: 10px; }
+        textarea { width: 100%; height: 400px; font-family: monospace; padding: 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 0; box-sizing: border-box; resize: vertical; }
+        button { background-color: #f0f0f0; color: #333; border: 1px solid #ccc; padding: 6px 12px; font-size: 14px; cursor: pointer; border-radius: 0; margin-top: 8px; margin-right: 4px; }
+        button:hover { background-color: #e0e0e0; }
+        #status { margin-left: 10px; color: #666; font-size: 13px; font-weight: normal; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <textarea id="codeContent" placeholder="Paste your stored procedure or notes here..."></textarea>
+    <textarea id="codeContent" placeholder="Type here..."></textarea>
     <br>
     <button onclick="copyText()">Copy Text</button>
-    <button onclick="saveToCloud()" style="background-color: #107c41;">Save to Cloud</button>
+    <button onclick="saveToCloud()">Save to Cloud</button>
     <span id="status"></span>
 </div>
 
@@ -27,7 +27,6 @@
     const BIN_ID = '6a6658d5da38895dfe930056';
     const API_KEY = '$2a$10$FPgzNfQhAfoRmUOmmhDxMurkQkOcOd2suMzx/XagiT3welevDT2NS';
 
-    // Load text from cloud automatically when page opens
     window.onload = function() {
         fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
             headers: { 'X-Master-Key': API_KEY }
