@@ -64,6 +64,7 @@
     <textarea id="codeContent" placeholder="Type here..."></textarea>
     <div class="button-bar">
         <span id="status"></span>
+        <button onclick="loadFromCloud()">Load Data</button>
         <button onclick="copyText()">Copy Text</button>
         <button onclick="saveToCloud()">Save to Cloud</button>
     </div>
@@ -72,17 +73,6 @@
 <script>
     const BIN_ID = '6a6658d5da38895dfe930056';
     const API_KEY = '$2a$10$FPgzNfQhAfoRmUOmmhDxMurkQkOcOd2suMzx/XagiT3welevDT2NS';
-
-    window.onload = function() {
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { 'X-Master-Key': API_KEY }
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('codeContent').value = data.record.text || '';
-        })
-        .catch(error => console.error('Error loading data:', error));
-    };
 
     // Menu logic
     function toggleMenu(event, element) {
@@ -129,7 +119,6 @@
             textarea.setSelectionRange(index, index + query.length);
             textarea.focus();
         } else {
-            // Wrap around to start if not found from current cursor
             const wrapIndex = text.indexOf(query);
             if (wrapIndex !== -1) {
                 textarea.setSelectionRange(wrapIndex, wrapIndex + query.length);
@@ -152,6 +141,23 @@
         }
     }
 
+    function loadFromCloud() {
+        document.getElementById('status').innerText = "Loading...";
+        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+            headers: { 'X-Master-Key': API_KEY }
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('codeContent').value = data.record.text || '';
+            document.getElementById('status').innerText = "Loaded from Cloud!";
+            setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
+        })
+        .catch(error => {
+            document.getElementById('status').innerText = "Error loading!";
+            console.error('Error loading data:', error);
+        });
+    }
+
     function copyText() {
         const textarea = document.getElementById('codeContent');
         textarea.select();
@@ -161,20 +167,32 @@
     }
 
     function saveToCloud() {
-        const textValue = document.getElementById('codeContent').value;
+        const newText = document.getElementById('codeContent').value;
         document.getElementById('status').innerText = "Saving...";
 
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Master-Key': API_KEY
-            },
-            body: JSON.stringify({ text: textValue })
+        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+            headers: { 'X-Master-Key': API_KEY }
         })
         .then(response => response.json())
         .then(data => {
-            document.getElementById('status').innerText = "Saved to Cloud!";
+            const existingText = data.record.text || '';
+            const separator = "\n\n----------------------------------------\n\n";
+            const combinedText = existingText ? existingText + separator + newText : newText;
+
+            return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': API_KEY
+                },
+                body: JSON.stringify({ text: combinedText })
+            });
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Clear notepad after successful save
+            document.getElementById('codeContent').value = '';
+            document.getElementById('status').innerText = "Saved to Cloud & Cleared!";
             setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
         })
         .catch(error => {
