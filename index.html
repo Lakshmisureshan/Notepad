@@ -1,1 +1,56 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Stored Procedure Vault</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f9f9f9; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        textarea { width: 100%; height: 350px; font-family: monospace; padding: 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #0078d4; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 4px; margin-top: 10px; }
+        button:hover { background-color: #005a9e; }
+        #status { margin-left: 10px; color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Paste & Copy Stored Procedures</h2>
+    <p>Paste your code below. You can save it to your browser or copy it quickly.</p>
+    
+    <textarea id="codeContent" placeholder="Paste your stored procedure or notes here..."></textarea>
+    <br>
+    <button onclick="copyText()">Copy Text</button>
+    <button onclick="saveToBrowser()" style="background-color: #107c41;">Save Locally</button>
+    <span id="status"></span>
+</div>
+
+<script>
+    // Load saved text when the page opens
+    window.onload = function() {
+        const savedText = localStorage.getItem('myStoredProcedure');
+        if (savedText) {
+            document.getElementById('codeContent').value = savedText;
+        }
+    };
+
+    function copyText() {
+        const textarea = document.getElementById('codeContent');
+        textarea.select();
+        document.execCommand('copy');
+        document.getElementById('status').innerText = "Copied to clipboard!";
+        setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
+    }
+
+    function saveToBrowser() {
+        const textareaValue = document.getElementById('codeContent').value;
+        localStorage.setItem('myStoredProcedure', textareaValue);
+        document.getElementById('status').innerText = "Saved to browser!";
+        setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
+    }
+</script>
+
+</body>
+</html>
