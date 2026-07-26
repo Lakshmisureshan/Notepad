@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,10 +16,7 @@
 <body>
 
 <div class="container">
-    <h2>Paste & Copy Stored Procedures</h2>
-    <p>Paste your code below. You can save it to your browser or copy it quickly.</p>
-    
-    <textarea id="codeContent" placeholder="Paste your stored procedure or notes here..."></textarea>
+    <textarea id="codeContent" placeholder="HIII."></textarea>
     <br>
     <button onclick="copyText()">Copy Text</button>
     <button onclick="saveToBrowser()" style="background-color: #107c41;">Save Locally</button>
@@ -28,7 +24,6 @@
 </div>
 
 <script>
-    // Load saved text when the page opens
     window.onload = function() {
         const savedText = localStorage.getItem('myStoredProcedure');
         if (savedText) {
