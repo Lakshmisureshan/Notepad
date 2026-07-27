@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACEINVENTORY.NET</title>
     <style>
-        /* Exact layout and design matching the provided GoDaddy parked page */
         body {
             margin: 0;
             padding: 0;
@@ -28,7 +27,6 @@
             position: relative;
         }
 
-        /* Top Header */
         .domain-header {
             padding: 30px 20px 20px 20px;
             font-size: 1.1rem;
@@ -38,7 +36,6 @@
             background: transparent;
         }
 
-        /* Hero Image Section with Mountains & Reflection */
         .hero-section {
             position: relative;
             width: 100%;
@@ -51,7 +48,6 @@
             align-items: center;
         }
 
-        /* Blue highlight box matching screenshot */
         .hero-title-box {
             background-color: rgba(0, 85, 220, 0.85);
             padding: 15px 40px;
@@ -66,7 +62,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Lower Black Footer Section */
         .lower-section {
             background-color: #000000;
             flex: 1;
@@ -76,7 +71,7 @@
             align-items: center;
             padding-top: 50px;
             position: relative;
-            padding-bottom: 40px;
+            padding-bottom: 50px;
         }
 
         .lower-section h2 {
@@ -98,28 +93,30 @@
             color: #999999;
             font-size: 0.9rem;
             text-decoration: none;
+            margin-bottom: 25px;
         }
 
-        /* Visible, clear tiny text "open" button right below "Drop us a line!" */
+        /* Highly visible, styled "open" button right in the middle of the black section */
         .enter-btn-tiny {
-            margin-top: 25px;
-            background: #222222;
-            color: #aaaaaa;
-            border: 1px solid #444444;
-            padding: 4px 12px;
-            font-size: 11px;
-            font-family: monospace;
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #ffffff;
+            padding: 8px 24px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
             cursor: pointer;
             outline: none;
-            border-radius: 3px;
+            border-radius: 4px;
             letter-spacing: 1px;
             text-transform: lowercase;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
             transition: all 0.2s;
         }
         .enter-btn-tiny:hover {
-            background: #333333;
-            color: #ffffff;
-            border-color: #666666;
+            background: #e0e0e0;
+            border-color: #e0e0e0;
+            transform: scale(1.05);
         }
 
         /* App View (Initially Hidden) */
@@ -138,7 +135,6 @@
             z-index: 9999;
         }
         
-        /* Menu Bar */
         .top-bar { background: #f0f0f0; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: space-between; padding: 2px 5px; font-size: 13px; user-select: none; }
         .menu-group { display: flex; align-items: center; }
         .menu-item { position: relative; padding: 4px 10px; cursor: pointer; }
@@ -148,17 +144,14 @@
         .dropdown div:hover { background: #0078d4; color: white; }
         .menu-item.active .dropdown { display: block; }
 
-        /* Find Bar */
         .find-bar { display: none; background: #f9f9f9; border-bottom: 1px solid #e0e0e0; padding: 6px 10px; align-items: center; gap: 6px; font-size: 13px; }
         .find-bar input { padding: 3px 6px; border: 1px solid #e0e0e0; font-size: 13px; outline: none; }
 
-        /* Container & Textarea */
         .container { flex: 1; display: flex; flex-direction: column; padding: 10px 10px 2px 10px; box-sizing: border-box; max-width: 100%; width: 100%; }
         textarea { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; border: 1px solid #e0e0e0; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; outline: none; }
         textarea:focus { border-color: #b0b0b0; }
         textarea.word-wrap { white-space: pre-wrap; overflow-wrap: break-word; overflow-x: hidden; }
 
-        /* Bottom Action Bar */
         .bottom-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 10px 6px 10px; background: #ffffff; }
         .action-buttons { display: flex; align-items: center; }
         button.tool-btn { background: #e8e8e8; color: #333; border: 1px solid #d0d0d0; outline: none; padding: 1px 3px; font-size: 10px; font-family: sans-serif; font-weight: bold; cursor: pointer; margin-left: 2px; line-height: 1; }
@@ -169,7 +162,6 @@
 </head>
 <body>
 
-<!-- 1. GoDaddy Exact Landing Page match -->
 <div id="landingPage">
     <div class="domain-header">ACEINVENTORY.NET</div>
     <div class="hero-section">
@@ -182,14 +174,12 @@
         <div class="contact-divider"></div>
         <a href="#" class="drop-link">Drop us a line!</a>
         
-        <!-- Clearly visible tiny "open" button right in the center footer section -->
+        <!-- Prominent, clearly visible open button -->
         <button class="enter-btn-tiny" onclick="openAppPage()" title="Open Editor">open</button>
     </div>
 </div>
 
-<!-- 2. Notepad Application Page (Hidden by default) -->
 <div id="appPage">
-    <!-- Top Bar (Menu Only) -->
     <div class="top-bar">
         <div class="menu-group">
             <div class="menu-item" onclick="toggleMenu(event, this)">
@@ -212,7 +202,6 @@
         </div>
     </div>
 
-    <!-- Find Bar -->
     <div id="findBar" class="find-bar">
         <span>Find:</span>
         <input type="text" id="findInput" placeholder="Find text...">
@@ -224,7 +213,6 @@
         <textarea id="codeContent" placeholder="Type here..."></textarea>
     </div>
 
-    <!-- Bottom Bar -->
     <div class="bottom-bar">
         <span class="back-home-link" onclick="openLandingPage()">← Home</span>
         <div class="action-buttons">
@@ -241,7 +229,6 @@
     const BIN_ID = '6a6658d5da38895dfe930056';
     const API_KEY = '$2a$10$FPgzNfQhAfoRmUOmmhDxMurkQkOcOd2suMzx/XagiT3welevDT2NS';
 
-    // Page Navigation logic
     function openAppPage() {
         document.getElementById('landingPage').style.display = 'none';
         document.getElementById('appPage').style.display = 'flex';
@@ -252,7 +239,6 @@
         document.getElementById('landingPage').style.display = 'flex';
     }
 
-    // Menu logic
     function toggleMenu(event, element) {
         event.stopPropagation();
         document.querySelectorAll('.menu-item').forEach(item => {
@@ -265,7 +251,6 @@
         document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
     };
 
-    // Edit actions
     function undoText() {
         document.execCommand('undo');
     }
@@ -274,7 +259,6 @@
         document.getElementById('codeContent').select();
     }
 
-    // Find actions
     function openFind() {
         document.getElementById('findBar').style.display = 'flex';
         document.getElementById('findInput').focus();
@@ -307,7 +291,6 @@
         }
     }
 
-    // View actions (Word Wrap)
     function toggleWordWrap() {
         const textarea = document.getElementById('codeContent');
         const statusSpan = document.getElementById('wrapStatus');
