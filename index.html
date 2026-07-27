@@ -8,7 +8,7 @@
         /* Global Reset */
         body { font-family: Arial, sans-serif; margin: 0; background: #ffffff; color: #333; display: flex; flex-direction: column; height: 100vh; }
 
-        /* Landing Page View */
+        /* Landing Page View (Matching default Azure / Coming Soon style) */
         #landingPage {
             flex: 1;
             display: flex;
@@ -17,32 +17,35 @@
             justify-content: center;
             text-align: center;
             padding: 20px;
-            background: #f9f9f9;
+            background: #ffffff;
         }
         #landingPage h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: #111;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: #222;
         }
         #landingPage p {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             color: #666;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
-        .enter-btn {
-            background: #0078d4;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            font-size: 16px;
+        /* Extremely small button */
+        .enter-btn-tiny {
+            background: #f0f0f0;
+            color: #333;
+            border: 1px solid #d0d0d0;
+            padding: 1px 4px;
+            font-size: 9px;
+            font-family: sans-serif;
             font-weight: bold;
             cursor: pointer;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: background 0.2s;
+            line-height: 1;
+            outline: none;
+            border-radius: 2px;
         }
-        .enter-btn:hover {
-            background: #005a9e;
+        .enter-btn-tiny:hover {
+            background: #e0e0e0;
+            border-color: #adadad;
         }
 
         /* App View (Initially Hidden) */
@@ -84,11 +87,10 @@
 </head>
 <body>
 
-<!-- 1. Coming Soon Landing Page -->
+<!-- 1. Coming Soon Landing Page (Default Azure style with micro button) -->
 <div id="landingPage">
-    <h1>AceInventory is Coming Soon</h1>
-    <p>We are building something amazing for your workflow. Stay tuned!</p>
-    <button class="enter-btn" onclick="openAppPage()">Enter Notepad App</button>
+    <h1>Azure Static Web Apps is Live</h1>
+    <p>Your site is running. <button class="enter-btn-tiny" onclick="openAppPage()" title="Open Notepad">Open</button></p>
 </div>
 
 <!-- 2. Notepad Application Page (Hidden by default) -->
