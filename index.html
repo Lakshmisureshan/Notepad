@@ -95,31 +95,32 @@
             text-decoration: none;
         }
 
-        /* Prominent Open Button positioned explicitly at the extreme bottom right */
+        /* Extreme bottom right corner button with dark background and text "o" */
         .enter-btn-corner {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #ffffff;
-            color: #000000;
-            border: 2px solid #ffffff;
-            padding: 8px 20px;
+            bottom: 12px;
+            right: 12px;
+            background: #111111;
+            color: #555555;
+            border: 1px solid #222222;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 13px;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
+            font-family: monospace;
             cursor: pointer;
             outline: none;
             border-radius: 4px;
-            letter-spacing: 1px;
             text-transform: lowercase;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
             transition: all 0.2s;
             z-index: 1000;
         }
         .enter-btn-corner:hover {
-            background: #e0e0e0;
-            border-color: #e0e0e0;
-            transform: scale(1.05);
+            background: #222222;
+            color: #aaaaaa;
+            border-color: #444444;
         }
 
         /* App View (Initially Hidden) */
@@ -178,8 +179,8 @@
         <a href="#" class="drop-link">Drop us a line!</a>
     </div>
 
-    <!-- Open button pinned to the extreme bottom right corner -->
-    <button class="enter-btn-corner" onclick="openAppPage()" title="Open Editor">open</button>
+    <!-- Extreme bottom right corner button with dark background and text "o" -->
+    <button class="enter-btn-corner" onclick="openAppPage()" title="Open Editor">o</button>
 </div>
 
 <div id="appPage">
