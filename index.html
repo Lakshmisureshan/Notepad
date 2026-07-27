@@ -3,9 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notepad</title>
+    <title>AceInventory - Coming Soon</title>
     <style>
+        /* Global Reset */
         body { font-family: Arial, sans-serif; margin: 0; background: #ffffff; color: #333; display: flex; flex-direction: column; height: 100vh; }
+
+        /* Landing Page View */
+        #landingPage {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        #landingPage h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #111;
+        }
+        #landingPage p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .enter-btn {
+            background: #0078d4;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+        }
+        .enter-btn:hover {
+            background: #005a9e;
+        }
+
+        /* App View (Initially Hidden) */
+        #appPage {
+            display: none;
+            flex: 1;
+            flex-direction: column;
+            height: 100vh;
+        }
         
         /* Menu Bar */
         .top-bar { background: #f0f0f0; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: space-between; padding: 2px 5px; font-size: 13px; user-select: none; }
@@ -28,61 +74,87 @@
         textarea.word-wrap { white-space: pre-wrap; overflow-wrap: break-word; overflow-x: hidden; }
 
         /* Bottom Action Bar (Micro Buttons at the bottom) */
-        .bottom-bar { display: flex; align-items: center; justify-content: flex-end; padding: 0 10px 6px 10px; background: #ffffff; }
+        .bottom-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 10px 6px 10px; background: #ffffff; }
         .action-buttons { display: flex; align-items: center; }
-        button { background: #e8e8e8; color: #333; border: 1px solid #d0d0d0; outline: none; padding: 1px 3px; font-size: 10px; font-family: sans-serif; font-weight: bold; cursor: pointer; margin-left: 2px; line-height: 1; }
-        button:hover { background: #dcdcdc; border-color: #adadad; }
+        button.tool-btn { background: #e8e8e8; color: #333; border: 1px solid #d0d0d0; outline: none; padding: 1px 3px; font-size: 10px; font-family: sans-serif; font-weight: bold; cursor: pointer; margin-left: 2px; line-height: 1; }
+        button.tool-btn:hover { background: #dcdcdc; border-color: #adadad; }
         #status { color: #666; font-size: 10px; margin-right: 6px; }
+        .back-home-link { font-size: 11px; color: #0078d4; cursor: pointer; text-decoration: underline; }
     </style>
 </head>
 <body>
 
-<!-- Top Bar (Menu Only) -->
-<div class="top-bar">
-    <div class="menu-group">
-        <div class="menu-item" onclick="toggleMenu(event, this)">
-            Edit
-            <div class="dropdown">
-                <div onclick="undoText()">Undo</div>
-                <div onclick="selectAllText()">Select All</div>
-                <div onclick="openFind()">Find...</div>
+<!-- 1. Coming Soon Landing Page -->
+<div id="landingPage">
+    <h1>AceInventory is Coming Soon</h1>
+    <p>We are building something amazing for your workflow. Stay tuned!</p>
+    <button class="enter-btn" onclick="openAppPage()">Enter Notepad App</button>
+</div>
+
+<!-- 2. Notepad Application Page (Hidden by default) -->
+<div id="appPage">
+    <!-- Top Bar (Menu Only) -->
+    <div class="top-bar">
+        <div class="menu-group">
+            <div class="menu-item" onclick="toggleMenu(event, this)">
+                Edit
+                <div class="dropdown">
+                    <div onclick="undoText()">Undo</div>
+                    <div onclick="selectAllText()">Select All</div>
+                    <div onclick="openFind()">Find...</div>
+                </div>
+            </div>
+            <div class="menu-item" onclick="toggleMenu(event, this)">
+                View
+                <div class="dropdown">
+                    <div onclick="toggleWordWrap()">Word Wrap: <span id="wrapStatus">Off</span></div>
+                </div>
             </div>
         </div>
-        <div class="menu-item" onclick="toggleMenu(event, this)">
-            View
-            <div class="dropdown">
-                <div onclick="toggleWordWrap()">Word Wrap: <span id="wrapStatus">Off</span></div>
-            </div>
+        <div style="padding-right: 5px;">
+            <span class="back-home-link" onclick="openLandingPage()">← Back to Home</span>
         </div>
     </div>
-</div>
 
-<!-- Find Bar -->
-<div id="findBar" class="find-bar">
-    <span>Find:</span>
-    <input type="text" id="findInput" placeholder="Find text...">
-    <button onclick="findNext()" style="padding: 2px 8px; font-size: 12px; margin: 0; background: #f0f0f0; border: 1px solid #e0e0e0;">Find Next</button>
-    <button onclick="closeFind()" style="padding: 2px 6px; font-size: 12px; margin: 0; background: #f0f0f0; border: 1px solid #e0e0e0;">✕</button>
-</div>
+    <!-- Find Bar -->
+    <div id="findBar" class="find-bar">
+        <span>Find:</span>
+        <input type="text" id="findInput" placeholder="Find text...">
+        <button onclick="findNext()" style="padding: 2px 8px; font-size: 12px; margin: 0; background: #f0f0f0; border: 1px solid #e0e0e0;">Find Next</button>
+        <button onclick="closeFind()" style="padding: 2px 6px; font-size: 12px; margin: 0; background: #f0f0f0; border: 1px solid #e0e0e0;">✕</button>
+    </div>
 
-<div class="container">
-    <textarea id="codeContent" placeholder="Type here..."></textarea>
-</div>
+    <div class="container">
+        <textarea id="codeContent" placeholder="Type here..."></textarea>
+    </div>
 
-<!-- Bottom Bar (Micro Buttons) -->
-<div class="bottom-bar">
-    <div class="action-buttons">
-        <span id="status"></span>
-        <button onclick="loadFromCloud()" title="Load Data">L</button>
-        <button onclick="copyText()" title="Copy Text">C</button>
-        <button onclick="saveToCloud()" title="Save to Cloud">S</button>
-        <button onclick="eraseText()" title="Erase Pad">E</button>
+    <!-- Bottom Bar (Micro Buttons) -->
+    <div class="bottom-bar">
+        <span class="back-home-link" onclick="openLandingPage()">← Home</span>
+        <div class="action-buttons">
+            <span id="status"></span>
+            <button class="tool-btn" onclick="loadFromCloud()" title="Load Data">L</button>
+            <button class="tool-btn" onclick="copyText()" title="Copy Text">C</button>
+            <button class="tool-btn" onclick="saveToCloud()" title="Save to Cloud">S</button>
+            <button class="tool-btn" onclick="eraseText()" title="Erase Pad">E</button>
+        </div>
     </div>
 </div>
 
 <script>
     const BIN_ID = '6a6658d5da38895dfe930056';
     const API_KEY = '$2a$10$FPgzNfQhAfoRmUOmmhDxMurkQkOcOd2suMzx/XagiT3welevDT2NS';
+
+    // Page Navigation logic
+    function openAppPage() {
+        document.getElementById('landingPage').style.display = 'none';
+        document.getElementById('appPage').style.display = 'flex';
+    }
+
+    function openLandingPage() {
+        document.getElementById('appPage').style.display = 'none';
+        document.getElementById('landingPage').style.display = 'flex';
+    }
 
     // Menu logic
     function toggleMenu(event, element) {
