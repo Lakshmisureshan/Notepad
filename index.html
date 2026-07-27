@@ -19,6 +19,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            position: relative;
         }
 
         #landingPage {
@@ -46,24 +47,27 @@
             line-height: 1.5;
         }
 
-        /* Extremely small button */
+        /* Extremely small button positioned at the bottom of the screen */
         .enter-btn-tiny {
-            background: #f0f0f0;
-            color: #333;
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            color: #666;
             border: 1px solid #d0d0d0;
-            padding: 1px 4px;
+            padding: 2px 6px;
             font-size: 9px;
             font-family: sans-serif;
-            font-weight: bold;
             cursor: pointer;
             line-height: 1;
             outline: none;
             border-radius: 2px;
-            vertical-align: baseline;
-            margin-left: 4px;
+            letter-spacing: 0.5px;
         }
         .enter-btn-tiny:hover {
-            background: #e0e0e0;
+            background: #ffffff;
+            color: #111;
             border-color: #adadad;
         }
 
@@ -76,6 +80,9 @@
             width: 100vw;
             background: #ffffff;
             text-align: left;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
         
         /* Menu Bar */
@@ -113,9 +120,10 @@
 <div id="landingPage">
     <h1>aceinventory.net</h1>
     <p>Launching Soon</p>
-
-     <button class="enter-btn-tiny" onclick="openAppPage()" title="Open">Open</button>
 </div>
+
+<!-- Very small text button pinned to the bottom of the screen -->
+<button class="enter-btn-tiny" onclick="openAppPage()" title="Open">open</button>
 
 <!-- 2. Notepad Application Page (Hidden by default) -->
 <div id="appPage">
@@ -174,12 +182,14 @@
     // Page Navigation logic
     function openAppPage() {
         document.getElementById('landingPage').style.display = 'none';
+        document.querySelector('.enter-btn-tiny').style.display = 'none';
         document.getElementById('appPage').style.display = 'flex';
     }
 
     function openLandingPage() {
         document.getElementById('appPage').style.display = 'none';
-        document.getElementById('landingPage').style.display = 'flex';
+        document.getElementById('landingPage').style.display = 'block';
+        document.querySelector('.enter-btn-tiny').style.display = 'block';
     }
 
     // Menu logic
