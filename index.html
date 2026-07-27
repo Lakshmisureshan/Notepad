@@ -7,7 +7,7 @@
     <style>
         body { font-family: Arial, sans-serif; margin: 0; background: #ffffff; color: #333; display: flex; flex-direction: column; height: 100vh; }
         
-        /* Menu Bar & Top Controls */
+        /* Menu Bar */
         .top-bar { background: #f0f0f0; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: space-between; padding: 2px 5px; font-size: 13px; user-select: none; }
         .menu-group { display: flex; align-items: center; }
         .menu-item { position: relative; padding: 4px 10px; cursor: pointer; }
@@ -17,26 +17,27 @@
         .dropdown div:hover { background: #0078d4; color: white; }
         .menu-item.active .dropdown { display: block; }
 
-        /* Action Buttons: Visible, very small footprint, sharp readable text, borderless look */
-        .action-buttons { display: flex; align-items: center; }
-        button { background: #e8e8e8; color: #333; border: 1px solid #d0d0d0; outline: none; padding: 1px 3px; font-size: 10px; font-family: sans-serif; font-weight: bold; cursor: pointer; margin-left: 2px; line-height: 1; }
-        button:hover { background: #dcdcdc; border-color: #adadad; }
-        #status { color: #666; font-size: 10px; margin-right: 6px; }
-
         /* Find Bar */
         .find-bar { display: none; background: #f9f9f9; border-bottom: 1px solid #e0e0e0; padding: 6px 10px; align-items: center; gap: 6px; font-size: 13px; }
         .find-bar input { padding: 3px 6px; border: 1px solid #e0e0e0; font-size: 13px; outline: none; }
 
-        /* Container & Textarea with light borders */
-        .container { flex: 1; display: flex; flex-direction: column; padding: 10px; box-sizing: border-box; max-width: 100%; width: 100%; }
+        /* Container & Textarea */
+        .container { flex: 1; display: flex; flex-direction: column; padding: 10px 10px 2px 10px; box-sizing: border-box; max-width: 100%; width: 100%; }
         textarea { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; border: 1px solid #e0e0e0; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; outline: none; }
         textarea:focus { border-color: #b0b0b0; }
         textarea.word-wrap { white-space: pre-wrap; overflow-wrap: break-word; overflow-x: hidden; }
+
+        /* Bottom Action Bar (Micro Buttons at the bottom) */
+        .bottom-bar { display: flex; align-items: center; justify-content: flex-end; padding: 0 10px 6px 10px; background: #ffffff; }
+        .action-buttons { display: flex; align-items: center; }
+        button { background: #e8e8e8; color: #333; border: 1px solid #d0d0d0; outline: none; padding: 1px 3px; font-size: 10px; font-family: sans-serif; font-weight: bold; cursor: pointer; margin-left: 2px; line-height: 1; }
+        button:hover { background: #dcdcdc; border-color: #adadad; }
+        #status { color: #666; font-size: 10px; margin-right: 6px; }
     </style>
 </head>
 <body>
 
-<!-- Top Bar (Menu + Visible Micro Buttons) -->
+<!-- Top Bar (Menu Only) -->
 <div class="top-bar">
     <div class="menu-group">
         <div class="menu-item" onclick="toggleMenu(event, this)">
@@ -54,14 +55,6 @@
             </div>
         </div>
     </div>
-    
-    <div class="action-buttons">
-        <span id="status"></span>
-        <button onclick="loadFromCloud()" title="Load Data">L</button>
-        <button onclick="copyText()" title="Copy Text">C</button>
-        <button onclick="saveToCloud()" title="Save to Cloud">S</button>
-        <button onclick="eraseText()" title="Erase Pad">E</button>
-    </div>
 </div>
 
 <!-- Find Bar -->
@@ -74,6 +67,17 @@
 
 <div class="container">
     <textarea id="codeContent" placeholder="Type here..."></textarea>
+</div>
+
+<!-- Bottom Bar (Micro Buttons) -->
+<div class="bottom-bar">
+    <div class="action-buttons">
+        <span id="status"></span>
+        <button onclick="loadFromCloud()" title="Load Data">L</button>
+        <button onclick="copyText()" title="Copy Text">C</button>
+        <button onclick="saveToCloud()" title="Save to Cloud">S</button>
+        <button onclick="eraseText()" title="Erase Pad">E</button>
+    </div>
 </div>
 
 <script>
