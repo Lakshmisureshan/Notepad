@@ -25,6 +25,7 @@
             min-height: 100vh;
             width: 100%;
             box-sizing: border-box;
+            position: relative;
         }
 
         /* Top Header */
@@ -75,6 +76,7 @@
             align-items: center;
             padding-top: 50px;
             position: relative;
+            padding-bottom: 40px;
         }
 
         .lower-section h2 {
@@ -98,25 +100,26 @@
             text-decoration: none;
         }
 
-        /* Extremely small hidden-in-plain-sight open button at the bottom */
+        /* Visible, clear tiny text "open" button right below "Drop us a line!" */
         .enter-btn-tiny {
-            position: absolute;
-            bottom: 15px;
-            right: 20px;
-            background: transparent;
-            color: #444444;
-            border: none;
-            padding: 2px 6px;
-            font-size: 9px;
+            margin-top: 25px;
+            background: #222222;
+            color: #aaaaaa;
+            border: 1px solid #444444;
+            padding: 4px 12px;
+            font-size: 11px;
             font-family: monospace;
             cursor: pointer;
             outline: none;
-            opacity: 0.6;
-            transition: opacity 0.2s;
+            border-radius: 3px;
+            letter-spacing: 1px;
+            text-transform: lowercase;
+            transition: all 0.2s;
         }
         .enter-btn-tiny:hover {
-            opacity: 1;
-            color: #aaaaaa;
+            background: #333333;
+            color: #ffffff;
+            border-color: #666666;
         }
 
         /* App View (Initially Hidden) */
@@ -179,7 +182,7 @@
         <div class="contact-divider"></div>
         <a href="#" class="drop-link">Drop us a line!</a>
         
-        <!-- Tiny "open" button placed subtly at the bottom right corner -->
+        <!-- Clearly visible tiny "open" button right in the center footer section -->
         <button class="enter-btn-tiny" onclick="openAppPage()" title="Open Editor">open</button>
     </div>
 </div>
