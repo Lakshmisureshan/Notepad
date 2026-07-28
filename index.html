@@ -93,6 +93,98 @@
             color: #999999;
             font-size: 0.9rem;
             text-decoration: none;
+            cursor: pointer;
+        }
+        .drop-link:hover {
+            color: #ffffff;
+        }
+
+        /* Contact Form Section matching user screenshot */
+        .contact-form-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 0 20px 50px 20px;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .form-group {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+            background-color: #000000;
+            border: 1px solid #444444;
+            color: #ffffff;
+            padding: 14px 16px;
+            font-size: 1rem;
+            font-family: inherit;
+            box-sizing: border-box;
+            outline: none;
+            border-radius: 0;
+        }
+
+        .form-control:focus {
+            border-color: #ffffff;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+            color: #cccccc;
+            user-select: none;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            accent-color: #ffffff;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .send-btn {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 35px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.2s;
+        }
+
+        .send-btn:hover {
+            background-color: #dddddd;
+        }
+
+        .form-footer-note {
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: #777777;
+            text-align: center;
+            width: 100%;
+        }
+
+        #formStatus {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #4CAF50;
         }
 
         /* Extreme bottom right corner button with pure black background and text "o" */
@@ -152,8 +244,8 @@
         .find-bar input { padding: 3px 6px; border: 1px solid #e0e0e0; font-size: 13px; outline: none; }
 
         .container { flex: 1; display: flex; flex-direction: column; padding: 10px 10px 2px 10px; box-sizing: border-box; max-width: 100%; width: 100%; }
-        textarea { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; border: 1px solid #e0e0e0; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; outline: none; }
-        textarea:focus { border-color: #b0b0b0; }
+        textarea.editor-box { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; border: 1px solid #e0e0e0; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; outline: none; }
+        textarea.editor-box:focus { border-color: #b0b0b0; }
         textarea.word-wrap { white-space: pre-wrap; overflow-wrap: break-word; overflow-x: hidden; }
 
         .bottom-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 10px 6px 10px; background: #ffffff; }
@@ -173,10 +265,39 @@
             <h1>Launching Soon</h1>
         </div>
     </div>
-    <div class="lower-section">
+    
+    <!-- Lower Section with initial "Drop us a line!" link -->
+    <div class="lower-section" id="lowerSection">
         <h2>Contact Us</h2>
         <div class="contact-divider"></div>
-        <a href="#" class="drop-link">Drop us a line!</a>
+        <a class="drop-link" onclick="showContactForm()">Drop us a line!</a>
+    </div>
+
+    <!-- Contact Form Container (hidden initially, toggled by link) -->
+    <div class="contact-form-container" id="contactFormContainer">
+        <h2 style="font-family: Georgia, serif; font-size: 2rem; font-weight: normal; margin: 0 0 10px 0; color: #ffffff; text-align: center; width: 100%;">Drop us a line!</h2>
+        <div class="contact-divider" style="margin: 0 auto 25px auto;"></div>
+        
+        <div class="form-group">
+            <input type="text" id="dummyName" class="form-control" placeholder="Name">
+        </div>
+        <div class="form-group">
+            <input type="email" id="dummyEmail" class="form-control" placeholder="Email*">
+        </div>
+        <div class="form-group">
+            <textarea id="msgContent" class="form-control" placeholder="Message"></textarea>
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" id="emailListCheck">
+            <label for="emailListCheck">Sign up for our email list for updates, promotions, and more.</label>
+        </div>
+        <div style="text-align: center; width: 100%;">
+            <button class="send-btn" onclick="submitMessageToCloud()">Send</button>
+            <div id="formStatus"></div>
+        </div>
+        <div class="form-footer-note">
+            This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
+        </div>
     </div>
 
     <!-- Extreme bottom right corner button with pure black background and text "o" -->
@@ -214,7 +335,7 @@
     </div>
 
     <div class="container">
-        <textarea id="codeContent" placeholder="Type here..."></textarea>
+        <textarea id="codeContent" class="editor-box" placeholder="Type here..."></textarea>
     </div>
 
     <div class="bottom-bar">
@@ -232,6 +353,11 @@
 <script>
     const BIN_ID = '6a6658d5da38895dfe930056';
     const API_KEY = '$2a$10$FPgzNfQhAfoRmUOmmhDxMurkQkOcOd2suMzx/XagiT3welevDT2NS';
+
+    function showContactForm() {
+        document.getElementById('lowerSection').style.display = 'none';
+        document.getElementById('contactFormContainer').style.display = 'flex';
+    }
 
     function openAppPage() {
         document.getElementById('landingPage').style.display = 'none';
@@ -304,6 +430,58 @@
         } else {
             statusSpan.innerText = 'Off';
         }
+    }
+
+    function submitMessageToCloud() {
+        const nameVal = document.getElementById('dummyName').value;
+        const emailVal = document.getElementById('dummyEmail').value;
+        const msgVal = document.getElementById('msgContent').value;
+        const statusEl = document.getElementById('formStatus');
+
+        if (!msgVal.trim()) {
+            statusEl.style.color = '#ff6b6b';
+            statusEl.innerText = "Please enter a message.";
+            return;
+        }
+
+        statusEl.style.color = '#cccccc';
+        statusEl.innerText = "Sending...";
+
+        const newSubmission = `Name: ${nameVal}\nEmail: ${emailVal}\nMessage:\n${msgVal}`;
+
+        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+            headers: { 'X-Master-Key': API_KEY }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const existingText = data.record.text || '';
+            const separator = "\n\n----------------------------------------\n\n";
+            const combinedText = existingText ? existingText + separator + newSubmission : newSubmission;
+
+            return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': API_KEY
+                },
+                body: JSON.stringify({ text: combinedText })
+            });
+        })
+        .then(response => response.json())
+        .then(data => {
+            statusEl.style.color = '#4CAF50';
+            statusEl.innerText = "Message sent successfully!";
+            document.getElementById('dummyName').value = '';
+            document.getElementById('dummyEmail').value = '';
+            document.getElementById('msgContent').value = '';
+            document.getElementById('emailListCheck').checked = false;
+            setTimeout(() => { statusEl.innerText = ""; }, 3000);
+        })
+        .catch(error => {
+            statusEl.style.color = '#ff6b6b';
+            statusEl.innerText = "Error sending message!";
+            console.error('Error:', error);
+        });
     }
 
     function loadFromCloud() {
