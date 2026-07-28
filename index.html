@@ -1,4 +1,4 @@
-<!DOCTYPE html>   
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -99,7 +99,6 @@
             color: #ffffff;
         }
 
-        /* Contact Form Section matching user screenshot */
         .contact-form-container {
             display: none;
             flex-direction: column;
@@ -139,23 +138,6 @@
             min-height: 140px;
         }
 
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-            color: #cccccc;
-            user-select: none;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            accent-color: #ffffff;
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
-
         .send-btn {
             background-color: #ffffff;
             color: #000000;
@@ -173,87 +155,10 @@
             background-color: #dddddd;
         }
 
-        .form-footer-note {
-            margin-top: 30px;
-            font-size: 0.75rem;
-            color: #777777;
-            text-align: center;
-            width: 100%;
-        }
-
         #formStatus {
             margin-top: 15px;
             font-size: 0.85rem;
-            color: #4CAF50;
         }
-
-        /* Extreme bottom right corner button with pure black background and text "o" */
-        .enter-btn-corner {
-            position: fixed;
-            bottom: 12px;
-            right: 12px;
-            background: #000000;
-            color: #555555;
-            border: 1px solid #1a1a1a;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-family: monospace;
-            cursor: pointer;
-            outline: none;
-            border-radius: 4px;
-            text-transform: lowercase;
-            transition: all 0.2s;
-            z-index: 1000;
-        }
-        .enter-btn-corner:hover {
-            background: #111111;
-            color: #aaaaaa;
-            border-color: #333333;
-        }
-
-        /* App View (Initially Hidden) */
-        #appPage {
-            display: none;
-            flex: 1;
-            flex-direction: column;
-            height: 100vh;
-            width: 100vw;
-            background: #ffffff;
-            color: #2b2b2b;
-            text-align: left;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 9999;
-        }
-        
-        .top-bar { background: #f0f0f0; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: space-between; padding: 2px 5px; font-size: 13px; user-select: none; }
-        .menu-group { display: flex; align-items: center; }
-        .menu-item { position: relative; padding: 4px 10px; cursor: pointer; }
-        .menu-item:hover { background: #e0e0e0; }
-        .dropdown { display: none; position: absolute; top: 100%; left: 0; background: #ffffff; border: 1px solid #e0e0e0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 1000; min-width: 150px; }
-        .dropdown div { padding: 6px 12px; cursor: pointer; font-size: 13px; color: #333; }
-        .dropdown div:hover { background: #0078d4; color: white; }
-        .menu-item.active .dropdown { display: block; }
-
-        .find-bar { display: none; background: #f9f9f9; border-bottom: 1px solid #e0e0e0; padding: 6px 10px; align-items: center; gap: 6px; font-size: 13px; }
-        .find-bar input { padding: 3px 6px; border: 1px solid #e0e0e0; font-size: 13px; outline: none; }
-
-        .container { flex: 1; display: flex; flex-direction: column; padding: 10px 10px 2px 10px; box-sizing: border-box; max-width: 100%; width: 100%; }
-        textarea.editor-box { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; border: 1px solid #e0e0e0; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; outline: none; }
-        textarea.editor-box:focus { border-color: #b0b0b0; }
-        textarea.word-wrap { white-space: pre-wrap; overflow-wrap: break-word; overflow-x: hidden; }
-
-        .bottom-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 10px 6px 10px; background: #ffffff; }
-        .action-buttons { display: flex; align-items: center; }
-        button.tool-btn { background: #e8e8e8; color: #333; border: 1px solid #d0d0d0; outline: none; padding: 1px 3px; font-size: 10px; font-family: sans-serif; font-weight: bold; cursor: pointer; margin-left: 2px; line-height: 1; }
-        button.tool-btn:hover { background: #dcdcdc; border-color: #adadad; }
-        #status { color: #666; font-size: 10px; margin-right: 6px; }
-        .back-home-link { font-size: 11px; color: #0078d4; cursor: pointer; text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -266,14 +171,12 @@
         </div>
     </div>
     
-    <!-- Lower Section with initial "Drop us a line!" link -->
     <div class="lower-section" id="lowerSection">
         <h2>Contact Us</h2>
         <div class="contact-divider"></div>
         <a class="drop-link" onclick="showContactForm()">Drop us a line!</a>
     </div>
 
-    <!-- Contact Form Container (hidden initially, toggled by link) -->
     <div class="contact-form-container" id="contactFormContainer">
         <h2 style="font-family: Georgia, serif; font-size: 2rem; font-weight: normal; margin: 0 0 10px 0; color: #ffffff; text-align: center; width: 100%;">Drop us a line!</h2>
         <div class="contact-divider" style="margin: 0 auto 25px auto;"></div>
@@ -287,65 +190,9 @@
         <div class="form-group">
             <textarea id="msgContent" class="form-control" placeholder="Message"></textarea>
         </div>
-        <div class="checkbox-group">
-            <input type="checkbox" id="emailListCheck">
-            <label for="emailListCheck">Sign up for our email list for updates, promotions, and more.</label>
-        </div>
         <div style="text-align: center; width: 100%;">
             <button class="send-btn" onclick="submitMessageToCloud()">Send</button>
             <div id="formStatus"></div>
-        </div>
-        <div class="form-footer-note">
-            This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
-        </div>
-    </div>
-
-    <!-- Extreme bottom right corner button with pure black background and text "o" -->
-    <button class="enter-btn-corner" onclick="openAppPage()" title="Open Editor">o</button>
-</div>
-
-<div id="appPage">
-    <div class="top-bar">
-        <div class="menu-group">
-            <div class="menu-item" onclick="toggleMenu(event, this)">
-                Edit
-                <div class="dropdown">
-                    <div onclick="undoText()">Undo</div>
-                    <div onclick="selectAllText()">Select All</div>
-                    <div onclick="openFind()">Find...</div>
-                </div>
-            </div>
-            <div class="menu-item" onclick="toggleMenu(event, this)">
-                View
-                <div class="dropdown">
-                    <div onclick="toggleWordWrap()">Word Wrap: <span id="wrapStatus">Off</span></div>
-                </div>
-            </div>
-        </div>
-        <div style="padding-right: 5px;">
-            <span class="back-home-link" onclick="openLandingPage()">← Back to Home</span>
-        </div>
-    </div>
-
-    <div id="findBar" class="find-bar">
-        <span>Find:</span>
-        <input type="text" id="findInput" placeholder="Find text...">
-        <button onclick="findNext()" style="padding: 2px 8px; font-size: 12px; margin: 0; background: #f0f0f0; border: 1px solid #e0e0e0;">Find Next</button>
-        <button onclick="closeFind()" style="padding: 2px 6px; font-size: 12px; margin: 0; background: #f0f0f0; border: 1px solid #e0e0e0;">✕</button>
-    </div>
-
-    <div class="container">
-        <textarea id="codeContent" class="editor-box" placeholder="Type here..."></textarea>
-    </div>
-
-    <div class="bottom-bar">
-        <span class="back-home-link" onclick="openLandingPage()">← Home</span>
-        <div class="action-buttons">
-            <span id="status"></span>
-            <button class="tool-btn" onclick="loadFromCloud()" title="Load Data">L</button>
-            <button class="tool-btn" onclick="copyText()" title="Copy Text">C</button>
-            <button class="tool-btn" onclick="saveToCloud()" title="Save to Cloud">S</button>
-            <button class="tool-btn" onclick="eraseText()" title="Erase Pad">E</button>
         </div>
     </div>
 </div>
@@ -357,79 +204,6 @@
     function showContactForm() {
         document.getElementById('lowerSection').style.display = 'none';
         document.getElementById('contactFormContainer').style.display = 'flex';
-    }
-
-    function openAppPage() {
-        document.getElementById('landingPage').style.display = 'none';
-        document.getElementById('appPage').style.display = 'flex';
-    }
-
-    function openLandingPage() {
-        document.getElementById('appPage').style.display = 'none';
-        document.getElementById('landingPage').style.display = 'flex';
-    }
-
-    function toggleMenu(event, element) {
-        event.stopPropagation();
-        document.querySelectorAll('.menu-item').forEach(item => {
-            if (item !== element) item.classList.remove('active');
-        });
-        element.classList.toggle('active');
-    }
-
-    window.onclick = function() {
-        document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
-    };
-
-    function undoText() {
-        document.execCommand('undo');
-    }
-
-    function selectAllText() {
-        document.getElementById('codeContent').select();
-    }
-
-    function openFind() {
-        document.getElementById('findBar').style.display = 'flex';
-        document.getElementById('findInput').focus();
-    }
-
-    function closeFind() {
-        document.getElementById('findBar').style.display = 'none';
-    }
-
-    function findNext() {
-        const query = document.getElementById('findInput').value;
-        const textarea = document.getElementById('codeContent');
-        const text = textarea.value;
-        const startIndex = textarea.selectionEnd;
-        
-        if (!query) return;
-
-        const index = text.indexOf(query, startIndex);
-        if (index !== -1) {
-            textarea.setSelectionRange(index, index + query.length);
-            textarea.focus();
-        } else {
-            const wrapIndex = text.indexOf(query);
-            if (wrapIndex !== -1) {
-                textarea.setSelectionRange(wrapIndex, wrapIndex + query.length);
-                textarea.focus();
-            } else {
-                alert('Cannot find "' + query + '"');
-            }
-        }
-    }
-
-    function toggleWordWrap() {
-        const textarea = document.getElementById('codeContent');
-        const statusSpan = document.getElementById('wrapStatus');
-        textarea.classList.toggle('word-wrap');
-        if (textarea.classList.contains('word-wrap')) {
-            statusSpan.innerText = 'On';
-        } else {
-            statusSpan.innerText = 'Off';
-        }
     }
 
     function submitMessageToCloud() {
@@ -474,7 +248,6 @@
             document.getElementById('dummyName').value = '';
             document.getElementById('dummyEmail').value = '';
             document.getElementById('msgContent').value = '';
-            document.getElementById('emailListCheck').checked = false;
             setTimeout(() => { statusEl.innerText = ""; }, 3000);
         })
         .catch(error => {
@@ -482,70 +255,6 @@
             statusEl.innerText = "Error sending message!";
             console.error('Error:', error);
         });
-    }
-
-    function loadFromCloud() {
-        document.getElementById('status').innerText = "Loading...";
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { 'X-Master-Key': API_KEY }
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('codeContent').value = data.record.text || '';
-            document.getElementById('status').innerText = "Loaded!";
-            setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
-        })
-        .catch(error => {
-            document.getElementById('status').innerText = "Error!";
-            console.error('Error loading data:', error);
-        });
-    }
-
-    function copyText() {
-        const textarea = document.getElementById('codeContent');
-        textarea.select();
-        document.execCommand('copy');
-        document.getElementById('status').innerText = "Copied!";
-        setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
-    }
-
-    function saveToCloud() {
-        const newText = document.getElementById('codeContent').value;
-        document.getElementById('status').innerText = "Saving...";
-
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { 'X-Master-Key': API_KEY }
-        })
-        .then(response => response.json())
-        .then(data => {
-            const existingText = data.record.text || '';
-            const separator = "\n\n----------------------------------------\n\n";
-            const combinedText = existingText ? existingText + separator + newText : newText;
-
-            return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': API_KEY
-                },
-                body: JSON.stringify({ text: combinedText })
-            });
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('status').innerText = "Saved!";
-            setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
-        })
-        .catch(error => {
-            document.getElementById('status').innerText = "Error!";
-            console.error('Error:', error);
-        });
-    }
-
-    function eraseText() {
-        document.getElementById('codeContent').value = '';
-        document.getElementById('status').innerText = "Erased!";
-        setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
     }
 </script>
 
