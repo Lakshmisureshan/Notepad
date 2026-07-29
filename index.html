@@ -1,510 +1,472 @@
-<!DOCTYPE html>    
+<!DOCTYPE html>    
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACE</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            text-align: center;
-            box-sizing: border-box;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACE</title>
+    <style>
+        body {feditor-bo
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #000000;
+            color: #ffffff;feditor-bo
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;fv
+            text-align: center;
+            box-sizing: border-box;
+        }
 
-        #landingPage {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            width: 100%;
-            box-sizing: border-box;
-            position: relative;
-        }
+        #landingPage {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
 
-       .domain-header {
-            padding: 30px 20px 20px 20px;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            font-weight: 600;
-            text-transform: uppercase;
-            background: transparent;
-            text-align: center; /* Added to center the text */
-        }
+        .domain-header {
+            padding: 30px 20px 20px 20px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: transparent;
+        }
 
-        .hero-section {
-            position: relative;
-            width: 100%;
-            height: 55vh;
-            min-height: 350px;
-            background: url('https://img1.wsimg.com/parking/images/backgrounds/bg-default.jpg') no-repeat center center;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 55vh;
+            min-height: 350px;
+            background: url('https://img1.wsimg.com/parking/images/backgrounds/bg-default.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-        .hero-title-box {
-            background-color: rgba(0, 85, 220, 0.85);
-            padding: 15px 40px;
-        }
+        .hero-title-box {
+            background-color: rgba(0, 85, 220, 0.85);
+            padding: 15px 40px;
+        }
 
-        .hero-title-box h1 {
-            margin: 0;
-            font-size: 2.8rem;
-            font-family: Georgia, serif;
-            font-weight: normal;
-            color: #ffffff;
-            letter-spacing: 0.5px;
-        }
+        .hero-title-box h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            font-family: Georgia, serif;
+            font-weight: normal;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
 
-        .lower-section {
-            background-color: #000000;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            padding-top: 50px;
-            position: relative;
-            padding-bottom: 50px;
-        }
+        .lower-section {
+            background-color: #000000;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding-top: 50px;
+            position: relative;
+            padding-bottom: 50px;
+        }
 
-        .lower-section h2 {
-            font-family: Georgia, serif;
-            font-size: 2rem;
-            font-weight: normal;
-            margin: 0 0 10px 0;
-            color: #ffffff;
-        }
+        .lower-section h2 {
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            font-weight: normal;
+            margin: 0 0 10px 0;
+            color: #ffffff;
+        }
 
-        .contact-divider {
-            width: 40px;
-            height: 1px;
-            background-color: #444444;
-            margin-bottom: 25px;
-        }
+        .contact-divider {
+            width: 40px;
+            height: 1px;
+            background-color: #444444;
+            margin-bottom: 25px;
+        }
 
-        .drop-link {
-            color: #999999;
-            font-size: 0.9rem;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .drop-link:hover {
-            color: #ffffff;
-        }
+        .drop-link {
+            color: #999999;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .drop-link:hover {
+            color: #ffffff;
+        }
 
-        /* Contact Form Section */
-        .contact-form-container {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 550px;
-            margin: 0 auto;
-            padding: 0 20px 50px 20px;
-            box-sizing: border-box;
-            text-align: left;
-        }
+        /* Contact Form Section matching user screenshot */
+        .contact-form-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 0 20px 50px 20px;
+            box-sizing: border-box;
+            text-align: left;
+        }
 
-        .form-group {
-            width: 100%;
-            margin-bottom: 15px;
-        }
+        .form-group {
+            width: 100%;
+            margin-bottom: 15px;
+        }
 
-        .form-control {
-            width: 100%;
-            background-color: #000000;
-            border: 1px solid #444444;
-            color: #ffffff;
-            padding: 14px 16px;
-            font-size: 1rem;
-            font-family: inherit;
-            box-sizing: border-box;
-            outline: none;
-            border-radius: 0;
-        }
+        .form-control {
+            width: 100%;
+            background-color: #000000;
+            border: 1px solid #444444;
+            color: #ffffff;
+            padding: 14px 16px;
+            font-size: 1rem;
+            font-family: inherit;
+            box-sizing: border-box;
+            outline: none;
+            border-radius: 0;
+        }
 
-        .form-control:focus {
-            border-color: #ffffff;
-        }
+        .form-control:focus {
+            border-color: #ffffff;
+        }
 
-        textarea.form-control {
-            resize: vertical;
-            min-height: 140px;
-        }
+        textarea.form-control {
+            resize: vertical;
+            min-height: 140px;
+        }
 
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-            color: #cccccc;
-            user-select: none;
-        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+            color: #cccccc;
+            user-select: none;
+        }
 
-        .checkbox-group input[type="checkbox"] {
-            accent-color: #ffffff;
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
+        .checkbox-group input[type="checkbox"] {
+            accent-color: #ffffff;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
 
-        .send-btn {
-            background-color: #ffffff;
-            color: #000000;
-            border: none;
-            padding: 12px 35px;
-            font-weight: bold;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: background-color 0.2s;
-        }
+        .send-btn {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 35px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.2s;
+        }
 
-        .send-btn:hover {
-            background-color: #dddddd;
-        }
+        .send-btn:hover {
+            background-color: #dddddd;
+        }
 
-        .form-footer-note {
-            margin-top: 30px;
-            font-size: 0.75rem;
-            color: #777777;
-            text-align: center;
-            width: 100%;
-        }
+        .form-footer-note {
+            margin-top: 30px;
+            font-size: 0.75rem;
+            color: #777777;
+            text-align: center;
+            width: 100%;
+        }
 
-        #formStatus {
-            margin-top: 15px;
-            font-size: 0.85rem;
-            color: #4CAF50;
-        }
+        #formStatus {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #4CAF50;
+        }
 
-        /* Extreme bottom right corner button */
-        .enter-btn-corner {
-            position: fixed;
-            bottom: 12px;
-            right: 12px;
-            background: #000000;
-            color: #333333;
-            border: 1px solid #1a1a1a;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            font-family: monospace;
-            cursor: pointer;
-            outline: none;
-            border-radius: 4px;
-            text-transform: lowercase;
-            transition: all 0.2s;
-            z-index: 1000;
-        }
-        .enter-btn-corner:hover {
-            background: #111111;
-            color: #ffffff;
-            border-color: #333333;
-        }
+        /* Extreme bottom right corner button with pure black background and text "o" */
+        .enter-btn-corner {
+            position: fixed;
+            bottom: 12px;
+            right: 12px;
+            background: #000000;
+            color:#000000;
+            border: 1px solid #1a1a1a;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-family: monospace;
+            cursor: pointer;
+            outline: none;
+            border-radius: 4px;
+            text-transform: lowercase;
+            transition: all 0.2s;
+            z-index: 1000;
+        }
+        .enter-btn-corner:hover {
+            background: #000000;
+            color: #000000;
+            border-color: #333333;
+        }
 
-        /* App View (Initially Hidden) */
-        #appPage {
-            display: none;
-            flex: 1;
-            flex-direction: column;
-            height: 100vh;
-            width: 100vw;
-            background: #ffffff;
-            color: #2b2b2b;
-            text-align: left;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 9999;
-        }
-       
-        .top-bar { 
-            background: #f0f0f0; 
-            border-bottom: 1px solid #e0e0e0; 
-            display: flex; 
-            align-items: center; 
-            justify-content: flex-end; 
-            padding: 8px 10px; 
-            font-size: 13px; 
-            user-select: none; 
-        }
+        /* App View (Initially Hidden) */
+        #appPage {
+            display: none;
+            flex: 1;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            background: #ffffff;
+            color: #2b2b2b;
+            text-align: left;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+       
+        .top-bar { background: #f0f0f0; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: flex-end; padding: 2px 5px; font-size: 13px; user-select: none; }
 
-        .container { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            padding: 10px; 
-            box-sizing: border-box; 
-            max-width: 100%; 
-            width: 100%; 
-        }
+        .container { flex: 1; display: flex; flex-direction: column; padding: 10px 10px 2px 10px; box-sizing: border-box; max-width: 100%; width: 100%; }
+        textarea.editor-box { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; border: 1px solid #e0e0e0; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; outline: none; }
+        textarea.editor-box:focus { border-color: #b0b0b0; }
 
-        textarea.editor-box { 
-            flex: 1; 
-            font-family: monospace; 
-            padding: 10px; 
-            font-size: 14px; 
-            border: 1px solid #e0e0e0; 
-            border-radius: 0; 
-            box-sizing: border-box; 
-            resize: none; 
-            width: 100%; 
-            outline: none; 
-        }
-        textarea.editor-box:focus { 
-            border-color: #b0b0b0; 
-        }
-
-        .bottom-bar { 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            padding: 10px; 
-            background: #ffffff; 
-            border-top: 1px solid #e0e0e0;
-        }
-
-        .action-buttons { 
-            display: flex; 
-            align-items: center; 
-            gap: 5px;
-        }
-
-        button.tool-btn { 
-            background: #f8f8f8; 
-            color: #333333; 
-            border: 1px solid #d0d0d0; 
-            outline: none; 
-            padding: 6px 12px; 
-            font-size: 12px;     
-            font-family: sans-serif; 
-            font-weight: bold; 
-            cursor: pointer; 
-            border-radius: 3px;
-        }
-        button.tool-btn:hover { 
-            background: #eaeaea; 
-            border-color: #adadad; 
-        }
-
-        #status { 
-            color: #666; 
-            font-size: 12px; 
-            margin-right: 10px; 
-        }
-
-        .back-home-link { 
-            font-size: 12px; 
-            color: #0078d4; 
-            cursor: pointer; 
-            text-decoration: underline; 
-        }
-    </style>
+        .bottom-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 10px 6px 10px; background: #ffffff; }
+        .action-buttons { display: flex; align-items: center; }
+        button.tool-btn { 
+            background: #FFFFFF; 
+            color: #FFFFFF; 
+            border: 1px solid #d0d0d0; 
+            outline: none; 
+            padding: 0px 2px; 
+            font-size: 8px;     
+            font-family: sans-serif; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-left: 1px;   
+            line-height: 1; 
+        }
+        button.tool-btn:hover { 
+            background: #dcdcdc; 
+            border-color: #adadad; 
+        }
+        #status { color: #666; font-size: 10px; margin-right: 6px; }
+        .back-home-link { font-size: 11px; color: #0078d4; cursor: pointer; text-decoration: underline; }
+    </style>
 </head>
 <body>
 
 <div id="landingPage">
-    <div class="domain-header">ACEINVENTORY.NET</div>
-    <div class="hero-section">
-        <div class="hero-title-box">
-            <h1>Launching Soon</h1>
-        </div>
-    </div>
-   
-    <!-- Lower Section with initial "Drop us a line!" link -->
-    <div class="lower-section" id="lowerSection">
-        <h2>Contact Us</h2>
-        <div class="contact-divider"></div>
-        <a class="drop-link" onclick="showContactForm()">Drop us a line!</a>
-    </div>
+    <div class="domain-header">ACEINVENTORY.NET</div>
+    <div class="hero-section">
+        <div class="hero-title-box">
+            <h1>Launching Soon</h1>
+        </div>
+    </div>
+   
+    <!-- Lower Section with initial "Drop us a line!" link -->
+    <div class="lower-section" id="lowerSection">
+        <h2>Contact Us</h2>
+        <div class="contact-divider"></div>
+        <a class="drop-link" onclick="showContactForm()">Drop us a line!</a>
+    </div>
 
-    <!-- Contact Form Container -->
-    <div class="contact-form-container" id="contactFormContainer">
-        <h2 style="font-family: Georgia, serif; font-size: 2rem; font-weight: normal; margin: 0 0 10px 0; color: #ffffff; text-align: center; width: 100%;">Drop us a line!</h2>
-        <div class="contact-divider" style="margin: 0 auto 25px auto;"></div>
-       
-        <div class="form-group">
-            <input type="text" id="dummyName" class="form-control" placeholder="Name">
-        </div>
-        <div class="form-group">
-            <input type="email" id="dummyEmail" class="form-control" placeholder="Email*">
-        </div>
-        <div class="form-group">
-            <textarea id="msgContent" class="form-control" placeholder="Message"></textarea>
-        </div>
-        <div class="checkbox-group">
-            <input type="checkbox" id="emailListCheck">
-            <label for="emailListCheck">Sign up for our email list for updates, promotions, and more.</label>
-        </div>
-        <div style="text-align: center; width: 100%;">
-            <button class="send-btn" onclick="submitMessageToCloud()">Send</button>
-            <div id="formStatus"></div>
-        </div>
-        <div class="form-footer-note">
-            This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
-        </div>
-    </div>
+    <!-- Contact Form Container (hidden initially, toggled by link) -->
+    <div class="contact-form-container" id="contactFormContainer">
+        <h2 style="font-family: Georgia, serif; font-size: 2rem; font-weight: normal; margin: 0 0 10px 0; color: #ffffff; text-align: center; width: 100%;">Drop us a line!</h2>
+        <div class="contact-divider" style="margin: 0 auto 25px auto;"></div>
+       
+        <div class="form-group">
+            <input type="text" id="dummyName" class="form-control" placeholder="Name">
+        </div>
+        <div class="form-group">
+            <input type="email" id="dummyEmail" class="form-control" placeholder="Email*">
+        </div>
+        <div class="form-group">
+            <textarea id="msgContent" class="form-control" placeholder="Message"></textarea>
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" id="emailListCheck">
+            <label for="emailListCheck">Sign up for our email list for updates, promotions, and more.</label>
+        </div>
+        <div style="text-align: center; width: 100%;">
+            <button class="send-btn" onclick="submitMessageToCloud()">Send</button>
+            <div id="formStatus"></div>
+        </div>
+        <div class="form-footer-note">
+            This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
+        </div>
+    </div>
 
-    <!-- Corner button -->
-    <button class="enter-btn-corner" onclick="openAppPage()">o</button>
+    <!-- Extreme bottom right corner button with pure black background and text "o" -->
+    <button class="enter-btn-corner" onclick="openAppPage()" >o</button>
 </div>
 
-<div id="appPage"> 
-    <div class="top-bar">
-        <div>
-            <span class="back-home-link" onclick="openLandingPage()">← Back to Home</span>
-        </div>
-    </div>
+<div id="appPage"> 
+    <div class="top-bar">
+        <div style="padding-right: 5px;">
+            <span class="back-home-link" onclick="openLandingPage()">← Back to Home</span>
+        </div>
+    </div>
 
-    <div class="container">
-        <textarea id="codeContent" class="editor-box" placeholder=""></textarea>
-    </div>
+    <div class="container">
+        <textarea id="codeContent" class="editor-box" placeholder="."></textarea>
+    </div>
 
-    <div class="bottom-bar">
-        <span class="back-home-link" onclick="openLandingPage()">← Home</span>
-        <div class="action-buttons">
-            <span id="status"></span>
-            <button class="tool-btn" onclick="loadFromCloud()" title="Load Data">Load</button>
-            <button class="tool-btn" onclick="saveToCloud()" title="Save to Cloud">Save</button>
-        </div>
-    </div>
-</div> 
+    <div class="bottom-bar">
+        <span class="back-home-link" onclick="openLandingPage()">← Home</span>
+        <div class="action-buttons">
+            <span id="status"></span>
+            <button class="tool-btn" onclick="loadFromCloud()" title="Load Data">L</button>
+       
+            <button class="tool-btn" onclick="saveToCloud()" title="Save to Cloud">S</button>
+         
+        </div>
+    </div>
+</div> 
 
 <script>
-    const BIN_ID = '6a6a51cef5f4af5e29d28347';
-    const API_KEY = '$2a$10$FPgzNfQhAfoRmUOmmhDxMurkQkOcOd2suMzx/XagiT3welevDT2NS';
+    const BIN_ID = '6a6a51cef5f4af5e29d28347';
+    const API_KEY = '$2a$10$FPgzNfQhAfoRmUOmmhDxMurkQkOcOd2suMzx/XagiT3welevDT2NS';
 
-    function showContactForm() {
-        document.getElementById('lowerSection').style.display = 'none';
-        document.getElementById('contactFormContainer').style.display = 'flex';
-    }
+    function showContactForm() {
+        document.getElementById('lowerSection').style.display = 'none';
+        document.getElementById('contactFormContainer').style.display = 'flex';
+    }
 
-    function openAppPage() {
-        document.getElementById('landingPage').style.display = 'none';
-        document.getElementById('appPage').style.display = 'flex';
-    }
+    function openAppPage() {
+        document.getElementById('landingPage').style.display = 'none';
+        document.getElementById('appPage').style.display = 'flex';
+    }
 
-    function openLandingPage() {
-        document.getElementById('appPage').style.display = 'none';
-        document.getElementById('landingPage').style.display = 'flex';
-    }
+    function openLandingPage() {
+        document.getElementById('appPage').style.display = 'none';
+        document.getElementById('landingPage').style.display = 'flex';
+    }
 
-    function submitMessageToCloud() {
-        const nameVal = document.getElementById('dummyName').value;
-        const emailVal = document.getElementById('dummyEmail').value;
-        const msgVal = document.getElementById('msgContent').value;
-        const statusEl = document.getElementById('formStatus');
+    function submitMessageToCloud() {
+        const nameVal = document.getElementById('dummyName').value;
+        const emailVal = document.getElementById('dummyEmail').value;
+        const msgVal = document.getElementById('msgContent').value;
+        const statusEl = document.getElementById('formStatus');
 
-        if (!msgVal.trim()) {
-            statusEl.style.color = '#ff6b6b';
-            statusEl.innerText = "Please enter a message.";
-            return;
-        }
+        if (!msgVal.trim()) {
+            statusEl.style.color = '#ff6b6b';
+            statusEl.innerText = "Please enter a message.";
+            return;
+        }
 
-        statusEl.style.color = '#cccccc';
-        statusEl.innerText = "Sending...";
+        statusEl.style.color = '#cccccc';
+        statusEl.innerText = "Sending...";
 
-        const newSubmission = `Name: ${nameVal}\nEmail: ${emailVal}\nMessage:\n${msgVal}`;
+        const newSubmission = `Name: ${nameVal}\nEmail: ${emailVal}\nMessage:\n${msgVal}`;
 
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { 'X-Master-Key': API_KEY }
-        })
-        .then(response => response.json())
-        .then(data => {
-            const existingText = data.record.text || '';
-            const separator = "\n\n----------------------------------------\n\n";
-            const combinedText = existingText ? existingText + separator + newSubmission : newSubmission;
+        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+            headers: { 'X-Master-Key': API_KEY }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const existingText = data.record.text || '';
+            const separator = "\n\n----------------------------------------\n\n";
+            const combinedText = existingText ? existingText + separator + newSubmission : newSubmission;
 
-            return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': API_KEY
-                },
-                body: JSON.stringify({ text: combinedText })
-            });
-        })
-        .then(response => response.json())
-        .then(data => {
-            statusEl.style.color = '#4CAF50';
-            statusEl.innerText = "Message sent successfully!";
-            document.getElementById('dummyName').value = '';
-            document.getElementById('dummyEmail').value = '';
-            document.getElementById('msgContent').value = '';
-            document.getElementById('emailListCheck').checked = false;
-            setTimeout(() => { statusEl.innerText = ""; }, 3000);
-        })
-        .catch(error => {
-            statusEl.style.color = '#ff6b6b';
-            statusEl.innerText = "Error sending message!";
-            console.error('Error:', error);
-        });
-    }
+            return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': API_KEY
+                },
+                body: JSON.stringify({ text: combinedText })
+            });
+        })
+        .then(response => response.json())
+        .then(data => {
+            statusEl.style.color = '#4CAF50';
+            statusEl.innerText = "Message sent successfully!";
+            document.getElementById('dummyName').value = '';
+            document.getElementById('dummyEmail').value = '';
+            document.getElementById('msgContent').value = '';
+            document.getElementById('emailListCheck').checked = false;
+            setTimeout(() => { statusEl.innerText = ""; }, 3000);
+        })
+        .catch(error => {
+            statusEl.style.color = '#ff6b6b';
+            statusEl.innerText = "Error sending message!";
+            console.error('Error:', error);
+        });
+    }
 
-    function loadFromCloud() {
-        document.getElementById('status').innerText = "Loading...";
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { 'X-Master-Key': API_KEY }
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('codeContent').value = data.record.text || '';
-            document.getElementById('status').innerText = "Loaded!";
-            setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
-        })
-        .catch(error => {
-            document.getElementById('status').innerText = "Error!";
-            console.error('Error loading data:', error);
-        });
-    }
+    function loadFromCloud() {
+        document.getElementById('status').innerText = "Loading...";
+        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+            headers: { 'X-Master-Key': API_KEY }
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('codeContent').value = data.record.text || '';
+            document.getElementById('status').innerText = "Loaded!";
+            setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
+        })
+        .catch(error => {
+            document.getElementById('status').innerText = "Error!";
+            console.error('Error loading data:', error);
+        });
+    }
 
-    function saveToCloud() {
-        const newText = document.getElementById('codeContent').value;
-        document.getElementById('status').innerText = "Saving...";
+    function copyText() {
+        const textarea = document.getElementById('codeContent');
+        textarea.select();
+        document.execCommand('copy');
+        document.getElementById('status').innerText = "Copied!";
+        setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
+    }
 
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { 'X-Master-Key': API_KEY }
-        })
-        .then(response => response.json())
-        .then(data => {
-            const existingText = data.record.text || '';
-            const separator = "\n\n----------------------------------------\n\n";
-            const combinedText = existingText ? existingText + separator + newText : newText;
+    function saveToCloud() {
+        const newText = document.getElementById('codeContent').value;
+        document.getElementById('status').innerText = "Saving...";
 
-            return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': API_KEY
-                },
-                body: JSON.stringify({ text: combinedText })
-            });
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('status').innerText = "Saved!";
-            setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
-        })
-        .catch(error => {
-            document.getElementById('status').innerText = "Error!";
-            console.error('Error:', error);
-        });
-    }
+        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+            headers: { 'X-Master-Key': API_KEY }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const existingText = data.record.text || '';
+            const separator = "\n\n----------------------------------------\n\n";
+            const combinedText = existingText ? existingText + separator + newText : newText;
+
+            return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': API_KEY
+                },
+                body: JSON.stringify({ text: combinedText })
+            });
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('status').innerText = "Saved!";
+            setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
+        })
+        .catch(error => {
+            document.getElementById('status').innerText = "Error!";
+            console.error('Error:', error);
+        });
+    }
+
+    function eraseText() {
+        document.getElementById('codeContent').value = '';
+        document.getElementById('status').innerText = "Erased!";
+        setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
+    }
 </script>
 
 </body>
 </html>
+ correct this some probekm in css
