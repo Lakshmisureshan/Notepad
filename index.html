@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACE</title>
     <style>
-        body {feditor-bo
+        body {
             margin: 0;
             padding: 0;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             background-color: #000000;
-            color: #ffffff;feditor-bo
+            color: #ffffff;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;fv
+            min-height: 100vh;
             text-align: center;
             box-sizing: border-box;
         }
@@ -99,7 +99,7 @@
             color: #ffffff;
         }
 
-        /* Contact Form Section matching user screenshot */
+        /* Contact Form Section */
         .contact-form-container {
             display: none;
             flex-direction: column;
@@ -187,20 +187,20 @@
             color: #4CAF50;
         }
 
-        /* Extreme bottom right corner button with pure black background and text "o" */
+        /* Extreme bottom right corner button */
         .enter-btn-corner {
             position: fixed;
             bottom: 12px;
             right: 12px;
             background: #000000;
-            color:#000000;
+            color: #333333;
             border: 1px solid #1a1a1a;
             width: 28px;
             height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 8px;
+            font-size: 10px;
             font-family: monospace;
             cursor: pointer;
             outline: none;
@@ -210,8 +210,8 @@
             z-index: 1000;
         }
         .enter-btn-corner:hover {
-            background: #000000;
-            color: #000000;
+            background: #111111;
+            color: #ffffff;
             border-color: #333333;
         }
 
@@ -231,33 +231,87 @@
             z-index: 9999;
         }
        
-        .top-bar { background: #f0f0f0; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: flex-end; padding: 2px 5px; font-size: 13px; user-select: none; }
+        .top-bar { 
+            background: #f0f0f0; 
+            border-bottom: 1px solid #e0e0e0; 
+            display: flex; 
+            align-items: center; 
+            justify-content: flex-end; 
+            padding: 8px 10px; 
+            font-size: 13px; 
+            user-select: none; 
+        }
 
-        .container { flex: 1; display: flex; flex-direction: column; padding: 10px 10px 2px 10px; box-sizing: border-box; max-width: 100%; width: 100%; }
-        textarea.editor-box { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; border: 1px solid #e0e0e0; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; outline: none; }
-        textarea.editor-box:focus { border-color: #b0b0b0; }
+        .container { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            padding: 10px; 
+            box-sizing: border-box; 
+            max-width: 100%; 
+            width: 100%; 
+        }
 
-        .bottom-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 10px 6px 10px; background: #ffffff; }
-        .action-buttons { display: flex; align-items: center; }
+        textarea.editor-box { 
+            flex: 1; 
+            font-family: monospace; 
+            padding: 10px; 
+            font-size: 14px; 
+            border: 1px solid #e0e0e0; 
+            border-radius: 0; 
+            box-sizing: border-box; 
+            resize: none; 
+            width: 100%; 
+            outline: none; 
+        }
+        textarea.editor-box:focus { 
+            border-color: #b0b0b0; 
+        }
+
+        .bottom-bar { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            padding: 10px; 
+            background: #ffffff; 
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .action-buttons { 
+            display: flex; 
+            align-items: center; 
+            gap: 5px;
+        }
+
         button.tool-btn { 
-            background: #FFFFFF; 
-            color: #FFFFFF; 
+            background: #f8f8f8; 
+            color: #333333; 
             border: 1px solid #d0d0d0; 
             outline: none; 
-            padding: 0px 2px; 
-            font-size: 8px;     
+            padding: 6px 12px; 
+            font-size: 12px;     
             font-family: sans-serif; 
             font-weight: bold; 
             cursor: pointer; 
-            margin-left: 1px;   
-            line-height: 1; 
+            border-radius: 3px;
         }
         button.tool-btn:hover { 
-            background: #dcdcdc; 
+            background: #eaeaea; 
             border-color: #adadad; 
         }
-        #status { color: #666; font-size: 10px; margin-right: 6px; }
-        .back-home-link { font-size: 11px; color: #0078d4; cursor: pointer; text-decoration: underline; }
+
+        #status { 
+            color: #666; 
+            font-size: 12px; 
+            margin-right: 10px; 
+        }
+
+        .back-home-link { 
+            font-size: 12px; 
+            color: #0078d4; 
+            cursor: pointer; 
+            text-decoration: underline; 
+        }
     </style>
 </head>
 <body>
@@ -277,7 +331,7 @@
         <a class="drop-link" onclick="showContactForm()">Drop us a line!</a>
     </div>
 
-    <!-- Contact Form Container (hidden initially, toggled by link) -->
+    <!-- Contact Form Container -->
     <div class="contact-form-container" id="contactFormContainer">
         <h2 style="font-family: Georgia, serif; font-size: 2rem; font-weight: normal; margin: 0 0 10px 0; color: #ffffff; text-align: center; width: 100%;">Drop us a line!</h2>
         <div class="contact-divider" style="margin: 0 auto 25px auto;"></div>
@@ -304,29 +358,27 @@
         </div>
     </div>
 
-    <!-- Extreme bottom right corner button with pure black background and text "o" -->
-    <button class="enter-btn-corner" onclick="openAppPage()" >o</button>
+    <!-- Corner button -->
+    <button class="enter-btn-corner" onclick="openAppPage()">o</button>
 </div>
 
 <div id="appPage"> 
     <div class="top-bar">
-        <div style="padding-right: 5px;">
+        <div>
             <span class="back-home-link" onclick="openLandingPage()">← Back to Home</span>
         </div>
     </div>
 
     <div class="container">
-        <textarea id="codeContent" class="editor-box" placeholder="."></textarea>
+        <textarea id="codeContent" class="editor-box" placeholder=""></textarea>
     </div>
 
     <div class="bottom-bar">
         <span class="back-home-link" onclick="openLandingPage()">← Home</span>
         <div class="action-buttons">
             <span id="status"></span>
-            <button class="tool-btn" onclick="loadFromCloud()" title="Load Data">L</button>
-       
-            <button class="tool-btn" onclick="saveToCloud()" title="Save to Cloud">S</button>
-         
+            <button class="tool-btn" onclick="loadFromCloud()" title="Load Data">Load</button>
+            <button class="tool-btn" onclick="saveToCloud()" title="Save to Cloud">Save</button>
         </div>
     </div>
 </div> 
@@ -419,14 +471,6 @@
         });
     }
 
-    function copyText() {
-        const textarea = document.getElementById('codeContent');
-        textarea.select();
-        document.execCommand('copy');
-        document.getElementById('status').innerText = "Copied!";
-        setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
-    }
-
     function saveToCloud() {
         const newText = document.getElementById('codeContent').value;
         document.getElementById('status').innerText = "Saving...";
@@ -458,12 +502,6 @@
             document.getElementById('status').innerText = "Error!";
             console.error('Error:', error);
         });
-    }
-
-    function eraseText() {
-        document.getElementById('codeContent').value = '';
-        document.getElementById('status').innerText = "Erased!";
-        setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
     }
 </script>
 
