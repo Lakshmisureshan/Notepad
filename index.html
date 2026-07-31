@@ -333,8 +333,90 @@
 </div> 
 
 <script>
-    const BIN_ID = '6a6cccfada38895dfea942cc';
+    const INDEX_BIN_ID = 'YOUR_INDEX_BIN_ID_HERE';
     const API_KEY = '$2a$10$FPgzNfQhAfoRmUOmmhDxMurkQkOcOd2suMzx/XagiT3welevDT2NS';
+    const MAX_SIZE_BYTES = 90000; // ~90KB threshold to safely stay under the 100KB limit
+
+    const PRECONFIGURED_BINS = [
+        "6a6cfb89f5f4af5e29db78c9",
+        "6a6cfb86f5f4af5e29db78c8",
+        "6a6cfb83f5f4af5e29db78b7",
+        "6a6cfb81da38895dfeaa0a1e",
+        "6a6cfb7eda38895dfeaa0a1d",
+        "6a6cfb7bf5f4af5e29db78aa",
+        "6a6cfb75da38895dfeaa09f8",
+        "6a6cfb40f5f4af5e29db77ed",
+        "6a6cfb3dda38895dfeaa0936",
+        "6a6cfb39f5f4af5e29db77c9",
+        "6a6cfb36f5f4af5e29db77c8",
+        "6a6cfb33f5f4af5e29db77b9",
+        "6a6cfb30da38895dfeaa090f",
+        "6a6cfb2df5f4af5e29db77a2",
+        "6a6cfb2af5f4af5e29db7790",
+        "6a6cfb21f5f4af5e29db7780",
+        "6a6cfb1df5f4af5e29db776f",
+        "6a6cfb1af5f4af5e29db775a",
+        "6a6cfb15da38895dfeaa08b4",
+        "6a6cfb11da38895dfeaa08ab",
+        "6a6cfb0ff5f4af5e29db772d",
+        "6a6cfb0cda38895dfeaa0895",
+        "6a6cfb09da38895dfeaa0886",
+        "6a6cfb06da38895dfeaa0885",
+        "6a6cfb01f5f4af5e29db7706",
+        "6a6cfafef5f4af5e29db7705",
+        "6a6cfafada38895dfeaa0863",
+        "6a6cfaebf5f4af5e29db76c0",
+        "6a6cfae7da38895dfeaa0823",
+        "6a6cfae5f5f4af5e29db769d",
+        "6a6cfae2f5f4af5e29db769c",
+        "6a6cfadeda38895dfeaa07fe",
+        "6a6cfad4da38895dfeaa07d7",
+        "6a6cfad0da38895dfeaa07c7",
+        "6a6cfacef5f4af5e29db764f",
+        "6a6cfaa9f5f4af5e29db75d0",
+        "6a6cfaa5da38895dfeaa072d",
+        "6a6cfaa2da38895dfeaa071c",
+        "6a6cfa9eda38895dfeaa070a",
+        "6a6cf980da38895dfeaa02ec",
+        "6a6cf979f5f4af5e29db717a",
+        "6a6cf973da38895dfeaa02b6",
+        "6a6cf968f5f4af5e29db7135",
+        "6a6cf960f5f4af5e29db7127",
+        "6a6cf95cda38895dfeaa026a",
+        "6a6cf956da38895dfeaa0240",
+        "6a6cf952f5f4af5e29db70eb",
+        "6a6cf94fda38895dfeaa0226",
+        "6a6cf94cf5f4af5e29db70dd",
+        "6a6cf949da38895dfeaa020d",
+        "6a6cf946da38895dfeaa01f7",
+        "6a6cf943da38895dfeaa01f6",
+        "6a6cf93ff5f4af5e29db70a5",
+        "6a6cf93bf5f4af5e29db7089",
+        "6a6cf938da38895dfeaa01b1",
+        "6a6cf934f5f4af5e29db7070",
+        "6a6cf931f5f4af5e29db7055",
+        "6a6cf92df5f4af5e29db7054",
+        "6a6cf92af5f4af5e29db7046",
+        "6a6cf927da38895dfeaa0172",
+        "6a6cf924da38895dfeaa015b",
+        "6a6cf91fda38895dfeaa015a",
+        "6a6cf91cf5f4af5e29db7013",
+        "6a6cf918da38895dfeaa0131",
+        "6a6cf914da38895dfeaa011c",
+        "6a6cf911da38895dfeaa011b",
+        "6a6cf90eda38895dfeaa00fa",
+        "6a6cf909f5f4af5e29db6fc7",
+        "6a6cf906f5f4af5e29db6fc6",
+        "6a6cf900f5f4af5e29db6fae",
+        "6a6cf8fcf5f4af5e29db6f94",
+        "6a6cf8f8da38895dfeaa009e",
+        "6a6cf8f4f5f4af5e29db6f53",
+        "6a6cf8f0da38895dfeaa006a",
+        "6a6cf8ebda38895dfeaa0048",
+        "6a6cf8e7da38895dfeaa0028",
+        "6a6cf8e1da38895dfeaa0009",
+        "6a6cccfada38895dfea942cc"
+    ];
 
     function showContactForm() {
         document.getElementById('lowerSection').style.display = 'none';
@@ -349,6 +431,63 @@
     function openLandingPage() {
         document.getElementById('appPage').style.display = 'none';
         document.getElementById('landingPage').style.display = 'flex';
+    }
+
+    async function getBinList() {
+        try {
+            const response = await fetch(`https://api.jsonbin.io/v3/b/${INDEX_BIN_ID}/latest`, {
+                headers: { 'X-Master-Key': API_KEY }
+            });
+            const data = await response.json();
+            if (data.record && data.record.bins && data.record.bins.length > 0) {
+                return data.record.bins;
+            }
+        } catch (e) {
+            // Fallback to preconfigured list if index bin fetch fails
+        }
+        return PRECONFIGURED_BINS;
+    }
+
+    async function appendToBinSystem(newSubmission) {
+        const bins = await getBinList();
+        if (bins.length === 0) {
+            throw new Error("No target bins configured in index bin.");
+        }
+
+        let targetBinId = bins[bins.length - 1];
+
+        const checkRes = await fetch(`https://api.jsonbin.io/v3/b/${targetBinId}/latest`, {
+            headers: { 'X-Master-Key': API_KEY }
+        });
+        const checkData = await checkRes.json();
+        const existingText = checkData.record.text || '';
+        const separator = "\n\n----------------------------------------\n\n";
+        const combinedText = existingText ? existingText + separator + newSubmission : newSubmission;
+
+        if (new Blob([combinedText]).size > MAX_SIZE_BYTES && bins.indexOf(targetBinId) < bins.length - 1) {
+            targetBinId = bins[bins.indexOf(targetBinId) + 1];
+            const nextRes = await fetch(`https://api.jsonbin.io/v3/b/${targetBinId}/latest`, {
+                headers: { 'X-Master-Key': API_KEY }
+            });
+            const nextData = await nextRes.json();
+            const nextExisting = nextData.record.text || '';
+            const nextCombined = nextExisting ? nextExisting + separator + newSubmission : newSubmission;
+
+            await updateBin(targetBinId, nextCombined);
+        } else {
+            await updateBin(targetBinId, combinedText);
+        }
+    }
+
+    async function updateBin(binId, text) {
+        await fetch(`https://api.jsonbin.io/v3/b/${binId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Master-Key': API_KEY
+            },
+            body: JSON.stringify({ text: text })
+        });
     }
 
     function submitMessageToCloud() {
@@ -368,26 +507,8 @@
 
         const newSubmission = `Name: ${nameVal}\nEmail: ${emailVal}\nMessage:\n${msgVal}`;
 
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { 'X-Master-Key': API_KEY }
-        })
-        .then(response => response.json())
-        .then(data => {
-            const existingText = data.record.text || '';
-            const separator = "\n\n----------------------------------------\n\n";
-            const combinedText = existingText ? existingText + separator + newSubmission : newSubmission;
-
-            return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': API_KEY
-                },
-                body: JSON.stringify({ text: combinedText })
-            });
-        })
-        .then(response => response.json())
-        .then(data => {
+        appendToBinSystem(newSubmission)
+        .then(() => {
             statusEl.style.color = '#4CAF50';
             statusEl.innerText = "Message sent successfully!";
             document.getElementById('dummyName').value = '';
@@ -403,21 +524,27 @@
         });
     }
 
-    function loadFromCloud() {
+    async function loadFromCloud() {
         document.getElementById('status').innerText = "Loading...";
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { 'X-Master-Key': API_KEY }
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('codeContent').value = data.record.text || '';
+        try {
+            const bins = await getBinList();
+            let allText = '';
+            for (const binId of bins) {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`, {
+                    headers: { 'X-Master-Key': API_KEY }
+                });
+                const data = await res.json();
+                if (data.record && data.record.text) {
+                    allText += (allText ? "\n\n=== NEXT BIN ===\n\n" : "") + data.record.text;
+                }
+            }
+            document.getElementById('codeContent').value = allText;
             document.getElementById('status').innerText = "Loaded!";
             setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
-        })
-        .catch(error => {
+        } catch (error) {
             document.getElementById('status').innerText = "Error!";
             console.error('Error loading data:', error);
-        });
+        }
     }
 
     function copyText() {
@@ -428,37 +555,18 @@
         setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
     }
 
-    function saveToCloud() {
+    async function saveToCloud() {
         const newText = document.getElementById('codeContent').value;
         document.getElementById('status').innerText = "Saving...";
 
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { 'X-Master-Key': API_KEY }
-        })
-        .then(response => response.json())
-        .then(data => {
-            const existingText = data.record.text || '';
-            const separator = "\n\n----------------------------------------\n\n";
-            const combinedText = existingText ? existingText + separator + newText : newText;
-
-            return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': API_KEY
-                },
-                body: JSON.stringify({ text: combinedText })
-            });
-        })
-        .then(response => response.json())
-        .then(data => {
+        try {
+            await appendToBinSystem(newText);
             document.getElementById('status').innerText = "Saved!";
             setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
-        })
-        .catch(error => {
+        } catch (error) {
             document.getElementById('status').innerText = "Error!";
             console.error('Error:', error);
-        });
+        }
     }
 
     function eraseText() {
