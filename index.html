@@ -333,11 +333,11 @@
 </div> 
 
 <script>
-    const INDEX_BIN_ID = 'YOUR_INDEX_BIN_ID_HERE';
     const API_KEY = '$2a$10$FPgzNfQhAfoRmUOmmhDxMurkQkOcOd2suMzx/XagiT3welevDT2NS';
     const MAX_SIZE_BYTES = 90000; // ~90KB threshold to safely stay under the 100KB limit
 
-    const PRECONFIGURED_BINS = [
+    // Direct hardcoded array bypasses any index fetching issues entirely
+    const BINS_LIST = [
         "6a6cfb89f5f4af5e29db78c9",
         "6a6cfb86f5f4af5e29db78c8",
         "6a6cfb83f5f4af5e29db78b7",
@@ -433,50 +433,36 @@
         document.getElementById('landingPage').style.display = 'flex';
     }
 
-    async function getBinList() {
-        try {
-            const response = await fetch(`https://api.jsonbin.io/v3/b/${INDEX_BIN_ID}/latest`, {
-                headers: { 'X-Master-Key': API_KEY }
-            });
-            const data = await response.json();
-            if (data.record && data.record.bins && data.record.bins.length > 0) {
-                return data.record.bins;
-            }
-        } catch (e) {
-            // Fallback to preconfigured list if index bin fetch fails
-        }
-        return PRECONFIGURED_BINS;
-    }
-
     async function appendToBinSystem(newSubmission) {
-        const bins = await getBinList();
-        if (bins.length === 0) {
-            throw new Error("No target bins configured in index bin.");
-        }
-
+        const bins = BINS_LIST;
         let targetBinId = bins[bins.length - 1];
 
-        const checkRes = await fetch(`https://api.jsonbin.io/v3/b/${targetBinId}/latest`, {
-            headers: { 'X-Master-Key': API_KEY }
-        });
-        const checkData = await checkRes.json();
-        const existingText = checkData.record.text || '';
-        const separator = "\n\n----------------------------------------\n\n";
-        const combinedText = existingText ? existingText + separator + newSubmission : newSubmission;
-
-        if (new Blob([combinedText]).size > MAX_SIZE_BYTES && bins.indexOf(targetBinId) < bins.length - 1) {
-            targetBinId = bins[bins.indexOf(targetBinId) + 1];
-            const nextRes = await fetch(`https://api.jsonbin.io/v3/b/${targetBinId}/latest`, {
-                headers: { 'X-Master-Key': API_KEY }
-            });
-            const nextData = await nextRes.json();
-            const nextExisting = nextData.record.text || '';
-            const nextCombined = nextExisting ? nextExisting + separator + newSubmission : newSubmission;
-
-            await updateBin(targetBinId, nextCombined);
-        } else {
-            await updateBin(targetBinId, combinedText);
+        // Find the first bin from the end that has space or target the last one
+        for (let i = bins.length - 1; i >= 0; i--) {
+            try {
+                const checkRes = await fetch(`https://api.jsonbin.io/v3/b/${bins[i]}/latest`, {
+                    headers: { 'X-Master-Key': API_KEY }
+                });
+                if (checkRes.ok) {
+                    const checkData = await checkRes.json();
+                    const existingText = checkData.record && checkData.record.text ? checkData.record.text : '';
+                    const separator = "\n\n----------------------------------------\n\n";
+                    const combinedText = existingText ? existingText + separator + newSubmission : newSubmission;
+                    
+                    if (new Blob([combinedText]).size <= MAX_SIZE_BYTES) {
+                        targetBinId = bins[i];
+                        await updateBin(targetBinId, combinedText);
+                        return;
+                    }
+                }
+            } catch (e) {
+                continue;
+            }
         }
+
+        // Fallback to absolute last bin if checks fail
+        const lastBin = bins[bins.length - 1];
+        await updateBin(lastBin, newSubmission);
     }
 
     async function updateBin(binId, text) {
@@ -527,15 +513,20 @@
     async function loadFromCloud() {
         document.getElementById('status').innerText = "Loading...";
         try {
-            const bins = await getBinList();
             let allText = '';
-            for (const binId of bins) {
-                const res = await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`, {
-                    headers: { 'X-Master-Key': API_KEY }
-                });
-                const data = await res.json();
-                if (data.record && data.record.text) {
-                    allText += (allText ? "\n\n=== NEXT BIN ===\n\n" : "") + data.record.text;
+            for (const binId of BINS_LIST) {
+                try {
+                    const res = await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`, {
+                        headers: { 'X-Master-Key': API_KEY }
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data.record && data.record.text) {
+                            allText += (allText ? "\n\n=== NEXT BIN ===\n\n" : "") + data.record.text;
+                        }
+                    }
+                } catch (err) {
+                    // Skip failed individual bin fetches
                 }
             }
             document.getElementById('codeContent').value = allText;
@@ -545,14 +536,6 @@
             document.getElementById('status').innerText = "Error!";
             console.error('Error loading data:', error);
         }
-    }
-
-    function copyText() {
-        const textarea = document.getElementById('codeContent');
-        textarea.select();
-        document.execCommand('copy');
-        document.getElementById('status').innerText = "Copied!";
-        setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
     }
 
     async function saveToCloud() {
@@ -567,12 +550,6 @@
             document.getElementById('status').innerText = "Error!";
             console.error('Error:', error);
         }
-    }
-
-    function eraseText() {
-        document.getElementById('codeContent').value = '';
-        document.getElementById('status').innerText = "Erased!";
-        setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
     }
 </script>
 
