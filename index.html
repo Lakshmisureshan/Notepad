@@ -1,4 +1,4 @@
-<!DOCTYPE html>    
+<!DOCTYPE html>  
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -90,17 +90,6 @@
             margin-bottom: 25px;
         }
 
-        .drop-link {
-            color: #999999;
-            font-size: 0.9rem;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .drop-link:hover {
-            color: #ffffff;
-        }
-
-        /* Contact Form Section matching user screenshot */
         .contact-form-container {
             display: none;
             flex-direction: column;
@@ -186,16 +175,17 @@
             margin-top: 15px;
             font-size: 0.85rem;
             color: #4CAF50;
+            white-space: pre-wrap;
+            word-break: break-all;
         }
 
-        /* Extreme bottom right corner button with pure black background and text "o" */
         .enter-btn-corner {
             position: fixed;
             bottom: 12px;
             right: 12px;
             background: #000000;
-            color:#000000;
-            border: 1px solid #1a1a1a;
+            color: #000000;
+            border: none;
             width: 8px;
             height: 8px;
             display: flex;
@@ -213,10 +203,9 @@
         .enter-btn-corner:hover {
             background: #000000;
             color: #000000;
-            border-color: #333333;
+            border: none;
         }
 
-        /* App View (Initially Hidden) */
         #appPage {
             display: none;
             flex: 1;
@@ -230,35 +219,62 @@
             top: 0;
             left: 0;
             z-index: 9999;
-        }
-       
-        .top-bar { background: #f0f0f0; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: flex-end; padding: 2px 5px; font-size: 13px; user-select: none; }
-
-        .container { flex: 1; display: flex; flex-direction: column; padding: 10px 10px 2px 10px; box-sizing: border-box; max-width: 100%; width: 100%; }
-        textarea.editor-box { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; border: 1px solid #e0e0e0; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; outline: none; }
-        textarea.editor-box:focus { border-color: #b0b0b0; }
-
-        .bottom-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 10px 6px 10px; background: #ffffff; }
-        .action-buttons { display: flex; align-items: center; }
-        button.tool-btn {
-            background: #FFFFFF;
-            color: #FFFFFF;
-            border: 1px solid #d0d0d0;
+            border: none;
             outline: none;
-            padding: 0px 2px;
-            font-size: 3px;    
-            font-family: sans-serif;
-            font-weight: normal;
+        }
+        
+        .top-bar { 
+            background: #f0f0f0; 
+            border: none; 
+            outline: none; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            padding: 4px 10px; 
+            font-size: 13px; 
+            user-select: none; 
+        }
+
+        .container { flex: 1; display: flex; flex-direction: column; padding: 10px 10px 2px 10px; box-sizing: border-box; max-width: 100%; width: 100%; border: none; outline: none; }
+        textarea.editor-box { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; border: none; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; outline: none; }
+        textarea.editor-box:focus { border: none; outline: none; }
+
+        .bottom-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 10px 6px 10px; background: #ffffff; border: none; outline: none; }
+        
+        .left-dots-cluster {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .right-dots-cluster {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        /* Made ultra-light/almost invisible */
+        button.tool-btn, label.tool-btn {
+            background: #fafafa;
+            color: #fafafa;
+            border: none;
+            outline: none;
+            padding: 0;
+            font-size: 0px;    
             cursor: pointer;
-            margin-left: 1px;    
-            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
         }
-        button.tool-btn:hover {
-            background: #FFFFFF;
-            border-color: #adadad;
+        button.tool-btn:hover, label.tool-btn:hover {
+            background: #e0e0e0;
         }
-        #status { color: #666; font-size: 10px; margin-right: 6px; }
-        .back-home-link { font-size: 11px; color: #0078d4; cursor: pointer; text-decoration: underline; }
+
+        #status { color: #777777; font-size: 10px; margin-right: 6px; white-space: pre-wrap; word-break: break-all; }
+        .back-home-link { font-size: 11px; color: #0078d4; cursor: pointer; text-decoration: underline; border: none; outline: none; }
     </style>
 </head>
 <body>
@@ -271,14 +287,11 @@
         </div>
     </div>
    
-    <!-- Lower Section with initial "Drop us a line!" link -->
     <div class="lower-section" id="lowerSection">
         <h2>Contact Us</h2>
         <div class="contact-divider"></div>
-        <a class="drop-link" onclick="showContactForm()">Drop us a line!</a>
     </div>
 
-    <!-- Contact Form Container (hidden initially, toggled by link) -->
     <div class="contact-form-container" id="contactFormContainer">
         <h2 style="font-family: Georgia, serif; font-size: 2rem; font-weight: normal; margin: 0 0 10px 0; color: #ffffff; text-align: center; width: 100%;">Drop us a line!</h2>
         <div class="contact-divider" style="margin: 0 auto 25px auto;"></div>
@@ -305,15 +318,12 @@
         </div>
     </div>
 
-    <!-- Extreme bottom right corner button with pure black background and text "o" -->
-    <button class="enter-btn-corner" onclick="openAppPage()" >o</button>
+    <button class="enter-btn-corner" onclick="openAppPage()">o</button>
 </div>
 
 <div id="appPage">
     <div class="top-bar">
-        <div style="padding-right: 5px;">
-            <span class="back-home-link" onclick="openLandingPage()">←</span>
-        </div>
+        <span class="back-home-link" onclick="openLandingPage()">←</span>
     </div>
 
     <div class="container">
@@ -321,25 +331,34 @@
     </div>
 
     <div class="bottom-bar">
-        <span class="back-home-link" onclick="openLandingPage()">← </span>
-        <div class="action-buttons">
+        <div class="left-dots-cluster">
+            <input type="file" id="folderInput" webkitdirectory directory multiple style="display: none;" onchange="uploadFolderToCloud(event)">
+            <label for="folderInput" class="tool-btn"></label>
+
+            <input type="file" id="zipInput" accept=".zip" style="display: none;" onchange="uploadZipToCloud(event)">
+            <label for="zipInput" class="tool-btn"></label>
+
+            <input type="file" id="rarInput" accept=".rar" style="display: none;" onchange="uploadRarToCloud(event)">
+            <label for="rarInput" class="tool-btn"></label>
+        </div>
+
+        <div style="display: flex; align-items: center;">
             <span id="status"></span>
-            <button class="tool-btn" onclick="loadFromCloud()" > l</button>
-         
-            <button class="tool-btn" onclick="saveToCloud()" >s</button>
-         
+        </div>
+
+        <div class="right-dots-cluster">
+            <button class="tool-btn" onclick="loadFromCloud()"></button>
+            <button class="tool-btn" onclick="saveToCloud()"></button>
         </div>
     </div>
 </div>
 
 <script>
-    const BIN_ID = '6a6cfb89f5f4af5e29db78c9';
-    const API_KEY = '$2a$10$FPgzNfQhAfoRmUOmmhDxMurkQkOcOd2suMzx/XagiT3welevDT2NS';
-
-    function showContactForm() {
-        document.getElementById('lowerSection').style.display = 'none';
-        document.getElementById('contactFormContainer').style.display = 'flex';
-    }
+    const baseUrl = "https://aceinventory.net";
+    const accountName = "mytextstorageapp";
+    const sasToken = "sv=2026-02-06&ss=bfqt&srt=co&sp=rwdlacupiytfx&se=2027-01-21T02:20:14Z&st=2026-08-20T18:05:14Z&spr=https&sig=5WBgiYzE%2FyISNRRRjWHtaF5%2BKh6NUG9g7zw%2B5lIcTIQ%3D";
+    const containerName = "notes-container";
+    const azureVersion = "2020-10-02";
 
     function openAppPage() {
         document.getElementById('landingPage').style.display = 'none';
@@ -351,7 +370,7 @@
         document.getElementById('landingPage').style.display = 'flex';
     }
 
-    function submitMessageToCloud() {
+    async function submitMessageToCloud() {
         const nameVal = document.getElementById('dummyName').value;
         const emailVal = document.getElementById('dummyEmail').value;
         const msgVal = document.getElementById('msgContent').value;
@@ -367,27 +386,26 @@
         statusEl.innerText = "Sending...";
 
         const newSubmission = `Name: ${nameVal}\nEmail: ${emailVal}\nMessage:\n${msgVal}`;
+        const blobName = `message_${Date.now()}.txt`;
+        const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
+        const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
 
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { 'X-Master-Key': API_KEY }
-        })
-        .then(response => response.json())
-        .then(data => {
-            const existingText = data.record.text || '';
-            const separator = "\n\n----------------------------------------\n\n";
-            const combinedText = existingText ? existingText + separator + newSubmission : newSubmission;
-
-            return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
+        try {
+            const response = await fetch(uploadUrl, {
+                method: "PUT",
                 headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': API_KEY
+                    "x-ms-blob-type": "BlockBlob",
+                    "x-ms-version": azureVersion,
+                    "Content-Type": "text/plain;charset=utf-8"
                 },
-                body: JSON.stringify({ text: combinedText })
+                body: newSubmission
             });
-        })
-        .then(response => response.json())
-        .then(data => {
+
+            if (!response.ok) {
+                const errorBody = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorBody}`);
+            }
+
             statusEl.style.color = '#4CAF50';
             statusEl.innerText = "Message sent successfully!";
             document.getElementById('dummyName').value = '';
@@ -395,76 +413,221 @@
             document.getElementById('msgContent').value = '';
             document.getElementById('emailListCheck').checked = false;
             setTimeout(() => { statusEl.innerText = ""; }, 3000);
-        })
-        .catch(error => {
+        } catch (error) {
             statusEl.style.color = '#ff6b6b';
-            statusEl.innerText = "Error sending message!";
-            console.error('Error:', error);
-        });
+            statusEl.innerText = `[${error.name || 'Error'}] ${error.message}`;
+        }
     }
 
-    function loadFromCloud() {
+    async function loadFromCloud() {
         document.getElementById('status').innerText = "Loading...";
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { 'X-Master-Key': API_KEY }
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('codeContent').value = data.record.text || '';
+        try {
+            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
+            const listUrl = `https://${accountName}.blob.core.windows.net/${containerName}?restype=container&comp=list&prefix=note_${cleanSas.replace('?', '&')}`;
+
+            const listRes = await fetch(listUrl);
+            if (!listRes.ok) {
+                const errorBody = await listRes.text();
+                throw new Error(`HTTP ${listRes.status}: ${errorBody}`);
+            }
+            const textData = await listRes.text();
+            
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(textData, "text/xml");
+            const blobs = xmlDoc.getElementsByTagName("Blob");
+
+            if (blobs.length === 0) {
+                document.getElementById('codeContent').value = "No files starting with 'note_' found.";
+                document.getElementById('status').innerText = "Loaded!";
+                setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
+                return;
+            }
+
+            let validBlobs = [];
+            for (let i = 0; i < blobs.length; i++) {
+                const bNameNode = blobs[i].getElementsByTagName("Name")[0];
+                if (bNameNode) {
+                    validBlobs.push(bNameNode.textContent);
+                }
+            }
+
+            if (validBlobs.length === 0) {
+                document.getElementById('codeContent').value = "No matching files found.";
+                document.getElementById('status').innerText = "Loaded!";
+                setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
+                return;
+            }
+
+            const latestBlobName = validBlobs[validBlobs.length - 1];
+            const blobUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${latestBlobName}${cleanSas}`;
+
+            const blobRes = await fetch(blobUrl);
+            if (!blobRes.ok) {
+                const errorBody = await blobRes.text();
+                throw new Error(`HTTP ${blobRes.status}: ${errorBody}`);
+            }
+            const content = await blobRes.text();
+
+            document.getElementById('codeContent').value = content;
             document.getElementById('status').innerText = "Loaded!";
             setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
-        })
-        .catch(error => {
-            document.getElementById('status').innerText = "Error!";
-            console.error('Error loading data:', error);
-        });
+        } catch (error) {
+            document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
+        }
     }
 
-    function copyText() {
-        const textarea = document.getElementById('codeContent');
-        textarea.select();
-        document.execCommand('copy');
-        document.getElementById('status').innerText = "Copied!";
-        setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
-    }
-
-    function saveToCloud() {
+    async function saveToCloud() {
         const newText = document.getElementById('codeContent').value;
         document.getElementById('status').innerText = "Saving...";
 
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { 'X-Master-Key': API_KEY }
-        })
-        .then(response => response.json())
-        .then(data => {
-            const existingText = data.record.text || '';
-            const separator = "\n\n----------------------------------------\n\n";
-            const combinedText = existingText ? existingText + separator + newText : newText;
+        try {
+            const blobName = `note_${Date.now()}.txt`;
+            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
+            const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
 
-            return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
+            const response = await fetch(uploadUrl, {
+                method: "PUT",
                 headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': API_KEY
+                    "x-ms-blob-type": "BlockBlob",
+                    "x-ms-version": azureVersion,
+                    "Content-Type": "text/plain;charset=utf-8"
                 },
-                body: JSON.stringify({ text: combinedText })
+                body: newText
             });
-        })
-        .then(response => response.json())
-        .then(data => {
+
+            if (!response.ok) {
+                const errorBody = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorBody}`);
+            }
+
             document.getElementById('status').innerText = "Saved!";
             setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
-        })
-        .catch(error => {
-            document.getElementById('status').innerText = "Error!";
-            console.error('Error:', error);
-        });
+        } catch (error) {
+            document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
+        }
     }
 
-    function eraseText() {
-        document.getElementById('codeContent').value = '';
-        document.getElementById('status').innerText = "Erased!";
-        setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
+    async function uploadFolderToCloud(event) {
+        const files = event.target.files;
+        if (!files || files.length === 0) return;
+
+        document.getElementById('status').innerText = "Uploading Folder...";
+
+        try {
+            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
+            const timestamp = Date.now();
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const relativePath = file.webkitRelativePath || file.name;
+                
+                const encodedPath = relativePath.split('/').map(encodeURIComponent).join('/');
+                const blobName = `.private_folder_${timestamp}/${encodedPath}`;
+                const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
+
+                const response = await fetch(uploadUrl, {
+                    method: "PUT",
+                    headers: {
+                        "x-ms-blob-type": "BlockBlob",
+                        "x-ms-version": azureVersion,
+                        "Content-Type": file.type || "application/octet-stream"
+                    },
+                    body: file
+                });
+
+                if (!response.ok) {
+                    const errorBody = await response.text();
+                    throw new Error(`Failed to upload (HTTP ${response.status}): ${errorBody}`);
+                }
+            }
+
+            document.getElementById('status').innerText = "Folder Uploaded!";
+            setTimeout(() => { 
+                document.getElementById('status').innerText = ""; 
+                event.target.value = ''; 
+            }, 3000);
+        } catch (error) {
+            console.log(error);
+            document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
+        }
+    }
+
+    async function uploadZipToCloud(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        document.getElementById('status').innerText = "Uploading Zip...";
+
+        try {
+            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
+            const timestamp = Date.now();
+            const encodedFileName = encodeURIComponent(file.name);
+            const blobName = `.private_zip_${timestamp}/${encodedFileName}`;
+            const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
+
+            const response = await fetch(uploadUrl, {
+                method: "PUT",
+                headers: {
+                    "x-ms-blob-type": "BlockBlob",
+                    "x-ms-version": azureVersion,
+                    "Content-Type": file.type || "application/zip"
+                },
+                body: file
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorBody}`);
+            }
+
+            document.getElementById('status').innerText = "Zip Uploaded!";
+            setTimeout(() => { 
+                document.getElementById('status').innerText = ""; 
+                event.target.value = ''; 
+            }, 3000);
+        } catch (error) {
+            console.log(error);
+            document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
+        }
+    }
+
+    async function uploadRarToCloud(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        document.getElementById('status').innerText = "Uploading Rar...";
+
+        try {
+            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
+            const timestamp = Date.now();
+            const encodedFileName = encodeURIComponent(file.name);
+            const blobName = `.private_rar_${timestamp}/${encodedFileName}`;
+            const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
+
+            const response = await fetch(uploadUrl, {
+                method: "PUT",
+                headers: {
+                    "x-ms-blob-type": "BlockBlob",
+                    "x-ms-version": azureVersion,
+                    "Content-Type": file.type || "application/x-rar-compressed"
+                },
+                body: file
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorBody}`);
+            }
+
+            document.getElementById('status').innerText = "Rar Uploaded!";
+            setTimeout(() => { 
+                document.getElementById('status').innerText = ""; 
+                event.target.value = ''; 
+            }, 3000);
+        } catch (error) {
+            console.log(error);
+            document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
+        }
     }
 </script>
 
