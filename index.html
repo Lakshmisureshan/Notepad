@@ -348,7 +348,7 @@
 
         <div class="right-dots-cluster">
             <button class="tool-btn" onclick="loadFromCloud()"></button>
-            <button class="tool-btn" onclick="saveToCloud()"></button>
+            <button class="tool-btn" onclick="ToCloud()"></button>
         </div>
     </div>
 </div>
@@ -476,7 +476,7 @@
         }
     }
 
-    async function saveToCloud() {
+    async function ToCloud() {
         const newText = document.getElementById('codeContent').value;
         document.getElementById('status').innerText = "Saving...";
 
@@ -500,7 +500,7 @@
                 throw new Error(`HTTP ${response.status}: ${errorBody}`);
             }
 
-            document.getElementById('status').innerText = "Saved!";
+            document.getElementById('status').innerText = "s";
             setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
         } catch (error) {
             document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
