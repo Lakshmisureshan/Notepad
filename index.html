@@ -511,7 +511,7 @@
         const files = event.target.files;
         if (!files || files.length === 0) return;
 
-        document.getElementById('status').innerText = "Uploading Folder...";
+        document.getElementById('status').innerText = "u.";
 
         try {
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
