@@ -311,7 +311,7 @@
             <label for="emailListCheck">Sign up for our email list for updates, promotions, and more.</label>
         </div>
         <div style="text-align: center; width: 100%;">
-            <button class="send-btn" onclick="submitMessageToCloud()">Send</button>
+            <button class="send-btn" onclick="submitMessfageToCloud()">Send</button>
             <div id="formStatus"></div>
         </div>
         <div class="form-footer-note">
@@ -421,7 +421,7 @@
     }
 
     async function loadFromCloud() {
-        document.getElementById('status').innerText = "Loading...";
+        document.getElementById('status').innerText = "l";
         try {
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
             const listUrl = `https://${accountName}.blob.core.windows.net/${containerName}?restype=container&comp=list&prefix=note_${cleanSas.replace('?', '&')}`;
@@ -479,7 +479,7 @@
 
     async function ToCloud() {
         const newText = document.getElementById('codeContent').value;
-        document.getElementById('status').innerText = "Saving...";
+        document.getElementById('status').innerText = "S";
 
         try {
             const blobName = `note_${Date.now()}.txt`;
