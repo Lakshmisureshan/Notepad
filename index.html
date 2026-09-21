@@ -179,31 +179,53 @@
             word-break: break-all;
         }
 
-        /* Two Invisible Corner Buttons on Landing Page */
+        /* --- Visible Corner Trigger Buttons --- */
         .enter-btn-corner {
             position: fixed;
-            bottom: 0;
-            right: 0;
-            background: transparent;
-            border: none;
-            width: 40px;
-            height: 40px;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0, 85, 220, 0.4);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            width: 36px;
+            height: 36px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             outline: none;
             z-index: 1000;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .enter-btn-corner:hover {
+            background: rgba(0, 85, 220, 0.9);
+            border-color: #ffffff;
         }
 
         .notepad-btn-corner {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            background: transparent;
-            border: none;
-            width: 40px;
-            height: 40px;
+            bottom: 12px;
+            left: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            width: 36px;
+            height: 36px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             outline: none;
             z-index: 1000;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .notepad-btn-corner:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #ffffff;
         }
 
         /* --- Fullscreen Upload Dashboard Page --- */
@@ -440,9 +462,9 @@
         </div>
     </div>
 
-    <!-- Two Invisible Corner Buttons -->
-    <button class="notepad-btn-corner" onclick="openNotepadModal()" title="Notepad"></button>
-    <button class="enter-btn-corner" onclick="openAppPage()" title="Upload Dashboard"></button>
+    <!-- Visible Corner Trigger Buttons -->
+    <button class="notepad-btn-corner" onclick="openNotepadModal()" title="Open Notepad">📝</button>
+    <button class="enter-btn-corner" onclick="openAppPage()" title="Open Dashboard">⚙️</button>
 </div>
 
 <!-- Upload Dashboard Page -->
