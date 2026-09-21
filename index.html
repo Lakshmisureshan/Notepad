@@ -70,7 +70,7 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            padding-top: 40px;
+            padding-top: 50px;
             position: relative;
             padding-bottom: 50px;
         }
@@ -88,32 +88,6 @@
             height: 1px;
             background-color: #444444;
             margin-bottom: 25px;
-        }
-
-        /* Landing Page Action Buttons Container */
-        .landing-actions {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            justify-content: center;
-        }
-
-        .landing-dark-btn {
-            background-color: #1a1a1a;
-            color: #cccccc;
-            border: 1px solid #333333;
-            padding: 10px 22px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            letter-spacing: 0.5px;
-            transition: all 0.2s;
-        }
-
-        .landing-dark-btn:hover {
-            background-color: #262626;
-            color: #ffffff;
-            border-color: #555555;
         }
 
         .contact-form-container {
@@ -205,149 +179,98 @@
             word-break: break-all;
         }
 
-        /* --- Classic Windows Notepad Popup Window --- */
-        #appPage {
-            display: none;
+        /* Two Invisible Corner Buttons on Landing Page */
+        .enter-btn-corner {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 520px;
-            background: #f0f0f0;
+            bottom: 12px;
+            right: 12px;
+            background: #000000;
             color: #000000;
-            text-align: left;
-            z-index: 9999;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.8);
-            border: 1px solid #7f9db9;
-            flex-direction: column;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            box-sizing: border-box;
-        }
-
-        /* Win98 / WinXP Style Window Title Bar */
-        .notepad-titlebar {
-            background: linear-gradient(to right, #0055ea, #337efd);
-            color: #ffffff;
-            padding: 6px 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 13px;
-            font-weight: bold;
-            user-select: none;
-            cursor: default;
-        }
-
-        .notepad-title-left {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .notepad-title-buttons {
-            display: flex;
-            gap: 3px;
-        }
-
-        .win-btn {
-            background: #d4d0c8;
-            color: #000000;
-            border: 1px solid #ffffff;
-            border-right-color: #404040;
-            border-bottom-color: #404040;
-            width: 18px;
-            height: 18px;
-            font-size: 10px;
-            font-weight: bold;
+            border: none;
+            width: 8px;
+            height: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 8px;
+            font-family: monospace;
             cursor: pointer;
-            padding: 0;
-            line-height: 1;
+            outline: none;
+            border-radius: 4px;
+            z-index: 1000;
         }
 
-        .win-btn:active {
-            border: 1px solid #404040;
-            border-right-color: #ffffff;
-            border-bottom-color: #ffffff;
-        }
-
-        .notepad-menu-bar {
-            background: #f0f0f0;
-            border-bottom: 1px solid #dfdfdf;
+        .notepad-btn-corner {
+            position: fixed;
+            bottom: 12px;
+            left: 12px;
+            background: #000000;
+            color: #000000;
+            border: none;
+            width: 8px;
+            height: 8px;
             display: flex;
             align-items: center;
-            padding: 2px 4px;
-            font-size: 12px;
-            user-select: none;
-        }
-
-        .menu-item {
-            padding: 3px 8px;
+            justify-content: center;
+            font-size: 8px;
+            font-family: monospace;
             cursor: pointer;
+            outline: none;
+            border-radius: 4px;
+            z-index: 1000;
         }
 
-        .menu-item:hover {
-            background: #316ac5;
-            color: #ffffff;
-        }
-
-        .notepad-container { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            padding: 0; 
-            margin: 0; 
-            box-sizing: border-box; 
-            width: 100%; 
-        }
-
-        textarea.editor-box { 
-            flex: 1; 
-            font-family: Consolas, "Courier New", monospace; 
-            padding: 4px; 
-            font-size: 13px; 
-            border: none; 
-            border-radius: 0; 
-            box-sizing: border-box; 
-            resize: none; 
-            width: 100%; 
-            outline: none; 
+        /* --- Fullscreen Upload Dashboard Page --- */
+        #appPage {
+            display: none;
+            flex: 1;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
             background: #ffffff;
-            color: #000000;
-            line-height: 1.3;
+            color: #2b2b2b;
+            text-align: left;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            border: none;
+            outline: none;
         }
-
-        .notepad-status-bar {
+        
+        .top-bar {
+            background: #f0f0f0;
+            border: none;
+            outline: none;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 3px 8px;
-            background: #f0f0f0;
-            border-top: 1px solid #dfdfdf;
-            font-size: 11px;
-            color: #444444;
+            padding: 4px 10px;
+            font-size: 13px;
             user-select: none;
         }
 
-        .status-group {
+        .container { flex: 1; display: flex; flex-direction: column; padding: 10px 10px 2px 10px; box-sizing: border-box; max-width: 100%; width: 100%; border: none; outline: none; }
+        textarea.editor-box { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; border: none; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; outline: none; }
+        textarea.editor-box:focus { border: none; outline: none; }
+
+        .bottom-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 10px 6px 10px; background: #ffffff; border: none; outline: none; }
+        
+        .left-dots-cluster {
             display: flex;
-            gap: 15px;
+            gap: 6px;
             align-items: center;
         }
 
-        /* Hidden/Preserved functional tools */
-        .left-dots-cluster, .right-dots-cluster {
+        .right-dots-cluster {
             display: flex;
             gap: 6px;
             align-items: center;
         }
 
         button.tool-btn, label.tool-btn {
-            background: transparent;
-            color: transparent;
+            background: #fafafa;
+            color: #fafafa;
             border: none;
             outline: none;
             padding: 0;
@@ -358,10 +281,136 @@
             justify-content: center;
             width: 4px;
             height: 4px;
+            border-radius: 50%;
+        }
+        button.tool-btn:hover, label.tool-btn:hover {
+            background: #e0e0e0;
         }
 
-        #status { color: #0055ea; font-size: 11px; white-space: pre-wrap; word-break: break-all; }
-        .back-home-link { cursor: pointer; }
+        #status { color: #777777; font-size: 10px; margin-right: 6px; white-space: pre-wrap; word-break: break-all; }
+        .back-home-link { font-size: 11px; color: #0078d4; cursor: pointer; text-decoration: underline; border: none; outline: none; }
+
+
+        /* --- Classic Windows Notepad Popup Window --- */
+        #notepadModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 680px;
+            height: 440px;
+            background: #ece9d8;
+            color: #000000;
+            text-align: left;
+            z-index: 10000;
+            box-shadow: 3px 3px 15px rgba(0,0,0,0.6);
+            border: 1px solid #0055ea;
+            flex-direction: column;
+            font-family: Tahoma, Arial, sans-serif;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        .notepad-titlebar {
+            background: linear-gradient(to right, #0055ea, #337efd);
+            color: #ffffff;
+            padding: 5px 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .notepad-title-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .win-close-btn {
+            background: #ece9d8;
+            color: #000000;
+            border: 1px solid #ffffff;
+            border-right-color: #404040;
+            border-bottom-color: #404040;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .win-close-btn:active {
+            border: 1px solid #404040;
+            border-right-color: #ffffff;
+            border-bottom-color: #ffffff;
+        }
+
+        .notepad-menu-bar {
+            background: #ece9d8;
+            border-bottom: 1px solid #dfdfdf;
+            display: flex;
+            align-items: center;
+            padding: 2px 4px;
+            font-size: 11px;
+        }
+
+        .notepad-menu-item {
+            padding: 2px 6px;
+            cursor: pointer;
+        }
+
+        .notepad-menu-item:hover {
+            background: #316ac5;
+            color: #ffffff;
+        }
+
+        .notepad-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 2px;
+            background: #ffffff;
+            border: 1px solid #7f9db9;
+            margin: 4px;
+        }
+
+        textarea.classic-notepad-textarea {
+            flex: 1;
+            font-family: Lucida Console, Courier New, monospace;
+            font-size: 13px;
+            border: none;
+            outline: none;
+            resize: none;
+            padding: 4px;
+            background: #ffffff;
+            color: #000000;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .notepad-status-bar {
+            background: #ece9d8;
+            padding: 3px 6px;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #d4d0c8;
+            color: #444444;
+        }
+
+        #notepadStatus {
+            color: #0055ea;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -377,12 +426,6 @@
     <div class="lower-section" id="lowerSection">
         <h2>Contact Us</h2>
         <div class="contact-divider"></div>
-
-        <!-- 2 Dark Buttons in Landing Page -->
-        <div class="landing-actions">
-            <button class="landing-dark-btn" onclick="toggleContactForm()">Normal Operation</button>
-            <button class="landing-dark-btn" onclick="openAppPage()">Notepad</button>
-        </div>
     </div>
 
     <div class="contact-form-container" id="contactFormContainer">
@@ -410,46 +453,70 @@
             This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
         </div>
     </div>
+
+    <!-- Two Invisible Corner Buttons -->
+    <button class="notepad-btn-corner" onclick="openNotepadModal()" title="Notepad"></button>
+    <button class="enter-btn-corner" onclick="openAppPage()" title="Upload Dashboard"></button>
 </div>
 
-<!-- Popup Notepad Window -->
+<!-- Upload Dashboard Page -->
 <div id="appPage">
+    <div class="top-bar">
+        <span class="back-home-link" onclick="openLandingPage()">←</span>
+    </div>
+
+    <div class="container">
+        <textarea id="codeContent" class="editor-box" placeholder="."></textarea>
+    </div>
+
+    <div class="bottom-bar">
+        <div class="left-dots-cluster">
+            <input type="file" id="folderInput" webkitdirectory directory multiple style="display: none;" onchange="uploadFolderToCloud(event)">
+            <label for="folderInput" class="tool-btn"></label>
+
+            <input type="file" id="zipInput" accept=".zip" style="display: none;" onchange="uploadZipToCloud(event)">
+            <label for="zipInput" class="tool-btn"></label>
+
+            <input type="file" id="rarInput" accept=".rar" style="display: none;" onchange="uploadRarToCloud(event)">
+            <label for="rarInput" class="tool-btn"></label>
+        </div>
+
+        <div style="display: flex; align-items: center;">
+            <span id="status"></span>
+        </div>
+
+        <div class="right-dots-cluster">
+            <button class="tool-btn" onclick="loadFromCloud()"></button>
+            <button class="tool-btn" onclick="ToCloud()"></button>
+        </div>
+    </div>
+</div>
+
+<!-- Classic Notepad Popup Window -->
+<div id="notepadModal">
     <div class="notepad-titlebar">
         <div class="notepad-title-left">
             <span>📄 Untitled - Notepad</span>
         </div>
-        <div class="notepad-title-buttons">
-            <button class="win-btn" onclick="openLandingPage()">✕</button>
+        <div>
+            <button class="win-close-btn" onclick="closeNotepadModal()">✕</button>
         </div>
     </div>
 
     <div class="notepad-menu-bar">
-        <span class="menu-item" onclick="ToCloud()">File</span>
-        <span class="menu-item">Edit</span>
-        <span class="menu-item">Format</span>
-        <span class="menu-item" onclick="loadFromCloud()">View</span>
-        <span class="menu-item">Help</span>
+        <span class="notepad-menu-item" onclick="saveNotepadToCloud()">File</span>
+        <span class="notepad-menu-item">Edit</span>
+        <span class="notepad-menu-item" onclick="loadNotepadFromCloud()">Search</span>
+        <span class="notepad-menu-item">Help</span>
     </div>
 
-    <div class="notepad-container">
-        <textarea id="codeContent" class="editor-box" placeholder=""></textarea>
+    <div class="notepad-body">
+        <textarea id="classicNotepadText" class="classic-notepad-textarea" placeholder="Paste or type text here..."></textarea>
     </div>
 
     <div class="notepad-status-bar">
-        <div style="display:none;">
-            <input type="file" id="folderInput" webkitdirectory directory multiple onchange="uploadFolderToCloud(event)">
-            <label for="folderInput" class="tool-btn"></label>
-            <input type="file" id="zipInput" accept=".zip" onchange="uploadZipToCloud(event)">
-            <label for="zipInput" class="tool-btn"></label>
-            <input type="file" id="rarInput" accept=".rar" onchange="uploadRarToCloud(event)">
-            <label for="rarInput" class="tool-btn"></label>
-            <button class="tool-btn" onclick="loadFromCloud()"></button>
-            <button class="tool-btn" onclick="ToCloud()"></button>
-        </div>
-        <span id="status"></span>
-        <div class="status-group">
-            <span>Ln 1, Col 1</span>
-        </div>
+        <span id="notepadStatus">Ready</span>
+        <span>Ln 1, Col 1</span>
     </div>
 </div>
 
@@ -460,22 +527,106 @@
     const containerName = "notes-container";
     const azureVersion = "2020-10-02";
 
-    function toggleContactForm() {
-        const formContainer = document.getElementById('contactFormContainer');
-        if (formContainer.style.display === 'flex') {
-            formContainer.style.display = 'none';
-        } else {
-            formContainer.style.display = 'flex';
-            formContainer.scrollIntoView({ behavior: 'smooth' });
-        }
-    }
-
     function openAppPage() {
+        document.getElementById('landingPage').style.display = 'none';
+        document.getElementById('notepadModal').style.display = 'none';
         document.getElementById('appPage').style.display = 'flex';
     }
 
     function openLandingPage() {
         document.getElementById('appPage').style.display = 'none';
+        document.getElementById('notepadModal').style.display = 'none';
+        document.getElementById('landingPage').style.display = 'flex';
+    }
+
+    function openNotepadModal() {
+        document.getElementById('notepadModal').style.display = 'flex';
+        loadNotepadFromCloud();
+    }
+
+    function closeNotepadModal() {
+        document.getElementById('notepadModal').style.display = 'none';
+    }
+
+    async function saveNotepadToCloud() {
+        const textVal = document.getElementById('classicNotepadText').value;
+        const statusEl = document.getElementById('notepadStatus');
+        statusEl.innerText = "Saving to blob...";
+
+        try {
+            const blobName = `note_${Date.now()}.txt`;
+            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
+            const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
+
+            const response = await fetch(uploadUrl, {
+                method: "PUT",
+                headers: {
+                    "x-ms-blob-type": "BlockBlob",
+                    "x-ms-version": azureVersion,
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+                body: textVal
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorBody}`);
+            }
+
+            statusEl.innerText = "Saved successfully!";
+            setTimeout(() => { statusEl.innerText = "Ready"; }, 2500);
+        } catch (error) {
+            statusEl.innerText = `Error: ${error.message}`;
+        }
+    }
+
+    async function loadNotepadFromCloud() {
+        const statusEl = document.getElementById('notepadStatus');
+        statusEl.innerText = "Loading...";
+        try {
+            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
+            const listUrl = `https://${accountName}.blob.core.windows.net/${containerName}?restype=container&comp=list&prefix=note_${cleanSas.replace('?', '&')}`;
+
+            const listRes = await fetch(listUrl);
+            if (!listRes.ok) {
+                throw new Error(`HTTP ${listRes.status}`);
+            }
+            const textData = await listRes.text();
+            
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(textData, "text/xml");
+            const blobs = xmlDoc.getElementsByTagName("Blob");
+
+            if (blobs.length === 0) {
+                statusEl.innerText = "Ready";
+                return;
+            }
+
+            let validBlobs = [];
+            for (let i = 0; i < blobs.length; i++) {
+                const bNameNode = blobs[i].getElementsByTagName("Name")[0];
+                if (bNameNode) {
+                    validBlobs.push(bNameNode.textContent);
+                }
+            }
+
+            if (validBlobs.length === 0) {
+                statusEl.innerText = "Ready";
+                return;
+            }
+
+            const latestBlobName = validBlobs[validBlobs.length - 1];
+            const blobUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${latestBlobName}${cleanSas}`;
+
+            const blobRes = await fetch(blobUrl);
+            if (!blobRes.ok) throw new Error(`HTTP ${blobRes.status}`);
+            
+            const content = await blobRes.text();
+            document.getElementById('classicNotepadText').value = content;
+            statusEl.innerText = "Ready";
+        } catch (error) {
+            statusEl.innerText = "Ready";
+        }
     }
 
     async function submitMessageToCloud() {
@@ -539,7 +690,7 @@
                 throw new Error(`HTTP ${listRes.status}: ${errorBody}`);
             }
             const textData = await listRes.text();
-           
+            
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(textData, "text/xml");
             const blobs = xmlDoc.getElementsByTagName("Blob");
@@ -608,9 +759,135 @@
                 throw new Error(`HTTP ${response.status}: ${errorBody}`);
             }
 
-            document.getElementById('status').innerText = "Saved!";
+            document.getElementById('status').innerText = "s";
             setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
         } catch (error) {
+            document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
+        }
+    }
+
+    async function uploadFolderToCloud(event) {
+        const files = event.target.files;
+        if (!files || files.length === 0) return;
+
+        document.getElementById('status').innerText = "u.";
+
+        try {
+            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
+            const timestamp = Date.now();
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const relativePath = file.webkitRelativePath || file.name;
+                
+                const encodedPath = relativePath.split('/').map(encodeURIComponent).join('/');
+                const blobName = `.private_folder_${timestamp}/${encodedPath}`;
+                const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
+
+                const response = await fetch(uploadUrl, {
+                    method: "PUT",
+                    headers: {
+                        "x-ms-blob-type": "BlockBlob",
+                        "x-ms-version": azureVersion,
+                        "Content-Type": file.type || "application/octet-stream"
+                    },
+                    body: file
+                });
+
+                if (!response.ok) {
+                    const errorBody = await response.text();
+                    throw new Error(`Failed to upload (HTTP ${response.status}): ${errorBody}`);
+                }
+            }
+
+            document.getElementById('status').innerText = "Folder Uploaded!";
+            setTimeout(() => {
+                document.getElementById('status').innerText = "";
+                event.target.value = '';
+            }, 3000);
+        } catch (error) {
+            console.log(error);
+            document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
+        }
+    }
+
+    async function uploadZipToCloud(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        document.getElementById('status').innerText = "Uploading Zip...";
+
+        try {
+            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
+            const timestamp = Date.now();
+            const encodedFileName = encodeURIComponent(file.name);
+            const blobName = `.private_zip_${timestamp}/${encodedFileName}`;
+            const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
+
+            const response = await fetch(uploadUrl, {
+                method: "PUT",
+                headers: {
+                    "x-ms-blob-type": "BlockBlob",
+                    "x-ms-version": azureVersion,
+                    "Content-Type": file.type || "application/zip"
+                },
+                body: file
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorBody}`);
+            }
+
+            document.getElementById('status').innerText = "Zip Uploaded!";
+            setTimeout(() => {
+                document.getElementById('status').innerText = "";
+                event.target.value = '';
+            }, 3000);
+        } catch (error) {
+            console.log(error);
+            document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
+        }
+    }
+
+    async function uploadRarToCloud(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        document.getElementById('status').innerText = "Uploading Rar...";
+
+        try {
+            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
+            const timestamp = Date.now();
+            const encodedFileName = encodeURIComponent(file.name);
+            const blobName = `.private_rar_${timestamp}/${encodedFileName}`;
+            const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
+
+            const response = await fetch(uploadUrl, {
+                method: "PUT",
+                headers: {
+                    "x-ms-blob-type": "BlockBlob",
+                    "x-ms-version": azureVersion,
+                    "Content-Type": file.type || "application/x-rar-compressed"
+                },
+                body: file
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorBody}`);
+            }
+
+            document.getElementById('status').innerText = "Rar Uploaded!";
+            setTimeout(() => {
+                document.getElementById('status': '...'});
+                setTimeout(() => {
+                    document.getElementById('status').innerText = "";
+                    event.target.value = '';
+                }, 3000);
+            }, 3000);
+        } catch (error) {
+            console.log(error);
             document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
         }
     }
