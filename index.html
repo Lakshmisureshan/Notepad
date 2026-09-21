@@ -16,6 +16,7 @@
             min-height: 100vh;
             text-align: center;
             box-sizing: border-box;
+            overflow: hidden;
         }
 
         #landingPage {
@@ -235,8 +236,8 @@
             flex-direction: column;
             height: 100vh;
             width: 100vw;
-            background: #ffffff;
-            color: #2b2b2b;
+            background: #000000;
+            color: #ffffff;
             text-align: left;
             position: fixed;
             top: 0;
@@ -247,7 +248,7 @@
         }
         
         .top-bar {
-            background: #f0f0f0;
+            background: #111111;
             border: none;
             outline: none;
             display: flex;
@@ -258,11 +259,11 @@
             user-select: none;
         }
 
-        .container { flex: 1; display: flex; flex-direction: column; padding: 10px 10px 2px 10px; box-sizing: border-box; max-width: 100%; width: 100%; border: none; outline: none; }
-        textarea.editor-box { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; border: none; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; outline: none; }
-        textarea.editor-box:focus { border: none; outline: none; }
+        .container { flex: 1; display: flex; flex-direction: column; padding: 10px 10px 2px 10px; box-sizing: border-box; max-width: 100%; width: 100%; border: none; outline: none; background: #000000; }
+        textarea.editor-box { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; background: #000000; color: #ffffff; border: 1px solid #333333; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; outline: none; }
+        textarea.editor-box:focus { border-color: #555555; outline: none; }
 
-        .bottom-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 10px 6px 10px; background: #ffffff; border: none; outline: none; }
+        .bottom-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 10px 6px 10px; background: #000000; border: none; outline: none; }
         
         .left-dots-cluster {
             display: flex;
@@ -277,8 +278,8 @@
         }
 
         button.tool-btn, label.tool-btn {
-            background: #fafafa;
-            color: #fafafa;
+            background: #1a1a1a;
+            color: #1a1a1a;
             border: none;
             outline: none;
             padding: 0;
@@ -292,11 +293,11 @@
             border-radius: 50%;
         }
         button.tool-btn:hover, label.tool-btn:hover {
-            background: #e0e0e0;
+            background: #333333;
         }
 
-        #status { color: #777777; font-size: 10px; margin-right: 6px; white-space: pre-wrap; word-break: break-all; }
-        .back-home-link { font-size: 11px; color: #0078d4; cursor: pointer; text-decoration: underline; border: none; outline: none; }
+        #status { color: #888888; font-size: 10px; margin-right: 6px; white-space: pre-wrap; word-break: break-all; }
+        .back-home-link { font-size: 11px; color: #4da6ff; cursor: pointer; text-decoration: underline; border: none; outline: none; }
 
 
         /* --- Floating Windows 10 Notepad Window Style --- */
@@ -310,31 +311,45 @@
             max-width: 900px;
             height: 80vh;
             max-height: 700px;
-            background: #ffffff;
-            color: #000000;
+            background: #000000;
+            color: #ffffff;
             text-align: left;
             z-index: 10000;
             flex-direction: column;
             font-family: "Segoe UI", Tahoma, sans-serif;
             box-sizing: border-box;
             user-select: none;
-            border: 1px solid #d2d2d2;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #333333;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
             border-radius: 4px;
             overflow: hidden;
             outline: none;
+            transition: width 0.15s ease, height 0.15s ease, top 0.15s ease, left 0.15s ease, transform 0.15s ease, border-radius 0.15s ease;
+        }
+
+        /* Maximized State Class */
+        #notepadModal.maximized {
+            top: 0 !important;
+            left: 0 !important;
+            transform: none !important;
+            width: 100vw !important;
+            height: calc(100vh - 40px) !important;
+            max-width: none !important;
+            max-height: none !important;
+            border-radius: 0 !important;
+            border: none !important;
         }
 
         .notepad-titlebar {
-            background: #ffffff;
-            color: #000000;
+            background: #111111;
+            color: #ffffff;
             padding: 0 0 0 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             font-size: 12px;
             height: 32px;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid #222222;
             outline: none;
         }
 
@@ -351,7 +366,7 @@
 
         .win-control-btn {
             background: transparent;
-            color: #000000;
+            color: #cccccc;
             border: none;
             width: 45px;
             height: 100%;
@@ -359,15 +374,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            outline: none;
         }
 
         .win-control-btn:hover {
-            background: #e5e5e5;
+            background: #2a2a2a;
+            color: #ffffff;
         }
 
         .win-close-btn {
             background: transparent;
-            color: #000000;
+            color: #cccccc;
             border: none;
             width: 45px;
             height: 100%;
@@ -385,7 +403,7 @@
         }
 
         .notepad-menu-bar {
-            background: #ffffff;
+            background: #111111;
             border: none;
             outline: none;
             display: flex;
@@ -393,16 +411,18 @@
             padding: 2px 6px;
             font-size: 12px;
             gap: 2px;
+            border-bottom: 1px solid #222222;
         }
 
         .notepad-menu-item {
             padding: 4px 10px;
             cursor: pointer;
-            color: #1e1e1e;
+            color: #cccccc;
         }
 
         .notepad-menu-item:hover {
-            background: #e5e5e5;
+            background: #2a2a2a;
+            color: #ffffff;
         }
 
         .notepad-body {
@@ -410,7 +430,7 @@
             display: flex;
             flex-direction: column;
             padding: 0;
-            background: #ffffff;
+            background: #000000;
             border: none;
             outline: none;
             margin: 0;
@@ -424,8 +444,8 @@
             outline: none;
             resize: none;
             padding: 8px 12px;
-            background: #ffffff;
-            color: #000000;
+            background: #000000;
+            color: #ffffff;
             box-sizing: border-box;
             width: 100%;
             height: 100%;
@@ -435,24 +455,61 @@
         }
 
         .notepad-status-bar {
-            background: #f8f8f8;
+            background: #111111;
             padding: 4px 12px;
             font-size: 11px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid #222222;
             outline: none;
-            color: #666666;
+            color: #888888;
             height: 24px;
         }
 
         #notepadStatus {
-            color: #0078d4;
+            color: #4da6ff;
+        }
+
+        /* --- Windows Taskbar & Taskbar Item for Minimized Notepad --- */
+        #windowsTaskbar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            height: 40px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 10005;
+            align-items: center;
+            padding: 0 8px;
+            box-sizing: border-box;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .taskbar-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            padding: 0 12px;
+            height: 32px;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+            border-bottom: 2px solid #4da6ff;
+            transition: background 0.2s;
+            user-select: none;
+        }
+
+        .taskbar-item:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
-<body>
+<body id="pageBody" style="background-color: #000000;">
 
 <div id="landingPage">
     <div class="domain-header">ACE CRANES SYSTEM LLC</div>
@@ -538,9 +595,9 @@
             <span>Untitled - Notepad</span>
         </div>
         <div class="win-controls">
-            <button class="win-control-btn">🗕</button>
-            <button class="win-control-btn">🗖</button>
-            <button class="win-close-btn" onclick="closeNotepadModal()">✕</button>
+            <button class="win-control-btn" onclick="minimizeNotepad()" title="Minimize">🗕</button>
+            <button id="maximizeBtn" class="win-control-btn" onclick="toggleMaximizeNotepad()" title="Maximize">🗖</button>
+            <button class="win-close-btn" onclick="closeNotepadModal()" title="Close">✕</button>
         </div>
     </div>
 
@@ -557,8 +614,16 @@
     </div>
 
     <div class="notepad-status-bar">
-        <span id="notepadStatus">Ready</span>
+        <span id="notepadStatus"></span>
         <span id="cursorPos">Ln 1, Col 1</span>
+    </div>
+</div>
+
+<!-- Windows Taskbar -->
+<div id="windowsTaskbar">
+    <div class="taskbar-item" onclick="restoreNotepad()" title="Restore Notepad">
+        <span>📝</span>
+        <span>Untitled - Notepad</span>
     </div>
 </div>
 
@@ -572,32 +637,61 @@
     function openAppPage() {
         document.getElementById('landingPage').style.display = 'none';
         document.getElementById('notepadModal').style.display = 'none';
+        document.getElementById('windowsTaskbar').style.display = 'none';
         document.getElementById('appPage').style.display = 'flex';
+        document.getElementById('pageBody').style.backgroundColor = '#000000';
     }
 
     function openLandingPage() {
         document.getElementById('appPage').style.display = 'none';
         document.getElementById('notepadModal').style.display = 'none';
+        document.getElementById('windowsTaskbar').style.display = 'none';
         document.getElementById('landingPage').style.display = 'flex';
+        document.getElementById('pageBody').style.backgroundColor = '#000000';
     }
 
     function openNotepadModal() {
         document.getElementById('landingPage').style.display = 'none';
         document.getElementById('appPage').style.display = 'none';
+        document.getElementById('windowsTaskbar').style.display = 'none';
         document.getElementById('notepadModal').style.display = 'flex';
+        document.getElementById('pageBody').style.backgroundColor = '#000000';
         loadNotepadFromCloud();
     }
 
     function closeNotepadModal() {
         document.getElementById('notepadModal').style.display = 'none';
+        document.getElementById('windowsTaskbar').style.display = 'none';
         document.getElementById('landingPage').style.display = 'flex';
+        document.getElementById('pageBody').style.backgroundColor = '#000000';
+    }
+
+    function minimizeNotepad() {
+        document.getElementById('notepadModal').style.display = 'none';
+        document.getElementById('windowsTaskbar').style.display = 'flex';
+    }
+
+    function restoreNotepad() {
+        document.getElementById('windowsTaskbar').style.display = 'none';
+        document.getElementById('notepadModal').style.display = 'flex';
+    }
+
+    function toggleMaximizeNotepad() {
+        const modal = document.getElementById('notepadModal');
+        const maxBtn = document.getElementById('maximizeBtn');
+        if (modal.classList.contains('maximized')) {
+            modal.classList.remove('maximized');
+            maxBtn.innerText = '🗖';
+            maxBtn.title = 'Maximize';
+        } else {
+            modal.classList.add('maximized');
+            maxBtn.innerText = '🗗';
+            maxBtn.title = 'Restore Down';
+        }
     }
 
     function clearNotepad() {
-        if(confirm("Clear current text?")) {
-            document.getElementById('classicNotepadText').value = "";
-            document.getElementById('notepadStatus').innerText = "Cleared";
-        }
+        document.getElementById('classicNotepadText').value = "";
     }
 
     function toggleWordWrap() {
@@ -605,16 +699,14 @@
         if (ta.style.whiteSpace === 'normal') {
             ta.style.whiteSpace = 'pre';
             ta.style.overflowX = 'auto';
-            alert("Word Wrap: Off");
         } else {
             ta.style.whiteSpace = 'normal';
             ta.style.overflowX = 'hidden';
-            alert("Word Wrap: On");
         }
     }
 
     function showHelp() {
-        alert("Windows 10 Notepad\nConnected securely to Azure Blob Storage.");
+        // Silent
     }
 
     function updateCursorPosition() {
@@ -629,15 +721,13 @@
 
     async function saveNotepadToCloud() {
         const textVal = document.getElementById('classicNotepadText').value;
-        const statusEl = document.getElementById('notepadStatus');
-        statusEl.innerText = "Saving to blob...";
 
         try {
             const blobName = `note_${Date.now()}.txt`;
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
             const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
 
-            const response = await fetch(uploadUrl, {
+            await fetch(uploadUrl, {
                 method: "PUT",
                 headers: {
                     "x-ms-blob-type": "BlockBlob",
@@ -646,40 +736,25 @@
                 },
                 body: textVal
             });
-
-            if (!response.ok) {
-                const errorBody = await response.text();
-                throw new Error(`HTTP ${response.status}: ${errorBody}`);
-            }
-
-            statusEl.innerText = "Saved successfully!";
-            setTimeout(() => { statusEl.innerText = "Ready"; }, 2500);
         } catch (error) {
-            statusEl.innerText = `Error: ${error.message}`;
+            // Silent error handling
         }
     }
 
     async function loadNotepadFromCloud() {
-        const statusEl = document.getElementById('notepadStatus');
-        statusEl.innerText = "Loading...";
         try {
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
             const listUrl = `https://${accountName}.blob.core.windows.net/${containerName}?restype=container&comp=list&prefix=note_${cleanSas.replace('?', '&')}`;
 
             const listRes = await fetch(listUrl);
-            if (!listRes.ok) {
-                throw new Error(`HTTP ${listRes.status}`);
-            }
+            if (!listRes.ok) return;
             const textData = await listRes.text();
             
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(textData, "text/xml");
             const blobs = xmlDoc.getElementsByTagName("Blob");
 
-            if (blobs.length === 0) {
-                statusEl.innerText = "Ready";
-                return;
-            }
+            if (blobs.length === 0) return;
 
             let validBlobs = [];
             for (let i = 0; i < blobs.length; i++) {
@@ -689,23 +764,19 @@
                 }
             }
 
-            if (validBlobs.length === 0) {
-                statusEl.innerText = "Ready";
-                return;
-            }
+            if (validBlobs.length === 0) return;
 
             const latestBlobName = validBlobs[validBlobs.length - 1];
             const blobUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${latestBlobName}${cleanSas}`;
 
             const blobRes = await fetch(blobUrl);
-            if (!blobRes.ok) throw new Error(`HTTP ${blobRes.status}`);
+            if (!blobRes.ok) return;
             
             const content = await blobRes.text();
             document.getElementById('classicNotepadText').value = content;
-            statusEl.innerText = "Ready";
             updateCursorPosition();
         } catch (error) {
-            statusEl.innerText = "Ready";
+            // Silent error handling
         }
     }
 
@@ -715,14 +786,7 @@
         const msgVal = document.getElementById('msgContent').value;
         const statusEl = document.getElementById('formStatus');
 
-        if (!msgVal.trim()) {
-            statusEl.style.color = '#ff6b6b';
-            statusEl.innerText = "Please enter a message.";
-            return;
-        }
-
-        statusEl.style.color = '#cccccc';
-        statusEl.innerText = "Sending...";
+        if (!msgVal.trim()) return;
 
         const newSubmission = `Name: ${nameVal}\nEmail: ${emailVal}\nMessage:\n${msgVal}`;
         const blobName = `message_${Date.now()}.txt`;
@@ -740,47 +804,34 @@
                 body: newSubmission
             });
 
-            if (!response.ok) {
-                const errorBody = await response.text();
-                throw new Error(`HTTP ${response.status}: ${errorBody}`);
+            if (response.ok) {
+                statusEl.style.color = '#4CAF50';
+                statusEl.innerText = "Message sent successfully!";
+                document.getElementById('dummyName').value = '';
+                document.getElementById('dummyEmail').value = '';
+                document.getElementById('msgContent').value = '';
+                document.getElementById('emailListCheck').checked = false;
+                setTimeout(() => { statusEl.innerText = ""; }, 3000);
             }
-
-            statusEl.style.color = '#4CAF50';
-            statusEl.innerText = "Message sent successfully!";
-            document.getElementById('dummyName').value = '';
-            document.getElementById('dummyEmail').value = '';
-            document.getElementById('msgContent').value = '';
-            document.getElementById('emailListCheck').checked = false;
-            setTimeout(() => { statusEl.innerText = ""; }, 3000);
         } catch (error) {
-            statusEl.style.color = '#ff6b6b';
-            statusEl.innerText = `[${error.name || 'Error'}] ${error.message}`;
+            // Silent error handling
         }
     }
 
     async function loadFromCloud() {
-        document.getElementById('status').innerText = "Loading...";
         try {
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
             const listUrl = `https://${accountName}.blob.core.windows.net/${containerName}?restype=container&comp=list&prefix=note_${cleanSas.replace('?', '&')}`;
 
             const listRes = await fetch(listUrl);
-            if (!listRes.ok) {
-                const errorBody = await listRes.text();
-                throw new Error(`HTTP ${listRes.status}: ${errorBody}`);
-            }
+            if (!listRes.ok) return;
             const textData = await listRes.text();
             
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(textData, "text/xml");
             const blobs = xmlDoc.getElementsByTagName("Blob");
 
-            if (blobs.length === 0) {
-                document.getElementById('codeContent').value = "No files starting with 'note_' found.";
-                document.getElementById('status').innerText = "Loaded!";
-                setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
-                return;
-            }
+            if (blobs.length === 0) return;
 
             let validBlobs = [];
             for (let i = 0; i < blobs.length; i++) {
@@ -790,41 +841,30 @@
                 }
             }
 
-            if (validBlobs.length === 0) {
-                document.getElementById('codeContent').value = "No matching files found.";
-                document.getElementById('status').innerText = "Loaded!";
-                setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
-                return;
-            }
+            if (validBlobs.length === 0) return;
 
             const latestBlobName = validBlobs[validBlobs.length - 1];
             const blobUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${latestBlobName}${cleanSas}`;
 
             const blobRes = await fetch(blobUrl);
-            if (!blobRes.ok) {
-                const errorBody = await blobRes.text();
-                throw new Error(`HTTP ${blobRes.status}: ${errorBody}`);
-            }
+            if (!blobRes.ok) return;
             const content = await blobRes.text();
 
             document.getElementById('codeContent').value = content;
-            document.getElementById('status').innerText = "Loaded!";
-            setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
         } catch (error) {
-            document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
+            // Silent error handling
         }
     }
 
     async function ToCloud() {
         const newText = document.getElementById('codeContent').value;
-        document.getElementById('status').innerText = "Saving...";
 
         try {
             const blobName = `note_${Date.now()}.txt`;
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
             const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
 
-            const response = await fetch(uploadUrl, {
+            await fetch(uploadUrl, {
                 method: "PUT",
                 headers: {
                     "x-ms-blob-type": "BlockBlob",
@@ -833,24 +873,14 @@
                 },
                 body: newText
             });
-
-            if (!response.ok) {
-                const errorBody = await response.text();
-                throw new Error(`HTTP ${response.status}: ${errorBody}`);
-            }
-
-            document.getElementById('status').innerText = "s";
-            setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
         } catch (error) {
-            document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
+            // Silent error handling
         }
     }
 
     async function uploadFolderToCloud(event) {
         const files = event.target.files;
         if (!files || files.length === 0) return;
-
-        document.getElementById('status').innerText = "u.";
 
         try {
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
@@ -864,7 +894,7 @@
                 const blobName = `.private_folder_${timestamp}/${encodedPath}`;
                 const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
 
-                const response = await fetch(uploadUrl, {
+                await fetch(uploadUrl, {
                     method: "PUT",
                     headers: {
                         "x-ms-blob-type": "BlockBlob",
@@ -873,29 +903,16 @@
                     },
                     body: file
                 });
-
-                if (!response.ok) {
-                    const errorBody = await response.text();
-                    throw new Error(`Failed to upload (HTTP ${response.status}): ${errorBody}`);
-                }
             }
-
-            document.getElementById('status').innerText = "Folder Uploaded!";
-            setTimeout(() => {
-                document.getElementById('status').innerText = "";
-                event.target.value = '';
-            }, 3000);
+            event.target.value = '';
         } catch (error) {
-            console.log(error);
-            document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
+            // Silent error handling
         }
     }
 
     async function uploadZipToCloud(event) {
         const file = event.target.files[0];
         if (!file) return;
-
-        document.getElementById('status').innerText = "Uploading Zip...";
 
         try {
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
@@ -904,7 +921,7 @@
             const blobName = `.private_zip_${timestamp}/${encodedFileName}`;
             const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
 
-            const response = await fetch(uploadUrl, {
+            await fetch(uploadUrl, {
                 method: "PUT",
                 headers: {
                     "x-ms-blob-type": "BlockBlob",
@@ -913,28 +930,15 @@
                 },
                 body: file
             });
-
-            if (!response.ok) {
-                const errorBody = await response.text();
-                throw new Error(`HTTP ${response.status}: ${errorBody}`);
-            }
-
-            document.getElementById('status').innerText = "Zip Uploaded!";
-            setTimeout(() => {
-                document.getElementById('status').innerText = "";
-                event.target.value = '';
-            }, 3000);
+            event.target.value = '';
         } catch (error) {
-            console.log(error);
-            document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
+            // Silent error handling
         }
     }
 
     async function uploadRarToCloud(event) {
         const file = event.target.files[0];
         if (!file) return;
-
-        document.getElementById('status').innerText = "Uploading Rar...";
 
         try {
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
@@ -943,7 +947,7 @@
             const blobName = `.private_rar_${timestamp}/${encodedFileName}`;
             const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
 
-            const response = await fetch(uploadUrl, {
+            await fetch(uploadUrl, {
                 method: "PUT",
                 headers: {
                     "x-ms-blob-type": "BlockBlob",
@@ -952,20 +956,9 @@
                 },
                 body: file
             });
-
-            if (!response.ok) {
-                const errorBody = await response.text();
-                throw new Error(`HTTP ${response.status}: ${errorBody}`);
-            }
-
-            document.getElementById('status').innerText = "Rar Uploaded!";
-            setTimeout(() => {
-                document.getElementById('status').innerText = "";
-                event.target.value = '';
-            }, 3000);
+            event.target.value = '';
         } catch (error) {
-            console.log(error);
-            document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
+            // Silent error handling
         }
     }
 </script>
