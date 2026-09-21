@@ -299,42 +299,43 @@
         .back-home-link { font-size: 11px; color: #0078d4; cursor: pointer; text-decoration: underline; border: none; outline: none; }
 
 
-        /* --- Classic Windows Notepad Popup Window --- */
+        /* --- Borderless Fullscreen Classic Windows Notepad Page --- */
         #notepadModal {
             display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 680px;
-            height: 440px;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             background: #ece9d8;
             color: #000000;
             text-align: left;
             z-index: 10000;
-            box-shadow: 3px 3px 15px rgba(0,0,0,0.6);
-            border: 1px solid #0055ea;
             flex-direction: column;
             font-family: Tahoma, Arial, sans-serif;
             box-sizing: border-box;
             user-select: none;
+            border: none;
+            outline: none;
         }
 
         .notepad-titlebar {
             background: linear-gradient(to right, #0055ea, #337efd);
             color: #ffffff;
-            padding: 5px 8px;
+            padding: 6px 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: bold;
+            border: none;
+            outline: none;
         }
 
         .notepad-title-left {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         .win-close-btn {
@@ -343,9 +344,9 @@
             border: 1px solid #ffffff;
             border-right-color: #404040;
             border-bottom-color: #404040;
-            width: 18px;
-            height: 18px;
-            font-size: 11px;
+            width: 22px;
+            height: 22px;
+            font-size: 12px;
             font-weight: bold;
             display: flex;
             align-items: center;
@@ -353,6 +354,7 @@
             cursor: pointer;
             padding: 0;
             line-height: 1;
+            outline: none;
         }
 
         .win-close-btn:active {
@@ -363,15 +365,17 @@
 
         .notepad-menu-bar {
             background: #ece9d8;
-            border-bottom: 1px solid #dfdfdf;
+            border: none;
+            outline: none;
             display: flex;
             align-items: center;
-            padding: 2px 4px;
-            font-size: 11px;
+            padding: 3px 6px;
+            font-size: 12px;
+            gap: 2px;
         }
 
         .notepad-menu-item {
-            padding: 2px 6px;
+            padding: 3px 8px;
             cursor: pointer;
         }
 
@@ -384,34 +388,40 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 2px;
+            padding: 0;
             background: #ffffff;
-            border: 1px solid #7f9db9;
-            margin: 4px;
+            border: none;
+            outline: none;
+            margin: 0;
         }
 
         textarea.classic-notepad-textarea {
             flex: 1;
             font-family: Lucida Console, Courier New, monospace;
-            font-size: 13px;
+            font-size: 14px;
             border: none;
             outline: none;
             resize: none;
-            padding: 4px;
+            padding: 8px;
             background: #ffffff;
             color: #000000;
             box-sizing: border-box;
             width: 100%;
+            height: 100%;
+            white-space: pre;
+            overflow-wrap: normal;
+            overflow: auto;
         }
 
         .notepad-status-bar {
             background: #ece9d8;
-            padding: 3px 6px;
+            padding: 5px 10px;
             font-size: 11px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid #d4d0c8;
+            border: none;
+            outline: none;
             color: #444444;
         }
 
@@ -470,7 +480,7 @@
 <!-- Upload Dashboard Page -->
 <div id="appPage">
     <div class="top-bar">
-        <span class="back-home-link" onclick="openLandingPage()">←</span>
+        <span class="back-home-link" onclick="openLandingPage()">← Back to Home</span>
     </div>
 
     <div class="container">
@@ -500,7 +510,7 @@
     </div>
 </div>
 
-<!-- Classic Notepad Popup Window -->
+<!-- Borderless Fullscreen Classic Windows Notepad Page -->
 <div id="notepadModal">
     <div class="notepad-titlebar">
         <div class="notepad-title-left">
@@ -513,18 +523,19 @@
 
     <div class="notepad-menu-bar">
         <span class="notepad-menu-item" onclick="saveNotepadToCloud()">File</span>
-        <span class="notepad-menu-item">Edit</span>
+        <span class="notepad-menu-item" onclick="clearNotepad()">Edit</span>
         <span class="notepad-menu-item" onclick="loadNotepadFromCloud()">Search</span>
-        <span class="notepad-menu-item">Help</span>
+        <span class="notepad-menu-item" onclick="toggleWordWrap()">Format</span>
+        <span class="notepad-menu-item" onclick="showHelp()">Help</span>
     </div>
 
     <div class="notepad-body">
-        <textarea id="classicNotepadText" class="classic-notepad-textarea" placeholder="Paste or type text here..."></textarea>
+        <textarea id="classicNotepadText" class="classic-notepad-textarea" placeholder="Type or paste notes here..." oninput="updateCursorPosition()" onclick="updateCursorPosition()" onkeyup="updateCursorPosition()"></textarea>
     </div>
 
     <div class="notepad-status-bar">
         <span id="notepadStatus">Ready</span>
-        <span>Ln 1, Col 1</span>
+        <span id="cursorPos">Ln 1, Col 1</span>
     </div>
 </div>
 
@@ -548,12 +559,49 @@
     }
 
     function openNotepadModal() {
+        document.getElementById('landingPage').style.display = 'none';
+        document.getElementById('appPage').style.display = 'none';
         document.getElementById('notepadModal').style.display = 'flex';
         loadNotepadFromCloud();
     }
 
     function closeNotepadModal() {
         document.getElementById('notepadModal').style.display = 'none';
+        document.getElementById('landingPage').style.display = 'flex';
+    }
+
+    function clearNotepad() {
+        if(confirm("Clear current text?")) {
+            document.getElementById('classicNotepadText').value = "";
+            document.getElementById('notepadStatus').innerText = "Cleared";
+        }
+    }
+
+    function toggleWordWrap() {
+        const ta = document.getElementById('classicNotepadText');
+        if (ta.style.whiteSpace === 'normal') {
+            ta.style.whiteSpace = 'pre';
+            ta.style.overflowX = 'auto';
+            alert("Word Wrap: Off");
+        } else {
+            ta.style.whiteSpace = 'normal';
+            ta.style.overflowX = 'hidden';
+            alert("Word Wrap: On");
+        }
+    }
+
+    function showHelp() {
+        alert("Classic Notepad App\nConnected securely to Azure Blob Storage.");
+    }
+
+    function updateCursorPosition() {
+        const ta = document.getElementById('classicNotepadText');
+        const text = ta.value;
+        const pos = ta.selectionStart;
+        const lines = text.substr(0, pos).split("\n");
+        const ln = lines.length;
+        const col = lines[lines.length - 1].length + 1;
+        document.getElementById('cursorPos').innerText = `Ln ${ln}, Col ${col}`;
     }
 
     async function saveNotepadToCloud() {
@@ -632,6 +680,7 @@
             const content = await blobRes.text();
             document.getElementById('classicNotepadText').value = content;
             statusEl.innerText = "Ready";
+            updateCursorPosition();
         } catch (error) {
             statusEl.innerText = "Ready";
         }
