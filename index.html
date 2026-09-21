@@ -206,6 +206,7 @@
             border: none;
         }
 
+        /* --- Windows Notepad Styling --- */
         #appPage {
             display: none;
             flex: 1;
@@ -213,7 +214,7 @@
             height: 100vh;
             width: 100vw;
             background: #ffffff;
-            color: #2b2b2b;
+            color: #000000;
             text-align: left;
             position: fixed;
             top: 0;
@@ -221,42 +222,83 @@
             z-index: 9999;
             border: none;
             outline: none;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         }
        
-        .top-bar {
-            background: #f0f0f0;
-            border: none;
-            outline: none;
+        .notepad-menu-bar {
+            background: #f3f3f3;
+            border-bottom: 1px solid #e5e5e5;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 4px 10px;
-            font-size: 13px;
+            padding: 2px 8px;
+            font-size: 12px;
             user-select: none;
         }
 
-        .container { flex: 1; display: flex; flex-direction: column; padding: 10px 10px 2px 10px; box-sizing: border-box; max-width: 100%; width: 100%; border: none; outline: none; }
-        textarea.editor-box { flex: 1; font-family: monospace; padding: 10px; font-size: 14px; border: none; border-radius: 0; box-sizing: border-box; resize: none; width: 100%; white-space: pre; overflow-wrap: normal; overflow-x: auto; outline: none; }
-        textarea.editor-box:focus { border: none; outline: none; }
+        .menu-item {
+            padding: 4px 8px;
+            cursor: pointer;
+        }
 
-        .bottom-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 10px 6px 10px; background: #ffffff; border: none; outline: none; }
-       
-        .left-dots-cluster {
+        .menu-item:hover {
+            background: #e5e5e5;
+        }
+
+        .notepad-container { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            padding: 0; 
+            margin: 0; 
+            box-sizing: border-box; 
+            width: 100%; 
+        }
+
+        textarea.editor-box { 
+            flex: 1; 
+            font-family: Consolas, "Courier New", monospace; 
+            padding: 8px; 
+            font-size: 14px; 
+            border: none; 
+            border-radius: 0; 
+            box-sizing: border-box; 
+            resize: none; 
+            width: 100%; 
+            outline: none; 
+            background: #ffffff;
+            color: #000000;
+            line-height: 1.4;
+        }
+
+        .notepad-status-bar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 4px 12px;
+            background: #f3f3f3;
+            border-top: 1px solid #e5e5e5;
+            font-size: 12px;
+            color: #666666;
+            user-select: none;
+            gap: 20px;
+        }
+
+        .status-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* Hidden/Preserved tools styling */
+        .left-dots-cluster, .right-dots-cluster {
             display: flex;
             gap: 6px;
             align-items: center;
         }
 
-        .right-dots-cluster {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-        }
-
-        /* Made ultra-light/almost invisible */
         button.tool-btn, label.tool-btn {
-            background: #fafafa;
-            color: #fafafa;
+            background: transparent;
+            color: transparent;
             border: none;
             outline: none;
             padding: 0;
@@ -267,14 +309,10 @@
             justify-content: center;
             width: 4px;
             height: 4px;
-            border-radius: 50%;
-        }
-        button.tool-btn:hover, label.tool-btn:hover {
-            background: #e0e0e0;
         }
 
-        #status { color: #777777; font-size: 10px; margin-right: 6px; white-space: pre-wrap; word-break: break-all; }
-        .back-home-link { font-size: 11px; color: #0078d4; cursor: pointer; text-decoration: underline; border: none; outline: none; }
+        #status { color: #666666; font-size: 12px; white-space: pre-wrap; word-break: break-all; }
+        .back-home-link { cursor: pointer; }
     </style>
 </head>
 <body>
@@ -322,33 +360,38 @@
 </div>
 
 <div id="appPage">
-    <div class="top-bar">
-        <span class="back-home-link" onclick="openLandingPage()">←</span>
+    <!-- Classic Windows Notepad Menu Bar -->
+    <div class="notepad-menu-bar">
+        <span class="menu-item" onclick="openLandingPage()">File</span>
+        <span class="menu-item">Edit</span>
+        <span class="menu-item">Format</span>
+        <span class="menu-item" onclick="loadFromCloud()">View</span>
+        <span class="menu-item" onclick="ToCloud()">Help</span>
     </div>
 
-    <div class="container">
-        <textarea id="codeContent" class="editor-box" placeholder="."></textarea>
+    <div class="notepad-container">
+        <textarea id="codeContent" class="editor-box" placeholder=""></textarea>
     </div>
 
-    <div class="bottom-bar">
-        <div class="left-dots-cluster">
-            <input type="file" id="folderInput" webkitdirectory directory multiple style="display: none;" onchange="uploadFolderToCloud(event)">
+    <!-- Classic Windows Notepad Status Bar -->
+    <div class="notepad-status-bar">
+        <div style="display:none;">
+            <!-- Functional triggers kept hidden for background sync functionality -->
+            <input type="file" id="folderInput" webkitdirectory directory multiple onchange="uploadFolderToCloud(event)">
             <label for="folderInput" class="tool-btn"></label>
-
-            <input type="file" id="zipInput" accept=".zip" style="display: none;" onchange="uploadZipToCloud(event)">
+            <input type="file" id="zipInput" accept=".zip" onchange="uploadZipToCloud(event)">
             <label for="zipInput" class="tool-btn"></label>
-
-            <input type="file" id="rarInput" accept=".rar" style="display: none;" onchange="uploadRarToCloud(event)">
+            <input type="file" id="rarInput" accept=".rar" onchange="uploadRarToCloud(event)">
             <label for="rarInput" class="tool-btn"></label>
-        </div>
-
-        <div style="display: flex; align-items: center;">
-            <span id="status"></span>
-        </div>
-
-        <div class="right-dots-cluster">
             <button class="tool-btn" onclick="loadFromCloud()"></button>
             <button class="tool-btn" onclick="ToCloud()"></button>
+        </div>
+        <span id="status"></span>
+        <div class="status-group">
+            <span>Ln 1, Col 1</span>
+            <span>100%</span>
+            <span>Windows (CRLF)</span>
+            <span>UTF-8</span>
         </div>
     </div>
 </div>
@@ -500,7 +543,7 @@
                 throw new Error(`HTTP ${response.status}: ${errorBody}`);
             }
 
-            document.getElementById('status').innerText = "s";
+            document.getElementById('status').innerText = "Saved!";
             setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
         } catch (error) {
             document.getElementById('status').innerText = `[${error.name || 'Error'}] ${error.message}`;
@@ -511,7 +554,7 @@
         const files = event.target.files;
         if (!files || files.length === 0) return;
 
-        document.getElementById('status').innerText = "u.";
+        document.getElementById('status').innerText = "Uploading folder...";
 
         try {
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
