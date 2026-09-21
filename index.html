@@ -299,36 +299,42 @@
         .back-home-link { font-size: 11px; color: #0078d4; cursor: pointer; text-decoration: underline; border: none; outline: none; }
 
 
-        /* --- Borderless Fullscreen Classic Windows Notepad Page --- */
+        /* --- Floating Windows 10 Notepad Window Style --- */
         #notepadModal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #ece9d8;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85vw;
+            max-width: 900px;
+            height: 80vh;
+            max-height: 700px;
+            background: #ffffff;
             color: #000000;
             text-align: left;
             z-index: 10000;
             flex-direction: column;
-            font-family: Tahoma, Arial, sans-serif;
+            font-family: "Segoe UI", Tahoma, sans-serif;
             box-sizing: border-box;
             user-select: none;
-            border: none;
+            border: 1px solid #d2d2d2;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
             outline: none;
         }
 
         .notepad-titlebar {
-            background: linear-gradient(to right, #0055ea, #337efd);
-            color: #ffffff;
-            padding: 6px 10px;
+            background: #ffffff;
+            color: #000000;
+            padding: 0 0 0 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-size: 13px;
-            font-weight: bold;
-            border: none;
+            font-size: 12px;
+            height: 32px;
+            border-bottom: 1px solid #f0f0f0;
             outline: none;
         }
 
@@ -338,50 +344,65 @@
             gap: 8px;
         }
 
-        .win-close-btn {
-            background: #ece9d8;
+        .win-controls {
+            display: flex;
+            height: 100%;
+        }
+
+        .win-control-btn {
+            background: transparent;
             color: #000000;
-            border: 1px solid #ffffff;
-            border-right-color: #404040;
-            border-bottom-color: #404040;
-            width: 22px;
-            height: 22px;
+            border: none;
+            width: 45px;
+            height: 100%;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .win-control-btn:hover {
+            background: #e5e5e5;
+        }
+
+        .win-close-btn {
+            background: transparent;
+            color: #000000;
+            border: none;
+            width: 45px;
+            height: 100%;
             font-size: 12px;
-            font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            padding: 0;
-            line-height: 1;
             outline: none;
         }
 
-        .win-close-btn:active {
-            border: 1px solid #404040;
-            border-right-color: #ffffff;
-            border-bottom-color: #ffffff;
+        .win-close-btn:hover {
+            background: #e81123;
+            color: #ffffff;
         }
 
         .notepad-menu-bar {
-            background: #ece9d8;
+            background: #ffffff;
             border: none;
             outline: none;
             display: flex;
             align-items: center;
-            padding: 3px 6px;
+            padding: 2px 6px;
             font-size: 12px;
             gap: 2px;
         }
 
         .notepad-menu-item {
-            padding: 3px 8px;
+            padding: 4px 10px;
             cursor: pointer;
+            color: #1e1e1e;
         }
 
         .notepad-menu-item:hover {
-            background: #316ac5;
-            color: #ffffff;
+            background: #e5e5e5;
         }
 
         .notepad-body {
@@ -397,12 +418,12 @@
 
         textarea.classic-notepad-textarea {
             flex: 1;
-            font-family: Lucida Console, Courier New, monospace;
+            font-family: Consolas, Lucida Console, monospace;
             font-size: 14px;
             border: none;
             outline: none;
             resize: none;
-            padding: 8px;
+            padding: 8px 12px;
             background: #ffffff;
             color: #000000;
             box-sizing: border-box;
@@ -414,20 +435,20 @@
         }
 
         .notepad-status-bar {
-            background: #ece9d8;
-            padding: 5px 10px;
+            background: #f8f8f8;
+            padding: 4px 12px;
             font-size: 11px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: none;
+            border-top: 1px solid #f0f0f0;
             outline: none;
-            color: #444444;
+            color: #666666;
+            height: 24px;
         }
 
         #notepadStatus {
-            color: #0055ea;
-            font-weight: bold;
+            color: #0078d4;
         }
     </style>
 </head>
@@ -510,13 +531,15 @@
     </div>
 </div>
 
-<!-- Borderless Fullscreen Classic Windows Notepad Page -->
+<!-- Floating Windows 10 Notepad Window -->
 <div id="notepadModal">
     <div class="notepad-titlebar">
         <div class="notepad-title-left">
-            <span>📄 Untitled - Notepad</span>
+            <span>Untitled - Notepad</span>
         </div>
-        <div>
+        <div class="win-controls">
+            <button class="win-control-btn">🗕</button>
+            <button class="win-control-btn">🗖</button>
             <button class="win-close-btn" onclick="closeNotepadModal()">✕</button>
         </div>
     </div>
@@ -591,7 +614,7 @@
     }
 
     function showHelp() {
-        alert("Classic Notepad App\nConnected securely to Azure Blob Storage.");
+        alert("Windows 10 Notepad\nConnected securely to Azure Blob Storage.");
     }
 
     function updateCursorPosition() {
