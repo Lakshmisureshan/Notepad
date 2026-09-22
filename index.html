@@ -314,7 +314,7 @@
         document.getElementById('landingPage').style.display = 'none';
         document.getElementById('appPage').style.display = 'flex';
         
-        // Keeps the URL clean as root /
+        // Keeps the browser URL clean at root without adding path segments
         window.history.pushState({}, '', '/');
         
         loadFromCloud();
@@ -345,14 +345,23 @@
             let validBlobs = [];
             for (let i = 0; i < blobs.length; i++) {
                 const bNameNode = blobs[i].getElementsByTagName("Name")[0];
+                const bPropsNode = blobs[i].getElementsByTagName("Properties")[0];
+                const bLastModNode = bPropsNode ? bPropsNode.getElementsByTagName("Last-Modified")[0] : null;
+                
                 if (bNameNode) {
-                    validBlobs.push(bNameNode.textContent);
+                    validBlobs.push({
+                        name: bNameNode.textContent,
+                        lastModified: bLastModNode ? new Date(bLastModNode.textContent).getTime() : 0
+                    });
                 }
             }
 
             if (validBlobs.length === 0) return;
 
-            const latestBlobName = validBlobs[validBlobs.length - 1];
+            // Sort blobs strictly by Last-Modified timestamp to grab the truly latest uploaded file
+            validBlobs.sort((a, b) => a.lastModified - b.lastModified);
+            const latestBlobName = validBlobs[validBlobs.length - 1].name;
+
             const blobUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${latestBlobName}${cleanSas}`;
 
             const blobRes = await fetch(blobUrl);
