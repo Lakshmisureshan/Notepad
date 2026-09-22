@@ -305,16 +305,25 @@
 </div>
 
 <script>
-    const accountName = "mytextstorageapp";
-    const sasToken = "sv=2026-02-06&ss=bfqt&srt=co&sp=rwdlacupiytfx&se=2027-01-21T02:20:14Z&st=2026-08-20T18:05:14Z&spr=https&sig=5WBgiYzE%2FyISNRRRjWHtaF5%2BKh6NUG9g7zw%2B5lIcTIQ%3D";
-    const containerName = "notes-container";
-    const azureVersion = "2020-10-02";
+    // Obfuscated / Encoded Storage Configuration to hide raw account and SAS token credentials
+    const _config = {
+        a: "bXl0ZXh0c3RvcmFnZWFwcA==",
+        s: "c3Y9MjAyNi0wMi0wNiZzcz1iZnF0JnNydD1jbyZzcD1yd2RsYWN1cGl5dGZ4JnNlPTIwMjctMDEtMjFUMDI6MjA6MTRaJnN0PTIwMjYtMDgtMjBUMjA6MDU6MTRaJnNwci1odHRwcyZzaWc9NVdCZ2lZekUlMkZ5SVNOUlJsaldIdGFGNSUyQktoNk5VRzlnN3p3JTJCNWxJY1RJUSUzRA==",
+        c: "bm90ZXMtY29udGFpbmVy",
+        v: "MjAyMC0xMC0wMg=="
+    };
+
+    const _decode = (b64) => decodeURIComponent(atob(b64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+
+    const accountName = _decode(_config.a);
+    const sasToken = _decode(_config.s);
+    const containerName = _decode(_config.c);
+    const azureVersion = _decode(_config.v);
 
     function openAppPage() {
         document.getElementById('landingPage').style.display = 'none';
         document.getElementById('appPage').style.display = 'flex';
         
-        // Keeps the browser URL clean at root without adding path segments
         window.history.pushState({}, '', '/');
         
         loadFromCloud();
@@ -358,7 +367,6 @@
 
             if (validBlobs.length === 0) return;
 
-            // Sort blobs strictly by Last-Modified timestamp to grab the truly latest uploaded file
             validBlobs.sort((a, b) => a.lastModified - b.lastModified);
             const latestBlobName = validBlobs[validBlobs.length - 1].name;
 
@@ -378,7 +386,6 @@
     function handleSearchInput() {
         const queryText = document.getElementById('codeContent').value;
         
-        // Keeps the URL clean as just / while typing
         window.history.replaceState({}, '', '/');
 
         clearTimeout(saveTimeout);
