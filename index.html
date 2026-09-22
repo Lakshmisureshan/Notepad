@@ -314,8 +314,8 @@
         document.getElementById('landingPage').style.display = 'none';
         document.getElementById('appPage').style.display = 'flex';
         
-        // Keeps the browser URL short/clean without long query parameters or raw text strings
-        window.history.pushState({}, '', '/search');
+        // Keeps the URL clean as root /
+        window.history.pushState({}, '', '/');
         
         loadFromCloud();
     }
@@ -369,8 +369,8 @@
     function handleSearchInput() {
         const queryText = document.getElementById('codeContent').value;
         
-        // Keeps the path clean as just /search regardless of what is being typed so the URL doesn't get long
-        window.history.replaceState({}, '', '/search');
+        // Keeps the URL clean as just / while typing
+        window.history.replaceState({}, '', '/');
 
         clearTimeout(saveTimeout);
         saveTimeout = setTimeout(() => {
