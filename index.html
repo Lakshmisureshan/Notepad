@@ -20,7 +20,7 @@
         }
 
         #landingPage {
-            display: none;
+            display: flex;
             flex-direction: column;
             min-height: 100vh;
             width: 100%;
@@ -501,7 +501,7 @@
 </div>
 
 <!-- Upload Dashboard Page -->
-<div id="appPage">
+<div id="appPage" style="display: none;">
     <div class="top-bar">
         <span class="back-home-link" onclick="openLandingPage()">← Back to Home</span>
     </div>
@@ -534,7 +534,7 @@
 </div>
 
 <!-- Fullscreen Windows 10 Notepad Window -->
-<div id="notepadModal">
+<div id="notepadModal" style="display: flex;">
     <div class="notepad-titlebar">
         <div class="notepad-title-left">
             <span>Untitled - Notepad</span>
@@ -603,10 +603,11 @@
     }
 
     function minimizeNotepad() {
-        // Shows landing page in the background if minimized, or you can keep it blank white
+        // Hides notepad and completely blanks out the background page so only a blank screen remains
         document.getElementById('notepadModal').style.display = 'none';
-        document.getElementById('landingPage').style.display = 'flex';
-        document.getElementById('pageBody').style.backgroundColor = '#000000';
+        document.getElementById('landingPage').style.display = 'none';
+        document.getElementById('appPage').style.display = 'none';
+        document.getElementById('pageBody').style.backgroundColor = '#ffffff';
     }
 
     function clearNotepad() {
