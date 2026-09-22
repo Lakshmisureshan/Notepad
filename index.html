@@ -204,7 +204,7 @@
         .back-home-link:hover { text-decoration: underline; }
 
 
-        /* --- Native Desktop Application Style Notepad --- */
+        /* --- Pure White Windows 10 Classic Notepad Window --- */
         #notepadModal {
             display: none;
             position: fixed;
@@ -212,47 +212,65 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #1e1e1e;
-            color: #d4d4d4;
+            background: #ffffff;
+            color: #000000;
             text-align: left;
             z-index: 10000;
             flex-direction: column;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: "Segoe UI", Tahoma, sans-serif;
             box-sizing: border-box;
             user-select: none;
             border: none;
             outline: none;
         }
 
-        .app-window-header {
-            background: #2d2d2d;
-            color: #cccccc;
-            height: 38px;
+        .notepad-titlebar {
+            background: #f0f0f0;
+            color: #000000;
+            padding: 0 0 0 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-left: 14px;
-            border-bottom: 1px solid #3f3f3f;
+            font-size: 12px;
+            height: 32px;
+            border-bottom: 1px solid #e0e0e0;
         }
 
-        .app-window-title {
+        .notepad-title-left {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 13px;
-            font-weight: 500;
         }
 
-        .app-window-controls {
+        .win-controls {
             display: flex;
             height: 100%;
         }
 
-        .app-win-btn {
+        .win-control-btn {
             background: transparent;
-            color: #999999;
+            color: #333333;
             border: none;
-            width: 46px;
+            width: 45px;
+            height: 100%;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .win-control-btn:hover {
+            background: #e5e5e5;
+            color: #000000;
+        }
+
+        .win-close-btn {
+            background: transparent;
+            color: #333333;
+            border: none;
+            width: 45px;
             height: 100%;
             font-size: 12px;
             display: flex;
@@ -260,61 +278,53 @@
             justify-content: center;
             cursor: pointer;
             outline: none;
-            transition: background 0.1s;
         }
 
-        .app-win-btn:hover {
-            background: #383838;
-            color: #ffffff;
-        }
-
-        .app-win-close:hover {
+        .win-close-btn:hover {
             background: #e81123;
             color: #ffffff;
         }
 
-        .app-menubar {
-            background: #252526;
+        .notepad-menu-bar {
+            background: #f8f8f8;
             display: flex;
             align-items: center;
-            padding: 4px 8px;
+            padding: 2px 6px;
             font-size: 12px;
-            gap: 4px;
-            border-bottom: 1px solid #333333;
+            gap: 2px;
+            border-bottom: 1px solid #e0e0e0;
         }
 
-        .app-menu-item {
+        .notepad-menu-item {
             padding: 4px 10px;
             cursor: pointer;
-            color: #cccccc;
-            border-radius: 3px;
+            color: #333333;
         }
 
-        .app-menu-item:hover {
-            background: #3e3e42;
-            color: #ffffff;
+        .notepad-menu-item:hover {
+            background: #e5e5e5;
+            color: #000000;
         }
 
-        .app-workspace {
+        .notepad-body {
             flex: 1;
             display: flex;
             flex-direction: column;
-            background: #1e1e1e;
+            background: #ffffff;
             margin: 0;
             padding: 0;
         }
 
-        textarea.app-textarea {
+        textarea.classic-notepad-textarea {
             flex: 1;
-            font-family: 'Consolas', 'Courier New', monospace;
+            font-family: Consolas, Lucida Console, monospace;
             font-size: 14px;
-            line-height: 1.5;
             border: none;
             outline: none;
             resize: none;
-            padding: 12px;
-            background: #1e1e1e;
-            color: #d4d4d4;
+            padding: 8px 12px;
+            background: #ffffff;
+            color: #000000;
             box-sizing: border-box;
             width: 100%;
             height: 100%;
@@ -322,15 +332,20 @@
             overflow: auto;
         }
 
-        .app-statusbar {
-            background: #007acc;
-            color: #ffffff;
+        .notepad-status-bar {
+            background: #f0f0f0;
             padding: 4px 12px;
             font-size: 11px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-top: 1px solid #e0e0e0;
+            color: #666666;
             height: 24px;
+        }
+
+        #notepadStatus {
+            color: #0066cc;
         }
     </style>
 </head>
@@ -389,31 +404,31 @@
     </div>
 </div>
 
-<!-- Desktop App Style Notepad -->
+<!-- Fullscreen Windows 10 Classic White Notepad -->
 <div id="notepadModal">
-    <div class="app-window-header">
-        <div class="app-window-title">
-            <span>📝 ACE Workspace Notepad</span>
+    <div class="notepad-titlebar">
+        <div class="notepad-title-left">
+            <span>Untitled - Notepad</span>
         </div>
-        <div class="app-window-controls">
-            <button class="app-win-btn" onclick="minimizeNotepad()" title="Minimize">🗕</button>
-            <button class="app-win-btn app-win-close" onclick="closeNotepadModal()" title="Close">✕</button>
+        <div class="win-controls">
+            <button class="win-control-btn" onclick="minimizeNotepad()" title="Minimize">🗕</button>
+            <button class="win-close-btn" onclick="closeNotepadModal()" title="Close">✕</button>
         </div>
     </div>
 
-    <div class="app-menubar">
-        <span class="app-menu-item" onclick="saveNotepadToCloud()">File</span>
-        <span class="app-menu-item" onclick="clearNotepad()">Edit</span>
-        <span class="app-menu-item" onclick="loadNotepadFromCloud()">Refresh</span>
-        <span class="app-menu-item" onclick="toggleWordWrap()">Format</span>
+    <div class="notepad-menu-bar">
+        <span class="notepad-menu-item" onclick="saveNotepadToCloud()">File</span>
+        <span class="notepad-menu-item" onclick="clearNotepad()">Edit</span>
+        <span class="notepad-menu-item" onclick="loadNotepadFromCloud()">Search</span>
+        <span class="notepad-menu-item" onclick="toggleWordWrap()">Format</span>
     </div>
 
-    <div class="app-workspace">
-        <textarea id="classicNotepadText" class="app-textarea" placeholder="Type notes here..." oninput="updateCursorPosition()" onclick="updateCursorPosition()" onkeyup="updateCursorPosition()"></textarea>
+    <div class="notepad-body">
+        <textarea id="classicNotepadText" class="classic-notepad-textarea" placeholder="Type or paste notes here..." oninput="updateCursorPosition()" onclick="updateCursorPosition()" onkeyup="updateCursorPosition()"></textarea>
     </div>
 
-    <div class="app-statusbar">
-        <span id="notepadStatus">Synced with cloud</span>
+    <div class="notepad-status-bar">
+        <span id="notepadStatus">Ready</span>
         <span id="cursorPos">Ln 1, Col 1</span>
     </div>
 </div>
@@ -486,7 +501,7 @@
     async function saveNotepadToCloud() {
         const textVal = document.getElementById('classicNotepadText').value;
         const statusEl = document.getElementById('notepadStatus');
-        statusEl.innerText = "Saving to cloud...";
+        statusEl.innerText = "Saving...";
         try {
             const blobName = `note_${Date.now()}.txt`;
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
@@ -503,7 +518,7 @@
             });
             if (res.ok) {
                 statusEl.innerText = "Saved successfully";
-                setTimeout(() => { statusEl.innerText = "Synced with cloud"; }, 2500);
+                setTimeout(() => { statusEl.innerText = "Ready"; }, 2000);
             }
         } catch (error) {
             statusEl.innerText = "Save failed";
