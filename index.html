@@ -199,19 +199,20 @@
             border-color: #555555;
         }
 
-        #status { color: #888888; font-size: 11px; white-space: pre-wrap; }
         .back-home-link { font-size: 12px; color: #6bb2ff; cursor: pointer; text-decoration: none; }
         .back-home-link:hover { text-decoration: underline; }
 
-
-        /* --- Pure White Windows 10 Classic Notepad Window --- */
+        /* --- Authentic Floating Windows 10 App Window --- */
         #notepadModal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 75vh;
+            max-width: 900px;
+            max-height: 650px;
             background: #ffffff;
             color: #000000;
             text-align: left;
@@ -220,26 +221,29 @@
             font-family: "Segoe UI", Tahoma, sans-serif;
             box-sizing: border-box;
             user-select: none;
-            border: none;
-            outline: none;
+            border: 1px solid #707070;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.1);
+            border-radius: 4px 4px 0 0;
+            overflow: hidden;
         }
 
         .notepad-titlebar {
-            background: #f0f0f0;
-            color: #000000;
+            background: #e1dfdd;
+            color: #1f1f1f;
             padding: 0 0 0 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             font-size: 12px;
             height: 32px;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid #d1d1d1;
         }
 
         .notepad-title-left {
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 400;
         }
 
         .win-controls {
@@ -249,9 +253,28 @@
 
         .win-control-btn {
             background: transparent;
-            color: #333333;
+            color: #1f1f1f;
             border: none;
-            width: 45px;
+            width: 46px;
+            height: 100%;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            outline: none;
+            transition: background 0.1s;
+        }
+
+        .win-control-btn:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .win-close-btn {
+            background: transparent;
+            color: #1f1f1f;
+            border: none;
+            width: 46px;
             height: 100%;
             font-size: 11px;
             display: flex;
@@ -259,25 +282,8 @@
             justify-content: center;
             cursor: pointer;
             outline: none;
-        }
-
-        .win-control-btn:hover {
-            background: #e5e5e5;
-            color: #000000;
-        }
-
-        .win-close-btn {
-            background: transparent;
-            color: #333333;
-            border: none;
-            width: 45px;
-            height: 100%;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            outline: none;
+            transition: background 0.1s;
+            border-top-right-radius: 3px;
         }
 
         .win-close-btn:hover {
@@ -286,24 +292,61 @@
         }
 
         .notepad-menu-bar {
-            background: #f8f8f8;
+            background: #f3f2f1;
             display: flex;
             align-items: center;
-            padding: 2px 6px;
+            padding: 2px 4px;
             font-size: 12px;
             gap: 2px;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e1dfdd;
+            position: relative;
         }
 
         .notepad-menu-item {
             padding: 4px 10px;
             cursor: pointer;
-            color: #333333;
+            color: #323130;
+            position: relative;
+            border-radius: 2px;
         }
 
         .notepad-menu-item:hover {
-            background: #e5e5e5;
+            background: #e1dfdd;
             color: #000000;
+        }
+
+        /* Windows Dropdown Menu */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #ffffff;
+            border: 1px solid #c8c6c4;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 180px;
+            z-index: 10001;
+            padding: 4px 0;
+        }
+
+        .dropdown-item {
+            padding: 6px 28px 6px 14px;
+            font-size: 12px;
+            color: #323130;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .dropdown-item:hover {
+            background: #0078d4;
+            color: #ffffff;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #edebe9;
+            margin: 4px 0;
         }
 
         .notepad-body {
@@ -333,23 +376,19 @@
         }
 
         .notepad-status-bar {
-            background: #f0f0f0;
+            background: #f3f2f1;
             padding: 4px 12px;
             font-size: 11px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
-            border-top: 1px solid #e0e0e0;
-            color: #666666;
+            border-top: 1px solid #e1dfdd;
+            color: #605e5c;
             height: 24px;
-        }
-
-        #notepadStatus {
-            color: #0066cc;
         }
     </style>
 </head>
-<body id="pageBody">
+<body id="pageBody" onclick="closeAllDropdowns(event)">
 
 <!-- Landing Page -->
 <div id="landingPage">
@@ -393,9 +432,7 @@
             <label for="rarInput" class="tool-btn">🗜️ Upload RAR</label>
         </div>
 
-        <div>
-            <span id="status">Ready</span>
-        </div>
+        <div></div>
 
         <div class="right-dots-cluster">
             <button class="tool-btn" onclick="loadFromCloud()">Load</button>
@@ -404,31 +441,69 @@
     </div>
 </div>
 
-<!-- Fullscreen Windows 10 Classic White Notepad -->
+<!-- Floating Windows 10 Classic White Notepad App Window -->
 <div id="notepadModal">
     <div class="notepad-titlebar">
         <div class="notepad-title-left">
             <span>Untitled - Notepad</span>
         </div>
         <div class="win-controls">
-            <button class="win-control-btn" onclick="minimizeNotepad()" title="Minimize">🗕</button>
-            <button class="win-close-btn" onclick="closeNotepadModal()" title="Close">✕</button>
+            <button class="win-control-btn" onclick="minimizeNotepad()" title="Minimize">&#x1F5D5;</button>
+            <button class="win-control-btn" onclick="minimizeNotepad()" title="Maximize">&#x1F5D6;</button>
+            <button class="win-close-btn" onclick="closeNotepadModal()" title="Close">&#x2715;</button>
         </div>
     </div>
 
     <div class="notepad-menu-bar">
-        <span class="notepad-menu-item" onclick="saveNotepadToCloud()">File</span>
-        <span class="notepad-menu-item" onclick="clearNotepad()">Edit</span>
-        <span class="notepad-menu-item" onclick="loadNotepadFromCloud()">Search</span>
-        <span class="notepad-menu-item" onclick="toggleWordWrap()">Format</span>
+        <div class="notepad-menu-item" onclick="toggleDropdown(event, 'fileDropdown')">
+            File
+            <div id="fileDropdown" class="dropdown-menu">
+                <div class="dropdown-item" onclick="newNotepadFile()">New</div>
+                <div class="dropdown-item" onclick="openTextFile()">Open...</div>
+                <div class="dropdown-item" onclick="saveTextFile()">Save</div>
+                <div class="dropdown-item" onclick="saveAsTextFile()">Save As...</div>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-item" onclick="closeNotepadModal()">Exit</div>
+            </div>
+        </div>
+
+        <div class="notepad-menu-item" onclick="toggleDropdown(event, 'editDropdown')">
+            Edit
+            <div id="editDropdown" class="dropdown-menu">
+                <div class="dropdown-item" onclick="selectAllText()">Select All</div>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-item" onclick="clearNotepad()">Delete</div>
+            </div>
+        </div>
+
+        <div class="notepad-menu-item" onclick="toggleDropdown(event, 'formatDropdown')">
+            Format
+            <div id="formatDropdown" class="dropdown-menu">
+                <div class="dropdown-item" onclick="toggleWordWrap()">Word Wrap <span id="wrapCheck">&#x2713;</span></div>
+            </div>
+        </div>
+
+        <div class="notepad-menu-item" onclick="toggleDropdown(event, 'viewDropdown')">
+            View
+            <div id="viewDropdown" class="dropdown-menu">
+                <div class="dropdown-item">Zoom <span>100%</span></div>
+                <div class="dropdown-item">Status Bar <span id="statusCheck">&#x2713;</span></div>
+            </div>
+        </div>
+
+        <div class="notepad-menu-item" onclick="toggleDropdown(event, 'helpDropdown')">
+            Help
+            <div id="helpDropdown" class="dropdown-menu">
+                <div class="dropdown-item" onclick="alert('Windows 10 Notepad (Web Edition)')">About Notepad</div>
+            </div>
+        </div>
     </div>
 
     <div class="notepad-body">
-        <textarea id="classicNotepadText" class="classic-notepad-textarea" placeholder="Type or paste notes here..." oninput="updateCursorPosition()" onclick="updateCursorPosition()" onkeyup="updateCursorPosition()"></textarea>
+        <textarea id="classicNotepadText" class="classic-notepad-textarea" placeholder="" oninput="updateCursorPosition()" onclick="updateCursorPosition()" onkeyup="updateCursorPosition()"></textarea>
     </div>
 
-    <div class="notepad-status-bar">
-        <span id="notepadStatus">Ready</span>
+    <div class="notepad-status-bar" id="statusBarContainer">
         <span id="cursorPos">Ln 1, Col 1</span>
     </div>
 </div>
@@ -438,10 +513,6 @@
     const sasToken = "sv=2026-02-06&ss=bfqt&srt=co&sp=rwdlacupiytfx&se=2027-01-21T02:20:14Z&st=2026-08-20T18:05:14Z&spr=https&sig=5WBgiYzE%2FyISNRRRjWHtaF5%2BKh6NUG9g7zw%2B5lIcTIQ%3D";
     const containerName = "notes-container";
     const azureVersion = "2020-10-02";
-
-    window.onload = function() {
-        loadNotepadFromCloud();
-    };
 
     function openAppPage() {
         document.getElementById('landingPage').style.display = 'none';
@@ -456,20 +527,38 @@
     }
 
     function openNotepadModal() {
-        document.getElementById('landingPage').style.display = 'none';
-        document.getElementById('appPage').style.display = 'none';
         document.getElementById('notepadModal').style.display = 'flex';
-        loadNotepadFromCloud();
+        document.getElementById('classicNotepadText').focus();
     }
 
     function closeNotepadModal() {
         document.getElementById('notepadModal').style.display = 'none';
-        document.getElementById('landingPage').style.display = 'flex';
     }
 
     function minimizeNotepad() {
         document.getElementById('notepadModal').style.display = 'none';
-        document.getElementById('landingPage').style.display = 'flex';
+    }
+
+    function toggleDropdown(event, dropdownId) {
+        event.stopPropagation();
+        const allMenus = document.querySelectorAll('.dropdown-menu');
+        allMenus.forEach(m => {
+            if (m.id !== dropdownId) m.style.display = 'none';
+        });
+        const target = document.getElementById(dropdownId);
+        if (target) {
+            target.style.display = target.style.display === 'block' ? 'none' : 'block';
+        }
+    }
+
+    function closeAllDropdowns(event) {
+        const allMenus = document.querySelectorAll('.dropdown-menu');
+        allMenus.forEach(m => m.style.display = 'none');
+    }
+
+    function newNotepadFile() {
+        document.getElementById('classicNotepadText').value = "";
+        updateCursorPosition();
     }
 
     function clearNotepad() {
@@ -477,15 +566,55 @@
         updateCursorPosition();
     }
 
+    function selectAllText() {
+        const ta = document.getElementById('classicNotepadText');
+        ta.select();
+    }
+
     function toggleWordWrap() {
         const ta = document.getElementById('classicNotepadText');
+        const check = document.getElementById('wrapCheck');
         if (ta.style.whiteSpace === 'normal') {
             ta.style.whiteSpace = 'pre';
             ta.style.overflowX = 'auto';
+            check.style.display = 'inline';
         } else {
             ta.style.whiteSpace = 'normal';
             ta.style.overflowX = 'hidden';
+            check.style.display = 'none';
         }
+    }
+
+    function saveTextFile() {
+        const text = document.getElementById('classicNotepadText').value;
+        const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Untitled.txt';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    function saveAsTextFile() {
+        saveTextFile();
+    }
+
+    function openTextFile() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.txt,.log,.ini,.json,.js,.html,.css';
+        input.onchange = e => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                document.getElementById('classicNotepadText').value = event.target.result;
+                updateCursorPosition();
+            };
+            reader.readAsText(file);
+        };
+        input.click();
     }
 
     function updateCursorPosition() {
@@ -498,72 +627,7 @@
         document.getElementById('cursorPos').innerText = `Ln ${ln}, Col ${col}`;
     }
 
-    async function saveNotepadToCloud() {
-        const textVal = document.getElementById('classicNotepadText').value;
-        const statusEl = document.getElementById('notepadStatus');
-        statusEl.innerText = "Saving...";
-        try {
-            const blobName = `note_${Date.now()}.txt`;
-            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
-            const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
-
-            const res = await fetch(uploadUrl, {
-                method: "PUT",
-                headers: {
-                    "x-ms-blob-type": "BlockBlob",
-                    "x-ms-version": azureVersion,
-                    "Content-Type": "text/plain;charset=utf-8"
-                },
-                body: textVal
-            });
-            if (res.ok) {
-                statusEl.innerText = "Saved successfully";
-                setTimeout(() => { statusEl.innerText = "Ready"; }, 2000);
-            }
-        } catch (error) {
-            statusEl.innerText = "Save failed";
-        }
-    }
-
-    async function loadNotepadFromCloud() {
-        try {
-            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
-            const listUrl = `https://${accountName}.blob.core.windows.net/${containerName}?restype=container&comp=list&prefix=note_${cleanSas.replace('?', '&')}`;
-
-            const listRes = await fetch(listUrl);
-            if (!listRes.ok) return;
-            const textData = await listRes.text();
-            
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(textData, "text/xml");
-            const blobs = xmlDoc.getElementsByTagName("Blob");
-
-            if (blobs.length === 0) return;
-
-            let validBlobs = [];
-            for (let i = 0; i < blobs.length; i++) {
-                const bNameNode = blobs[i].getElementsByTagName("Name")[0];
-                if (bNameNode) {
-                    validBlobs.push(bNameNode.textContent);
-                }
-            }
-
-            if (validBlobs.length === 0) return;
-
-            const latestBlobName = validBlobs[validBlobs.length - 1];
-            const blobUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${latestBlobName}${cleanSas}`;
-
-            const blobRes = await fetch(blobUrl);
-            if (!blobRes.ok) return;
-            
-            const content = await blobRes.text();
-            document.getElementById('classicNotepadText').value = content;
-            updateCursorPosition();
-        } catch (error) {}
-    }
-
     async function loadFromCloud() {
-        document.getElementById('status').innerText = "Loading...";
         try {
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
             const listUrl = `https://${accountName}.blob.core.windows.net/${containerName}?restype=container&comp=list&prefix=note_${cleanSas.replace('?', '&')}`;
@@ -596,21 +660,17 @@
             const content = await blobRes.text();
 
             document.getElementById('codeContent').value = content;
-            document.getElementById('status').innerText = "Loaded successfully";
-        } catch (error) {
-            document.getElementById('status').innerText = "Load failed";
-        }
+        } catch (error) {}
     }
 
     async function ToCloud() {
         const newText = document.getElementById('codeContent').value;
-        document.getElementById('status').innerText = "Saving...";
         try {
             const blobName = `note_${Date.now()}.txt`;
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
             const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
 
-            const res = await fetch(uploadUrl, {
+            await fetch(uploadUrl, {
                 method: "PUT",
                 headers: {
                     "x-ms-blob-type": "BlockBlob",
@@ -619,18 +679,12 @@
                 },
                 body: newText
             });
-            if (res.ok) {
-                document.getElementById('status').innerText = "Saved successfully";
-            }
-        } catch (error) {
-            document.getElementById('status').innerText = "Save failed";
-        }
+        } catch (error) {}
     }
 
     async function uploadFolderToCloud(event) {
         const files = event.target.files;
         if (!files || files.length === 0) return;
-        document.getElementById('status').innerText = `Uploading folder (${files.length} files)...`;
         try {
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
             const timestamp = Date.now();
@@ -652,16 +706,12 @@
                 });
             }
             event.target.value = '';
-            document.getElementById('status').innerText = "Folder uploaded!";
-        } catch (error) {
-            document.getElementById('status').innerText = "Folder upload failed";
-        }
+        } catch (error) {}
     }
 
     async function uploadZipToCloud(event) {
         const file = event.target.files[0];
         if (!file) return;
-        document.getElementById('status').innerText = "Uploading ZIP...";
         try {
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
             const timestamp = Date.now();
@@ -669,7 +719,7 @@
             const blobName = `.private_zip_${timestamp}/${encodedFileName}`;
             const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
 
-            const res = await fetch(uploadUrl, {
+            await fetch(uploadUrl, {
                 method: "PUT",
                 headers: {
                     "x-ms-blob-type": "BlockBlob",
@@ -679,16 +729,12 @@
                 body: file
             });
             event.target.value = '';
-            if (res.ok) document.getElementById('status').innerText = "ZIP uploaded!";
-        } catch (error) {
-            document.getElementById('status').innerText = "ZIP upload failed";
-        }
+        } catch (error) {}
     }
 
     async function uploadRarToCloud(event) {
         const file = event.target.files[0];
         if (!file) return;
-        document.getElementById('status').innerText = "Uploading RAR...";
         try {
             const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
             const timestamp = Date.now();
@@ -696,7 +742,7 @@
             const blobName = `.private_rar_${timestamp}/${encodedFileName}`;
             const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
 
-            const res = await fetch(uploadUrl, {
+            await fetch(uploadUrl, {
                 method: "PUT",
                 headers: {
                     "x-ms-blob-type": "BlockBlob",
@@ -706,10 +752,7 @@
                 body: file
             });
             event.target.value = '';
-            if (res.ok) document.getElementById('status').innerText = "RAR uploaded!";
-        } catch (error) {
-            document.getElementById('status').innerText = "RAR upload failed";
-        }
+        } catch (error) {}
     }
 </script>
 
