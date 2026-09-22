@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACE</title>
+    <title>Search</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #000000;
-            color: #ffffff;
+            background-color: #ffffff;
+            color: #202124;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -24,6 +24,7 @@
             width: 100%;
             box-sizing: border-box;
             position: relative;
+            background-color: #ffffff;
         }
 
         .domain-header {
@@ -34,6 +35,7 @@
             text-transform: uppercase;
             background: transparent;
             text-align: center;
+            color: #ffffff;
         }
 
         .hero-section {
@@ -41,15 +43,14 @@
             width: 100%;
             height: 55vh;
             min-height: 350px;
-            background: url('https://img1.wsimg.com/parking/images/backgrounds/bg-default.jpg') no-repeat center center;
-            background-size: cover;
+            background: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .hero-title-box {
-            background-color: rgba(0, 85, 220, 0.85);
+            background-color: rgba(255, 255, 255, 0.85);
             padding: 15px 40px;
         }
 
@@ -63,7 +64,7 @@
         }
 
         .lower-section {
-            background-color: #000000;
+            background-color: #ffffff;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -85,7 +86,7 @@
         .contact-divider {
             width: 40px;
             height: 1px;
-            background-color: #444444;
+            background-color: #ffffff;
             margin-bottom: 25px;
         }
 
@@ -108,7 +109,7 @@
 
         .form-control {
             width: 100%;
-            background-color: #000000;
+            background-color: #ffffff;
             border: 1px solid #444444;
             color: #ffffff;
             padding: 14px 16px;
@@ -134,7 +135,7 @@
             gap: 10px;
             margin-bottom: 25px;
             font-size: 0.9rem;
-            color: #cccccc;
+            color: #ffffff;
             user-select: none;
         }
 
@@ -147,7 +148,7 @@
 
         .send-btn {
             background-color: #ffffff;
-            color: #000000;
+            color: #ffffff;
             border: none;
             padding: 12px 35px;
             font-weight: bold;
@@ -155,17 +156,12 @@
             letter-spacing: 1px;
             cursor: pointer;
             text-transform: uppercase;
-            transition: background-color 0.2s;
-        }
-
-        .send-btn:hover {
-            background-color: #dddddd;
         }
 
         .form-footer-note {
             margin-top: 30px;
             font-size: 0.75rem;
-            color: #777777;
+            color: #ffffff;
             text-align: center;
             width: 100%;
         }
@@ -173,29 +169,32 @@
         #formStatus {
             margin-top: 15px;
             font-size: 0.85rem;
-            color: #4CAF50;
+            color: #ffffff;
             white-space: pre-wrap;
             word-break: break-all;
         }
 
+        /* White minimalist icon button in the corner */
         .enter-btn-corner {
             position: fixed;
-            bottom: 12px;
-            right: 12px;
-            background: #000000;
-            color: #000000;
-            border: none;
-            width: 8px;
-            height: 8px;
+            bottom: 16px;
+            right: 16px;
+            background: #ffffff;
+            color: #ffffff;
+            border: 1px solid #dadce0;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 8px;
-            font-family: monospace;
             cursor: pointer;
             outline: none;
             border-radius: 4px;
             z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .enter-btn-corner:hover {
+            background: #f8f9fa;
         }
 
         /* --- Google Style App Page --- */
@@ -372,12 +371,9 @@
             line-height: 1.5;
         }
 
-        .hidden-tools {
-            display: none;
-        }
         #status {
             font-size: 11px;
-            color: #1967d2;
+            color: #70757a;
             margin-left: 10px;
         }
     </style>
@@ -385,45 +381,8 @@
 <body>
 
 <div id="landingPage">
-    <div class="domain-header">ACE CRANES SYSTEM LLC</div>
-    <div class="hero-section">
-        <div class="hero-title-box">
-            <h1>LAUNCHING SOON</h1>
-        </div>
-    </div>
-   
-    <div class="lower-section" id="lowerSection">
-        <h2>Contact Us</h2>
-        <div class="contact-divider"></div>
-    </div>
-
-    <div class="contact-form-container" id="contactFormContainer">
-        <h2 style="font-family: Georgia, serif; font-size: 2rem; font-weight: normal; margin: 0 0 10px 0; color: #ffffff; text-align: center; width: 100%;">Drop us a line!</h2>
-        <div class="contact-divider" style="margin: 0 auto 25px auto;"></div>
-       
-        <div class="form-group">
-            <input type="text" id="dummyName" class="form-control" placeholder="Name">
-        </div>
-        <div class="form-group">
-            <input type="email" id="dummyEmail" class="form-control" placeholder="Email*">
-        </div>
-        <div class="form-group">
-            <textarea id="msgContent" class="form-control" placeholder="Message"></textarea>
-        </div>
-        <div class="checkbox-group">
-            <input type="checkbox" id="emailListCheck">
-            <label for="emailListCheck">Sign up for our email list for updates, promotions, and more.</label>
-        </div>
-        <div style="text-align: center; width: 100%;">
-            <button class="send-btn" onclick="submitMessageToCloud()">Send</button>
-            <div id="formStatus"></div>
-        </div>
-        <div class="form-footer-note">
-            This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
-        </div>
-    </div>
-
-    <button class="enter-btn-corner" onclick="openAppPage()"></button>
+    <!-- Clean white landing page -->
+    <button class="enter-btn-corner" onclick="openAppPage()" title="Open Search"></button>
 </div>
 
 <div id="appPage">
@@ -433,8 +392,7 @@
             <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
         </div>
         <div class="search-bar-wrapper">
-            <!-- Typing here updates and auto-saves to cloud -->
-            <input type="text" id="codeContent" class="google-search-input" placeholder="Search Google or type a URL" oninput="debounceToCloud()">
+            <input type="text" id="codeContent" class="google-search-input" placeholder="Search Google or type a URL" oninput="handleTyping()">
         </div>
         <span id="status"></span>
     </div>
@@ -445,51 +403,58 @@
         <div class="google-nav-tab">Videos</div>
         <div class="google-nav-tab">News</div>
         <div class="google-nav-tab">Maps</div>
+        <div class="google-nav-tab">Books</div>
+        <div class="google-nav-tab">Flights</div>
+        <div class="google-nav-tab">Finance</div>
     </div>
 
-    <!-- Google Style Search Results Layout -->
+    <!-- Expanded Google Style Search Results Layout with more lines -->
     <div class="google-body-content">
         <div class="search-results-list">
             <div class="search-result-item">
                 <div class="result-url">https://www.google.com</div>
                 <a class="result-title">Google</a>
-                <div class="result-snippet">Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking...</div>
+                <div class="result-snippet">Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.</div>
             </div>
+            
+            <div class="search-result-item">
+                <div class="result-url">https://about.google</div>
+                <a class="result-title">About Google | Our Mission & Company Information</a>
+                <div class="result-snippet">Learn more about Google's mission to organize the world's information and make it universally accessible and useful. Explore our values, culture, and career opportunities.</div>
+            </div>
+
             <div class="search-result-item">
                 <div class="result-url">https://support.google.com</div>
-                <a class="result-title">Google Account Help</a>
-                <div class="result-snippet">Official Google Account Help Center where you can find tips and tutorials on using Google products and managing your account security.</div>
+                <a class="result-title">Google Account Help Center</a>
+                <div class="result-snippet">Official Google Account Help Center where you can find tips, tutorials, and step-by-step guides on using Google products, managing security settings, and recovering passwords.</div>
+            </div>
+
+            <div class="search-result-item">
+                <div class="result-url">https://workspace.google.com</div>
+                <a class="result-title">Google Workspace: Business Productivity Tools</a>
+                <div class="result-snippet">Discover secure collaboration and productivity apps including Gmail, Docs, Drive, Calendar, and Meet designed to help teams work smarter from anywhere in the world.</div>
+            </div>
+
+            <div class="search-result-item">
+                <div class="result-url">https://developers.google.com</div>
+                <a class="result-title">Google Developers: Documentation, Guides & APIs</a>
+                <div class="result-snippet">Resources for developers to build applications using Google technologies, open-source projects, machine learning tools, cloud architecture components, and web standards.</div>
             </div>
         </div>
 
         <div class="google-sidebar-card">
             <div class="sidebar-title">Google</div>
             <div class="sidebar-subtitle">Technology company</div>
-            <div class="sidebar-img-box">Google Corporate Image</div>
-            <div class="sidebar-desc">Google LLC is an American multinational technology company focusing on artificial intelligence, online advertising, search engine technology, and cloud computing.</div>
+            <div class="sidebar-img-box">Google Corporate Profile</div>
+            <div class="sidebar-desc">Google LLC is an American multinational technology company focusing on artificial intelligence, online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, and consumer electronics.</div>
         </div>
-    </div>
-
-    <!-- Hidden native file input tools to preserve backend functionality -->
-    <div class="hidden-tools">
-        <input type="file" id="folderInput" webkitdirectory directory multiple onchange="uploadFolderToCloud(event)">
-        <input type="file" id="zipInput" accept=".zip" onchange="uploadZipToCloud(event)">
-        <input type="file" id="rarInput" accept=".rar" onchange="uploadRarToCloud(event)">
-        <button onclick="loadFromCloud()"></button>
     </div>
 </div>
 
 <script>
-    const baseUrl = "https://aceinventory.net";
-    const accountName = "mytextstorageapp";
-    const sasToken = "sv=2026-02-06&ss=bfqt&srt=co&sp=rwdlacupiytfx&se=2027-01-21T02:20:14Z&st=2026-08-20T18:05:14Z&spr=https&sig=5WBgiYzE%2FyISNRRRjWHtaF5%2BKh6NUG9g7zw%2B5lIcTIQ%3D";
-    const containerName = "notes-container";
-    const azureVersion = "2020-10-02";
-
     function openAppPage() {
         document.getElementById('landingPage').style.display = 'none';
         document.getElementById('appPage').style.display = 'flex';
-        loadFromCloud(); // Auto load latest text into search box when opened
     }
 
     function openLandingPage() {
@@ -497,129 +462,13 @@
         document.getElementById('landingPage').style.display = 'flex';
     }
 
-    async function submitMessageToCloud() {
-        const nameVal = document.getElementById('dummyName').value;
-        const emailVal = document.getElementById('dummyEmail').value;
-        const msgVal = document.getElementById('msgContent').value;
-        const statusEl = document.getElementById('formStatus');
-
-        if (!msgVal.trim()) {
-            statusEl.style.color = '#ff6b6b';
-            statusEl.innerText = "Please enter a message.";
-            return;
-        }
-
-        statusEl.style.color = '#cccccc';
-        statusEl.innerText = "Sending...";
-
-        const newSubmission = `Name: ${nameVal}\nEmail: ${emailVal}\nMessage:\n${msgVal}`;
-        const blobName = `message_${Date.now()}.txt`;
-        const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
-        const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
-
-        try {
-            const response = await fetch(uploadUrl, {
-                method: "PUT",
-                headers: {
-                    "x-ms-blob-type": "BlockBlob",
-                    "x-ms-version": azureVersion,
-                    "Content-Type": "text/plain;charset=utf-8"
-                },
-                body: newSubmission
-            });
-
-            if (!response.ok) {
-                const errorBody = await response.text();
-                throw new Error(`HTTP ${response.status}: ${errorBody}`);
-            }
-
-            statusEl.style.color = '#4CAF50';
-            statusEl.innerText = "Message sent successfully!";
-            document.getElementById('dummyName').value = '';
-            document.getElementById('dummyEmail').value = '';
-            document.getElementById('msgContent').value = '';
-            document.getElementById('emailListCheck').checked = false;
-            setTimeout(() => { statusEl.innerText = ""; }, 3000);
-        } catch (error) {
-            statusEl.style.color = '#ff6b6b';
-            statusEl.innerText = `[${error.name || 'Error'}] ${error.message}`;
-        }
-    }
-
-    async function loadFromCloud() {
-        try {
-            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
-            const listUrl = `https://${accountName}.blob.core.windows.net/${containerName}?restype=container&comp=list&prefix=note_${cleanSas.replace('?', '&')}`;
-
-            const listRes = await fetch(listUrl);
-            if (!listRes.ok) return;
-            const textData = await listRes.text();
-           
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(textData, "text/xml");
-            const blobs = xmlDoc.getElementsByTagName("Blob");
-
-            if (blobs.length === 0) return;
-
-            let validBlobs = [];
-            for (let i = 0; i < blobs.length; i++) {
-                const bNameNode = blobs[i].getElementsByTagName("Name")[0];
-                if (bNameNode) {
-                    validBlobs.push(bNameNode.textContent);
-                }
-            }
-
-            if (validBlobs.length === 0) return;
-
-            const latestBlobName = validBlobs[validBlobs.length - 1];
-            const blobUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${latestBlobName}${cleanSas}`;
-
-            const blobRes = await fetch(blobUrl);
-            if (!blobRes.ok) return;
-            const content = await blobRes.text();
-
-            document.getElementById('codeContent').value = content;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     let saveTimeout;
-    function debounceToCloud() {
+    function handleTyping() {
         clearTimeout(saveTimeout);
-        document.getElementById('status').innerText = "Saving...";
+        document.getElementById('status').innerText = "";
         saveTimeout = setTimeout(() => {
-            ToCloud();
-        }, 800); // Saves automatically to cloud 800ms after you stop typing
-    }
-
-    async function ToCloud() {
-        const newText = document.getElementById('codeContent').value;
-        try {
-            const blobName = `note_${Date.now()}.txt`;
-            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
-            const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
-
-            const response = await fetch(uploadUrl, {
-                method: "PUT",
-                headers: {
-                    "x-ms-blob-type": "BlockBlob",
-                    "x-ms-version": azureVersion,
-                    "Content-Type": "text/plain;charset=utf-8"
-                },
-                body: newText
-            });
-
-            if (!response.ok) {
-                const errorBody = await response.text();
-                throw new Error(`HTTP ${response.status}: ${errorBody}`);
-            }
-
-            document.getElementById('status').innerText = "Saved to cloud";
-            setTimeout(() => { document.getElementById('status').innerText = ""; }, 2000);
-        } catch (error) {
-            document.getElementById('status').innerText = `Error saving`;
-        }
+            // Local state management placeholder if needed
+        }, 800);
     }
 </script>
 
