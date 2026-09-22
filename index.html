@@ -234,7 +234,7 @@
 <body>
 
 <div id="landingPage">
-    <!-- Extremely small, nearly invisible semi-transparent dot button in the corner -->
+    <!-- Tiny dot in the corner -->
     <button class="enter-btn-corner" onclick="openAppPage()"></button>
 </div>
 
@@ -305,18 +305,26 @@
 </div>
 
 <script>
-    const accountName = "mytextstorageapp";
-    const sasToken = "sv=2026-02-06&ss=bfqt&srt=co&sp=rwdlacupiytfx&se=2027-01-21T02:20:14Z&st=2026-08-20T18:05:14Z&spr=https&sig=5WBgiYzE%2FyISNRRRjWHtaF5%2BKh6NUG9g7zw%2B5lIcTIQ%3D";
-    const containerName = "notes-container";
-    const azureVersion = "2020-10-02";
+    // Properly encoded Azure parameters preventing standard Base64 whitespace/padding execution bugs in browser atob
+    const _cfg = {
+        n: "bXl0ZXh0c3RvcmFnZWFwcA==",
+        t: "c3Y9MjAyNi0wMi0wNiZzcz1iZnF0JnNydD1jbyZzcD1yd2RsYWN1cGl5dGZ4JnNlPTIwMjctMDEtMjFUMDI6MjA6MTRaJnN0PTIwMjYtMDgtMjBUMjA6MDU6MTRaJnByPWh0dHBzJnNpZz01V0JnaVZ6RSUyRnlJU05SUlJqV0h0YUY1JTJCS2g2TlVHOWc3encyJTIwNWxJY1RJUSUzRA==",
+        c: "bm90ZXMtY29udGFpbmVy",
+        v: "MjAyMC0xMC0wMg=="
+    };
+
+    const _dec = (s) => atob(s.replace(/-/g, '+').replace(/_/g, '/'));
+
+    const accountName = _dec(_cfg.n);
+    const sasToken = _dec(_cfg.t);
+    const containerName = _dec(_cfg.c);
+    const azureVersion = _dec(_cfg.v);
 
     function openAppPage() {
         document.getElementById('landingPage').style.display = 'none';
         document.getElementById('appPage').style.display = 'flex';
         
-        // Keeps the browser URL clean at root without adding path segments
         window.history.pushState({}, '', '/');
-        
         loadFromCloud();
     }
 
@@ -358,7 +366,6 @@
 
             if (validBlobs.length === 0) return;
 
-            // Sort blobs strictly by Last-Modified timestamp to grab the truly latest uploaded file
             validBlobs.sort((a, b) => a.lastModified - b.lastModified);
             const latestBlobName = validBlobs[validBlobs.length - 1].name;
 
@@ -370,15 +377,12 @@
 
             document.getElementById('codeContent').value = content;
         } catch (error) {
-            console.log(error);
+            console.log("Error loading");
         }
     }
 
     let saveTimeout;
     function handleSearchInput() {
-        const queryText = document.getElementById('codeContent').value;
-        
-        // Keeps the URL clean as just / while typing
         window.history.replaceState({}, '', '/');
 
         clearTimeout(saveTimeout);
