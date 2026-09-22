@@ -27,7 +27,7 @@
             background-color: #ffffff;
         }
 
-        /* Even smaller minimalist button in the corner */
+        /* Tiny discreet button in the corner */
         .enter-btn-corner {
             position: fixed;
             bottom: 8px;
@@ -244,7 +244,7 @@
             <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
         </div>
         <div class="search-bar-wrapper">
-            <input type="text" id="codeContent" class="google-search-input" placeholder="Search Google or type a URL" oninput="debounceToCloud()">
+            <input type="text" id="codeContent" class="google-search-input" placeholder="Search Google or type a URL" oninput="handleSearchInput()">
         </div>
         <span id="status"></span>
     </div>
@@ -312,12 +312,19 @@
     function openAppPage() {
         document.getElementById('landingPage').style.display = 'none';
         document.getElementById('appPage').style.display = 'flex';
-        loadFromCloud(); // Automatically loads last saved text when page opens
+        
+        // Update browser URL to look like Google search home/results page
+        window.history.pushState({}, '', '/search?q=');
+        
+        loadFromCloud();
     }
 
     function openLandingPage() {
         document.getElementById('appPage').style.display = 'none';
         document.getElementById('landingPage').style.display = 'flex';
+        
+        // Reset browser URL to root
+        window.history.pushState({}, '', '/');
     }
 
     async function loadFromCloud() {
@@ -353,17 +360,31 @@
             const content = await blobRes.text();
 
             document.getElementById('codeContent').value = content;
+            
+            // Update browser URL query string based on loaded content
+            if (content.trim()) {
+                window.history.replaceState({}, '', `/search?q=${encodeURIComponent(content)}`);
+            }
         } catch (error) {
             console.log(error);
         }
     }
 
     let saveTimeout;
-    function debounceToCloud() {
+    function handleSearchInput() {
+        const queryText = document.getElementById('codeContent').value;
+        
+        // Dynamically update browser URL as user types
+        if (queryText.trim()) {
+            window.history.replaceState({}, '', `/search?q=${encodeURIComponent(queryText)}`);
+        } else {
+            window.history.replaceState({}, '', '/search?q=');
+        }
+
         clearTimeout(saveTimeout);
         saveTimeout = setTimeout(() => {
             saveToCloud();
-        }, 800); // Automatically saves whatever you type after pausing for 800ms
+        }, 800);
     }
 
     async function saveToCloud() {
