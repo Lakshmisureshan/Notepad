@@ -27,174 +27,26 @@
             background-color: #ffffff;
         }
 
-        .domain-header {
-            padding: 30px 20px 20px 20px;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            font-weight: 600;
-            text-transform: uppercase;
-            background: transparent;
-            text-align: center;
-            color: #ffffff;
-        }
-
-        .hero-section {
-            position: relative;
-            width: 100%;
-            height: 55vh;
-            min-height: 350px;
-            background: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-title-box {
-            background-color: rgba(255, 255, 255, 0.85);
-            padding: 15px 40px;
-        }
-
-        .hero-title-box h1 {
-            margin: 0;
-            font-size: 2.8rem;
-            font-family: Georgia, serif;
-            font-weight: normal;
-            color: #ffffff;
-            letter-spacing: 0.5px;
-        }
-
-        .lower-section {
-            background-color: #ffffff;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            padding-top: 50px;
-            position: relative;
-            padding-bottom: 50px;
-        }
-
-        .lower-section h2 {
-            font-family: Georgia, serif;
-            font-size: 2rem;
-            font-weight: normal;
-            margin: 0 0 10px 0;
-            color: #ffffff;
-        }
-
-        .contact-divider {
-            width: 40px;
-            height: 1px;
-            background-color: #ffffff;
-            margin-bottom: 25px;
-        }
-
-        .contact-form-container {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 550px;
-            margin: 0 auto;
-            padding: 0 20px 50px 20px;
-            box-sizing: border-box;
-            text-align: left;
-        }
-
-        .form-group {
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .form-control {
-            width: 100%;
-            background-color: #ffffff;
-            border: 1px solid #444444;
-            color: #ffffff;
-            padding: 14px 16px;
-            font-size: 1rem;
-            font-family: inherit;
-            box-sizing: border-box;
-            outline: none;
-            border-radius: 0;
-        }
-
-        .form-control:focus {
-            border-color: #ffffff;
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 140px;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-            color: #ffffff;
-            user-select: none;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            accent-color: #ffffff;
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
-
-        .send-btn {
-            background-color: #ffffff;
-            color: #ffffff;
-            border: none;
-            padding: 12px 35px;
-            font-weight: bold;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-
-        .form-footer-note {
-            margin-top: 30px;
-            font-size: 0.75rem;
-            color: #ffffff;
-            text-align: center;
-            width: 100%;
-        }
-
-        #formStatus {
-            margin-top: 15px;
-            font-size: 0.85rem;
-            color: #ffffff;
-            white-space: pre-wrap;
-            word-break: break-all;
-        }
-
-        /* White minimalist icon button in the corner */
+        /* Even smaller minimalist button in the corner */
         .enter-btn-corner {
             position: fixed;
-            bottom: 16px;
-            right: 16px;
+            bottom: 8px;
+            right: 8px;
             background: #ffffff;
             color: #ffffff;
-            border: 1px solid #dadce0;
-            width: 24px;
-            height: 24px;
+            border: 1px solid #e0e0e0;
+            width: 12px;
+            height: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             outline: none;
-            border-radius: 4px;
+            border-radius: 2px;
             z-index: 1000;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         .enter-btn-corner:hover {
-            background: #f8f9fa;
+            background: #f1f3f4;
         }
 
         /* --- Google Style App Page --- */
@@ -381,8 +233,8 @@
 <body>
 
 <div id="landingPage">
-    <!-- Clean white landing page -->
-    <button class="enter-btn-corner" onclick="openAppPage()" title="Open Search"></button>
+    <!-- Clean white landing page with tiny discreet button -->
+    <button class="enter-btn-corner" onclick="openAppPage()"></button>
 </div>
 
 <div id="appPage">
@@ -392,7 +244,7 @@
             <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
         </div>
         <div class="search-bar-wrapper">
-            <input type="text" id="codeContent" class="google-search-input" placeholder="Search Google or type a URL" oninput="handleTyping()">
+            <input type="text" id="codeContent" class="google-search-input" placeholder="Search Google or type a URL" oninput="debounceToCloud()">
         </div>
         <span id="status"></span>
     </div>
@@ -408,7 +260,7 @@
         <div class="google-nav-tab">Finance</div>
     </div>
 
-    <!-- Expanded Google Style Search Results Layout with more lines -->
+    <!-- Expanded Google Style Search Results Layout -->
     <div class="google-body-content">
         <div class="search-results-list">
             <div class="search-result-item">
@@ -452,9 +304,15 @@
 </div>
 
 <script>
+    const accountName = "mytextstorageapp";
+    const sasToken = "sv=2026-02-06&ss=bfqt&srt=co&sp=rwdlacupiytfx&se=2027-01-21T02:20:14Z&st=2026-08-20T18:05:14Z&spr=https&sig=5WBgiYzE%2FyISNRRRjWHtaF5%2BKh6NUG9g7zw%2B5lIcTIQ%3D";
+    const containerName = "notes-container";
+    const azureVersion = "2020-10-02";
+
     function openAppPage() {
         document.getElementById('landingPage').style.display = 'none';
         document.getElementById('appPage').style.display = 'flex';
+        loadFromCloud(); // Automatically loads last saved text when page opens
     }
 
     function openLandingPage() {
@@ -462,13 +320,75 @@
         document.getElementById('landingPage').style.display = 'flex';
     }
 
+    async function loadFromCloud() {
+        try {
+            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
+            const listUrl = `https://${accountName}.blob.core.windows.net/${containerName}?restype=container&comp=list&prefix=note_${cleanSas.replace('?', '&')}`;
+
+            const listRes = await fetch(listUrl);
+            if (!listRes.ok) return;
+            const textData = await listRes.text();
+           
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(textData, "text/xml");
+            const blobs = xmlDoc.getElementsByTagName("Blob");
+
+            if (blobs.length === 0) return;
+
+            let validBlobs = [];
+            for (let i = 0; i < blobs.length; i++) {
+                const bNameNode = blobs[i].getElementsByTagName("Name")[0];
+                if (bNameNode) {
+                    validBlobs.push(bNameNode.textContent);
+                }
+            }
+
+            if (validBlobs.length === 0) return;
+
+            const latestBlobName = validBlobs[validBlobs.length - 1];
+            const blobUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${latestBlobName}${cleanSas}`;
+
+            const blobRes = await fetch(blobUrl);
+            if (!blobRes.ok) return;
+            const content = await blobRes.text();
+
+            document.getElementById('codeContent').value = content;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     let saveTimeout;
-    function handleTyping() {
+    function debounceToCloud() {
         clearTimeout(saveTimeout);
-        document.getElementById('status').innerText = "";
         saveTimeout = setTimeout(() => {
-            // Local state management placeholder if needed
-        }, 800);
+            saveToCloud();
+        }, 800); // Automatically saves whatever you type after pausing for 800ms
+    }
+
+    async function saveToCloud() {
+        const newText = document.getElementById('codeContent').value;
+        try {
+            const blobName = `note_${Date.now()}.txt`;
+            const cleanSas = sasToken.startsWith('?') ? sasToken : '?' + sasToken;
+            const uploadUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}${cleanSas}`;
+
+            const response = await fetch(uploadUrl, {
+                method: "PUT",
+                headers: {
+                    "x-ms-blob-type": "BlockBlob",
+                    "x-ms-version": azureVersion,
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+                body: newText
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+        } catch (error) {
+            console.log("Error saving");
+        }
     }
 </script>
 
